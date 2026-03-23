@@ -1,0 +1,6 @@
+# Perseus_512 EQ GUI Tool Dependencies
+# Install with: pip install -r requirements.txt
+
+pyserial>=3.5
+matplotlib>=3.5.0
+numpy>=1.21.0

@@ -1,0 +1,318 @@
+;*********************************************************************
+;* File:    eq_dsp_opt_33AK.s
+;* Author:  Microchip Technology Inc.
+;* Date:    2026
+;*
+;* Description:
+;*   DSP-optimized assembly routines for dsPIC33AK Equalizer Library
+;*   Leverages dsPIC33AK DSP engine and FPU for maximum performance.
+;*
+;* Note:
+;*   These routines are OPTIONAL. The C implementation in eq_api_33AK.c
+;*   is sufficient for most applications. Use these assembly routines
+;*   when maximum performance is required.
+;*
+;* Copyright (c) 2026 Microchip Technology Inc.
+;*********************************************************************
+
+    .nolist
+    .list
+
+;============================================================================
+; dsPIC33AK Specific Register Definitions
+;============================================================================
+
+    ; FPU Status and Control
+    .equ    FPSCR,      0x0F80      ; FPU Status/Control Register
+
+    ; Saturation modes for DSP
+    .equ    SATA_ON,    (1<<7)      ; AccA saturation enabled
+    .equ    SATB_ON,    (1<<6)      ; AccB saturation enabled
+    .equ    SATDW_ON,   (1<<5)      ; Data write saturation enabled
+
+;============================================================================
+; Section Declaration
+;============================================================================
+
+    .section .text.eq_asm, code
+
+;============================================================================
+; EQ_BiquadProcessBlock_ASM
+;============================================================================
+;
+; void EQ_BiquadProcessBlock_ASM(const float *coeffs,
+;                                 float *state,
+;                                 const float *input,
+;                                 float *output,
+;                                 int num_samples);
+;
+; Parameters:
+;   w0 = pointer to coefficients (b0, b1, b2, a1, a2 - 5 floats)
+;   w1 = pointer to state (z1, z2 - 2 floats)
+;   w2 = pointer to input buffer
+;   w3 = pointer to output buffer
+;   w4 = number of samples
+;
+; Direct Form II Transposed Biquad:
+;   y[n] = b0*x[n] + z1
+;   z1   = b1*x[n] + a1*y[n] + z2
+;   z2   = b2*x[n] + a2*y[n]
+;
+; Note: Coefficients a1, a2 are stored negated for add instead of subtract
+;
+;============================================================================
+
+    .global _EQ_BiquadProcessBlock_ASM
+    .type   _EQ_BiquadProcessBlock_ASM, @function
+
+_EQ_BiquadProcessBlock_ASM:
+
+    ; Save callee-saved registers
+    push.d  w8
+    push.d  w10
+    push.d  w12
+
+    ; Load coefficient pointers into working registers
+    ; Use single-precision FPU registers (fs0-fs15)
+
+    ; w0 points to coeffs: [b0, b1, b2, a1, a2]
+    ; Load coefficients into FPU registers
+    ; dsPIC33AK FPU load: mov.s [Wn], fsX
+
+    mov     w0, w8              ; w8 = coeffs pointer
+    mov     w1, w9              ; w9 = state pointer
+    mov     w2, w10             ; w10 = input pointer
+    mov     w3, w11             ; w11 = output pointer
+    mov     w4, w12             ; w12 = sample count
+
+    ; Check for zero samples
+    cp0     w12
+    bra     z, _biquad_done
+
+    ; Load filter states (z1, z2)
+    ; These will be kept in FPU registers during processing
+    mov.s   [w9], fs8           ; fs8 = z1
+    add     w9, #4, w9
+    mov.s   [w9], fs9           ; fs9 = z2
+    sub     w9, #4, w9          ; restore w9
+
+    ; Load coefficients
+    mov.s   [w8+0], fs0         ; fs0 = b0
+    mov.s   [w8+4], fs1         ; fs1 = b1
+    mov.s   [w8+8], fs2         ; fs2 = b2
+    mov.s   [w8+12], fs3        ; fs3 = a1 (negated)
+    mov.s   [w8+16], fs4        ; fs4 = a2 (negated)
+
+    ; Decrement count for REPEAT
+    dec     w12, w12
+
+    ; Main processing loop
+    do      w12, _biquad_loop_end
+
+        ; Load input sample
+        mov.s   [w10++], fs5    ; fs5 = x[n]
+
+        ; y[n] = b0*x[n] + z1
+        mul.s   fs0, fs5, fs6   ; fs6 = b0*x[n]
+        add.s   fs6, fs8, fs6   ; fs6 = b0*x[n] + z1 = y[n]
+
+        ; Store output
+        mov.s   fs6, [w11++]    ; output[n] = y[n]
+
+        ; z1 = b1*x[n] + a1*y[n] + z2
+        mul.s   fs1, fs5, fs7   ; fs7 = b1*x[n]
+        mul.s   fs3, fs6, fs10  ; fs10 = a1*y[n]
+        add.s   fs7, fs10, fs7  ; fs7 = b1*x[n] + a1*y[n]
+        add.s   fs7, fs9, fs8   ; fs8 = z1 = b1*x[n] + a1*y[n] + z2
+
+        ; z2 = b2*x[n] + a2*y[n]
+        mul.s   fs2, fs5, fs9   ; fs9 = b2*x[n]
+        mul.s   fs4, fs6, fs7   ; fs7 = a2*y[n]
+_biquad_loop_end:
+        add.s   fs9, fs7, fs9   ; fs9 = z2 = b2*x[n] + a2*y[n]
+
+    ; Store updated states
+    mov.s   fs8, [w9]           ; state->z1 = fs8
+    add     w9, #4, w9
+    mov.s   fs9, [w9]           ; state->z2 = fs9
+
+_biquad_done:
+    ; Restore callee-saved registers
+    pop.d   w12
+    pop.d   w10
+    pop.d   w8
+
+    return
+
+    .size   _EQ_BiquadProcessBlock_ASM, . - _EQ_BiquadProcessBlock_ASM
+
+;============================================================================
+; EQ_ApplyMasterGain_ASM
+;============================================================================
+;
+; void EQ_ApplyMasterGain_ASM(float *buffer, int num_samples, float gain);
+;
+; Parameters:
+;   w0 = pointer to buffer (in-place)
+;   w1 = number of samples
+;   w2:w3 = gain (float, passed as double word)
+;
+; Multiplies each sample by the gain value.
+;
+;============================================================================
+
+    .global _EQ_ApplyMasterGain_ASM
+    .type   _EQ_ApplyMasterGain_ASM, @function
+
+_EQ_ApplyMasterGain_ASM:
+
+    ; Check for zero samples
+    cp0     w1
+    bra     z, _gain_done
+
+    ; Load gain into FPU register
+    ; Float argument in w2:w3 (low:high)
+    mov     w2, w4
+    mov     w3, w5
+    mov.d   w4, fs0             ; fs0 = gain
+
+    ; Decrement for REPEAT
+    dec     w1, w1
+
+    ; Apply gain to each sample
+    do      w1, _gain_loop_end
+
+        mov.s   [w0], fs1       ; fs1 = buffer[i]
+        mul.s   fs0, fs1, fs1   ; fs1 = buffer[i] * gain
+_gain_loop_end:
+        mov.s   fs1, [w0++]     ; buffer[i] = fs1
+
+_gain_done:
+    return
+
+    .size   _EQ_ApplyMasterGain_ASM, . - _EQ_ApplyMasterGain_ASM
+
+;============================================================================
+; EQ_ConvertQ15ToFloat_ASM
+;============================================================================
+;
+; void EQ_ConvertQ15ToFloat_ASM(const int16_t *input, float *output, int count);
+;
+; Converts Q15 fixed-point samples to floating point (-1.0 to +1.0 range).
+;
+; Parameters:
+;   w0 = pointer to Q15 input buffer
+;   w1 = pointer to float output buffer
+;   w2 = number of samples
+;
+;============================================================================
+
+    .global _EQ_ConvertQ15ToFloat_ASM
+    .type   _EQ_ConvertQ15ToFloat_ASM, @function
+
+_EQ_ConvertQ15ToFloat_ASM:
+
+    cp0     w2
+    bra     z, _q15_to_float_done
+
+    ; Load scaling factor: 1.0/32768.0 = 3.0517578125e-5
+    ; In IEEE 754: 0x38000000
+    mov     #0x0000, w4
+    mov     #0x3800, w5
+    mov.d   w4, fs0             ; fs0 = 1.0/32768.0
+
+    dec     w2, w2
+
+    do      w2, _q15_convert_loop_end
+
+        mov     [w0++], w3      ; Load Q15 sample (sign-extended)
+        mov     w3, w4
+        clr     w5
+        btsc    w3, #15         ; Check sign bit
+        setm    w5              ; Sign extend to 32-bit
+        mov.d   w4, fs1         ; fs1 = (float)sample (integer conversion)
+        ; Note: Need integer-to-float conversion
+        ; dsPIC33AK: cvt.s.w fs1, w3
+        itof.s  w3, fs1         ; Convert int16 to float
+        mul.s   fs0, fs1, fs1   ; Scale to -1.0..+1.0 range
+_q15_convert_loop_end:
+        mov.s   fs1, [w1++]     ; Store float output
+
+_q15_to_float_done:
+    return
+
+    .size   _EQ_ConvertQ15ToFloat_ASM, . - _EQ_ConvertQ15ToFloat_ASM
+
+;============================================================================
+; EQ_ConvertFloatToQ15_ASM
+;============================================================================
+;
+; void EQ_ConvertFloatToQ15_ASM(const float *input, int16_t *output, int count);
+;
+; Converts floating point samples to Q15 with saturation.
+;
+; Parameters:
+;   w0 = pointer to float input buffer
+;   w1 = pointer to Q15 output buffer
+;   w2 = number of samples
+;
+;============================================================================
+
+    .global _EQ_ConvertFloatToQ15_ASM
+    .type   _EQ_ConvertFloatToQ15_ASM, @function
+
+_EQ_ConvertFloatToQ15_ASM:
+
+    cp0     w2
+    bra     z, _float_to_q15_done
+
+    ; Load scaling factor: 32768.0
+    ; In IEEE 754: 0x47000000
+    mov     #0x0000, w4
+    mov     #0x4700, w5
+    mov.d   w4, fs0             ; fs0 = 32768.0
+
+    ; Load saturation limits
+    mov     #0xFFFF, w4         ; 32767.0 in IEEE: 0x46FFFE00
+    mov     #0x46FF, w5
+    mov.d   w4, fs2             ; fs2 = 32767.0 (approx)
+
+    mov     #0x0000, w4         ; -32768.0 in IEEE: 0xC7000000
+    mov     #0xC700, w5
+    mov.d   w4, fs3             ; fs3 = -32768.0
+
+    dec     w2, w2
+
+    do      w2, _float_convert_loop_end
+
+        mov.s   [w0++], fs1     ; Load float sample
+        mul.s   fs0, fs1, fs1   ; Scale by 32768
+
+        ; Saturation check - positive
+        cmp.s   fs1, fs2        ; Compare with 32767
+        bra     le, _check_neg
+        mov.s   fs2, fs1        ; Saturate to 32767
+        bra     _store_q15
+
+_check_neg:
+        ; Saturation check - negative
+        cmp.s   fs3, fs1        ; Compare with -32768
+        bra     le, _store_q15
+        mov.s   fs3, fs1        ; Saturate to -32768
+
+_store_q15:
+        ; Convert float to integer
+        ftoi.s  fs1, w3         ; Convert to integer
+_float_convert_loop_end:
+        mov     w3, [w1++]      ; Store Q15 output
+
+_float_to_q15_done:
+    return
+
+    .size   _EQ_ConvertFloatToQ15_ASM, . - _EQ_ConvertFloatToQ15_ASM
+
+;============================================================================
+; End of File
+;============================================================================
+
+    .end

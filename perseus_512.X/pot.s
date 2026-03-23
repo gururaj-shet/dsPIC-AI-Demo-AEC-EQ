@@ -1,0 +1,1154 @@
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\curiosity\\pot.c"
+	.section	.text,code
+.Ltext0:
+	.section	.text,code
+	.align	4
+	.global	_POT_Initialize	; export
+	.type	_POT_Initialize,@function
+_POT_Initialize:
+.LFB14:
+	.file 1 "../src/curiosity/pot.c"
+	.loc 1 28 1
+	.set ___PA___,1
+	.loc 1 29 1
+	return	
+
+	.set ___PA___,0
+
+.LFE14:
+	.size	_POT_Initialize, .-_POT_Initialize
+	.align	4
+	.global	_POT_Read	; export
+	.type	_POT_Read,@function
+_POT_Read:
+.LFB15:
+	.loc 1 62 1
+	.set ___PA___,1
+	.loc 1 63 5
+	.loc 1 64 1 is_stmt 0
+	mov.w	_POT_Data,w0
+	return	
+
+	.set ___PA___,0
+
+.LFE15:
+	.size	_POT_Read, .-_POT_Read
+	.align	4
+	.global	_POT_Process	; export
+	.type	_POT_Process,@function
+_POT_Process:
+.LFB16:
+	.loc 1 67 1 is_stmt 1
+	.set ___PA___,1
+	.loc 1 70 5
+.LBB8:
+.LBB9:
+	.file 2 "../src/adc/adc5.h"
+	.loc 2 128 3
+	.loc 2 128 12 is_stmt 0
+	setm.l	_AD5SWTRG
+.L6:
+.LBE9:
+.LBE8:
+	.loc 1 73 5 is_stmt 1 discriminator 1
+.LVL0:
+.LBB10:
+.LBB11:
+	.loc 2 264 4 discriminator 1
+	.loc 2 266 5 discriminator 1
+	.loc 2 269 17 discriminator 1
+	.loc 2 269 37 is_stmt 0 discriminator 1
+	mov.bz	_AD5STATbits,w0
+	and.b	w0,#(0x1&0x7F),w0
+.LVL1:
+	.loc 2 270 17 is_stmt 1 discriminator 1
+	.loc 2 275 5 discriminator 1
+.LBE11:
+.LBE10:
+	.loc 1 71 10 is_stmt 0 discriminator 1
+	cp.b	w0,#0
+	.set ___BP___,89
+	bra	z,.L6
+	.loc 1 74 5 is_stmt 1
+.LVL2:
+.LBB12:
+.LBB13:
+	.loc 2 238 5
+	.loc 2 240 5
+	.loc 2 243 17
+	.loc 2 243 24 is_stmt 0
+	mov.l	_AD5CH0DATA,w0
+.LVL3:
+	.loc 2 244 17 is_stmt 1
+	.loc 2 248 5
+.LBE13:
+.LBE12:
+	.loc 1 74 14 is_stmt 0
+	mov.w	w0,_POT_Data
+	.loc 1 86 1
+	return	
+
+	.set ___PA___,0
+
+.LFE16:
+	.size	_POT_Process, .-_POT_Process
+	.section	.nbss,bss,near
+	.align	2
+	.type	_POT_Data,@object
+	.size	_POT_Data, 2
+_POT_Data:
+	.skip	2
+	.section	.debug_frame,info
+.Lframe0:
+	.4byte	.LECIE0-.LSCIE0
+.LSCIE0:
+	.4byte	0xffffffff
+	.byte	0x1
+	.byte	0
+	.byte	0x1
+	.byte	0x4
+	.byte	0x48
+	.byte	0x12
+	.byte	0xf
+	.byte	0x7f
+	.byte	0x9
+	.byte	0x48
+	.byte	0xf
+	.align	4
+.LECIE0:
+.LSFDE0:
+	.4byte	.LEFDE0-.LASFDE0
+.LASFDE0:
+	.4byte	.Lframe0
+	.4byte	.LFB14
+	.4byte	.LFE14-.LFB14
+	.align	4
+.LEFDE0:
+.LSFDE2:
+	.4byte	.LEFDE2-.LASFDE2
+.LASFDE2:
+	.4byte	.Lframe0
+	.4byte	.LFB15
+	.4byte	.LFE15-.LFB15
+	.align	4
+.LEFDE2:
+.LSFDE4:
+	.4byte	.LEFDE4-.LASFDE4
+.LASFDE4:
+	.4byte	.Lframe0
+	.4byte	.LFB16
+	.4byte	.LFE16-.LFB16
+	.align	4
+.LEFDE4:
+	.section	.text,code
+.Letext0:
+	.file 3 "c:\\program files\\microchip\\xc-dsc\\v3.31\\include\\bits\\alltypes.h"
+	.file 4 "c:\\users\\i69379\\.mchp_packs\\microchip\\dspic33ak-mp_dfp\\1.3.185\\xc16\\support\\dspic33a\\h\\p33ak512mps512.h"
+	.section	.debug_info,info
+.Ldebug_info0:
+	.4byte	0x689
+	.2byte	0x2
+	.4byte	.Ldebug_abbrev0
+	.byte	0x4
+	.byte	0x1
+	.ascii	"GNU C99 8.3.1 (XC-DSC, Microchip v3.31.00) Build date: Jan 30 2026  "
+	.ascii	" -mcpu=33AK512MPS512 -msmall-data -msmart-io=1 -msfr-warn=off -mdfp="
+	.ascii	"C:/Users/i69379/.mchp_packs/Microchip/dsPIC33AK-MP_DFP/1.3.185/xc16 "
+	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
+	.byte	0xc
+	.asciz	"../src/curiosity/pot.c"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
+	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
+	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.4byte	.Ldebug_ranges0+0
+	.4byte	0
+	.4byte	0
+	.4byte	.Ldebug_line0
+	.byte	0x2
+	.byte	0x8
+	.byte	0x4
+	.asciz	"long double"
+	.byte	0x2
+	.byte	0x1
+	.byte	0x6
+	.asciz	"signed char"
+	.byte	0x2
+	.byte	0x2
+	.byte	0x5
+	.asciz	"short int"
+	.byte	0x2
+	.byte	0x4
+	.byte	0x5
+	.asciz	"long int"
+	.byte	0x2
+	.byte	0x8
+	.byte	0x5
+	.asciz	"long long int"
+	.byte	0x3
+	.asciz	"uint8_t"
+	.byte	0x3
+	.byte	0xbb
+	.byte	0x17
+	.4byte	0x234
+	.byte	0x2
+	.byte	0x1
+	.byte	0x8
+	.asciz	"unsigned char"
+	.byte	0x3
+	.asciz	"uint16_t"
+	.byte	0x3
+	.byte	0xc7
+	.byte	0x18
+	.4byte	0x256
+	.byte	0x2
+	.byte	0x2
+	.byte	0x7
+	.asciz	"short unsigned int"
+	.byte	0x3
+	.asciz	"uint32_t"
+	.byte	0x3
+	.byte	0xcd
+	.byte	0x1b
+	.4byte	0x282
+	.byte	0x4
+	.4byte	0x26c
+	.byte	0x2
+	.byte	0x4
+	.byte	0x7
+	.asciz	"long unsigned int"
+	.byte	0x2
+	.byte	0x8
+	.byte	0x7
+	.asciz	"long long unsigned int"
+	.byte	0x2
+	.byte	0x4
+	.byte	0x7
+	.asciz	"unsigned int"
+	.byte	0x2
+	.byte	0x4
+	.byte	0x5
+	.asciz	"int"
+	.byte	0x5
+	.asciz	"tagAD5STATBITS"
+	.byte	0x4
+	.byte	0x4
+	.2byte	0x19d3
+	.byte	0x10
+	.4byte	0x448
+	.byte	0x6
+	.asciz	"CH0RDY"
+	.byte	0x4
+	.2byte	0x19d4
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x7
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH1RDY"
+	.byte	0x4
+	.2byte	0x19d5
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x6
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH2RDY"
+	.byte	0x4
+	.2byte	0x19d6
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x5
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH3RDY"
+	.byte	0x4
+	.2byte	0x19d7
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x4
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH4RDY"
+	.byte	0x4
+	.2byte	0x19d8
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x3
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH5RDY"
+	.byte	0x4
+	.2byte	0x19d9
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x2
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH6RDY"
+	.byte	0x4
+	.2byte	0x19da
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x1
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH7RDY"
+	.byte	0x4
+	.2byte	0x19db
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0
+	.byte	0x2
+	.byte	0x23
+	.byte	0
+	.byte	0x6
+	.asciz	"CH8RDY"
+	.byte	0x4
+	.2byte	0x19dc
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x7
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH9RDY"
+	.byte	0x4
+	.2byte	0x19dd
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x6
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH10RDY"
+	.byte	0x4
+	.2byte	0x19de
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x5
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH11RDY"
+	.byte	0x4
+	.2byte	0x19df
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x4
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH12RDY"
+	.byte	0x4
+	.2byte	0x19e0
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x3
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH13RDY"
+	.byte	0x4
+	.2byte	0x19e1
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x2
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH14RDY"
+	.byte	0x4
+	.2byte	0x19e2
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0x1
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0x6
+	.asciz	"CH15RDY"
+	.byte	0x4
+	.2byte	0x19e3
+	.byte	0xb
+	.4byte	0x224
+	.byte	0x1
+	.byte	0x1
+	.byte	0
+	.byte	0x2
+	.byte	0x23
+	.byte	0x1
+	.byte	0
+	.byte	0x7
+	.asciz	"AD5STATBITS"
+	.byte	0x4
+	.2byte	0x19e6
+	.byte	0x3
+	.4byte	0x2c8
+	.byte	0x4
+	.4byte	0x448
+	.byte	0x8
+	.asciz	"AD5STATbits"
+	.byte	0x4
+	.2byte	0x19e7
+	.byte	0x1d
+	.4byte	0x45d
+	.byte	0x1
+	.byte	0x1
+	.byte	0x8
+	.asciz	"AD5SWTRG"
+	.byte	0x4
+	.2byte	0x1a1a
+	.byte	0x1a
+	.4byte	0x27d
+	.byte	0x1
+	.byte	0x1
+	.byte	0x8
+	.asciz	"AD5CH0DATA"
+	.byte	0x4
+	.2byte	0x1a54
+	.byte	0x1a
+	.4byte	0x27d
+	.byte	0x1
+	.byte	0x1
+	.byte	0x2
+	.byte	0x1
+	.byte	0x2
+	.asciz	"_Bool"
+	.byte	0x9
+	.asciz	"ADC5_CHANNEL"
+	.byte	0x7
+	.byte	0x4
+	.4byte	0x2b1
+	.byte	0x2
+	.byte	0x2e
+	.byte	0x6
+	.4byte	0x4ec
+	.byte	0xa
+	.asciz	"ADC5_Channel0"
+	.byte	0
+	.byte	0xa
+	.asciz	"ADC5_MAX_CHANNELS"
+	.byte	0x1
+	.byte	0
+	.byte	0xb
+	.4byte	0x4ac
+	.byte	0xc
+	.asciz	"POT_Data"
+	.byte	0x1
+	.byte	0x3b
+	.byte	0x11
+	.4byte	0x245
+	.byte	0x5
+	.byte	0x3
+	.4byte	_POT_Data
+	.byte	0xd
+	.byte	0x1
+	.asciz	"POT_Process"
+	.byte	0x1
+	.byte	0x42
+	.byte	0x6
+	.byte	0x1
+	.4byte	.LFB16
+	.4byte	.LFE16
+	.byte	0x2
+	.byte	0x7f
+	.byte	0x7c
+	.byte	0x1
+	.4byte	0x599
+	.byte	0xe
+	.4byte	0x66b
+	.4byte	.LBB8
+	.4byte	.LBE8
+	.byte	0x1
+	.byte	0x46
+	.byte	0x5
+	.byte	0xf
+	.4byte	0x5d9
+	.4byte	.LBB10
+	.4byte	.LBE10
+	.byte	0x1
+	.byte	0x47
+	.byte	0xc
+	.4byte	0x56b
+	.byte	0x10
+	.4byte	0x602
+	.4byte	.LLST0
+	.byte	0x11
+	.4byte	.LBB11
+	.4byte	.LBE11
+	.byte	0x12
+	.4byte	0x613
+	.4byte	.LLST0
+	.byte	0
+	.byte	0
+	.byte	0x13
+	.4byte	0x624
+	.4byte	.LBB12
+	.4byte	.LBE12
+	.byte	0x1
+	.byte	0x4a
+	.byte	0x10
+	.byte	0x10
+	.4byte	0x64b
+	.4byte	.LLST2
+	.byte	0x11
+	.4byte	.LBB13
+	.4byte	.LBE13
+	.byte	0x12
+	.4byte	0x65b
+	.4byte	.LLST2
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0x14
+	.byte	0x1
+	.asciz	"POT_Read"
+	.byte	0x1
+	.byte	0x3d
+	.byte	0xa
+	.byte	0x1
+	.4byte	0x245
+	.4byte	.LFB15
+	.4byte	.LFE15
+	.byte	0x2
+	.byte	0x7f
+	.byte	0x7c
+	.byte	0x1
+	.byte	0x15
+	.byte	0x1
+	.asciz	"POT_Initialize"
+	.byte	0x1
+	.byte	0x1b
+	.byte	0x6
+	.byte	0x1
+	.4byte	.LFB14
+	.4byte	.LFE14
+	.byte	0x2
+	.byte	0x7f
+	.byte	0x7c
+	.byte	0x1
+	.byte	0x16
+	.asciz	"ADC5_IsConversionComplete"
+	.byte	0x2
+	.2byte	0x106
+	.byte	0x13
+	.byte	0x1
+	.4byte	0x4a3
+	.byte	0x3
+	.4byte	0x624
+	.byte	0x17
+	.asciz	"channel"
+	.byte	0x2
+	.2byte	0x106
+	.byte	0x45
+	.4byte	0x4ec
+	.byte	0x18
+	.asciz	"status"
+	.byte	0x2
+	.2byte	0x108
+	.byte	0x9
+	.4byte	0x4a3
+	.byte	0
+	.byte	0x19
+	.asciz	"ADC5_ConversionResultGet"
+	.byte	0x2
+	.byte	0xec
+	.byte	0x18
+	.byte	0x1
+	.4byte	0x26c
+	.byte	0x3
+	.4byte	0x66b
+	.byte	0x1a
+	.asciz	"channel"
+	.byte	0x2
+	.byte	0xec
+	.byte	0x49
+	.4byte	0x4ec
+	.byte	0x1b
+	.asciz	"result"
+	.byte	0x2
+	.byte	0xee
+	.byte	0xe
+	.4byte	0x26c
+	.byte	0
+	.byte	0x1c
+	.asciz	"ADC5_SoftwareTriggerEnable"
+	.byte	0x2
+	.byte	0x7e
+	.byte	0x14
+	.byte	0x1
+	.byte	0x3
+	.byte	0
+	.section	.debug_abbrev,info
+.Ldebug_abbrev0:
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x25
+	.byte	0x8
+	.byte	0x13
+	.byte	0xb
+	.byte	0x3
+	.byte	0x8
+	.byte	0x1b
+	.byte	0x8
+	.byte	0x55
+	.byte	0x6
+	.byte	0x11
+	.byte	0x1
+	.byte	0x52
+	.byte	0x1
+	.byte	0x10
+	.byte	0x6
+	.byte	0
+	.byte	0
+	.byte	0x2
+	.byte	0x24
+	.byte	0
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3e
+	.byte	0xb
+	.byte	0x3
+	.byte	0x8
+	.byte	0
+	.byte	0
+	.byte	0x3
+	.byte	0x16
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x4
+	.byte	0x35
+	.byte	0
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x5
+	.byte	0x13
+	.byte	0x1
+	.byte	0x3
+	.byte	0x8
+	.byte	0xb
+	.byte	0xb
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x6
+	.byte	0xd
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0xb
+	.byte	0xb
+	.byte	0xd
+	.byte	0xb
+	.byte	0xc
+	.byte	0xb
+	.byte	0x38
+	.byte	0xa
+	.byte	0
+	.byte	0
+	.byte	0x7
+	.byte	0x16
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x8
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x3f
+	.byte	0xc
+	.byte	0x3c
+	.byte	0xc
+	.byte	0
+	.byte	0
+	.byte	0x9
+	.byte	0x4
+	.byte	0x1
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3e
+	.byte	0xb
+	.byte	0xb
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xa
+	.byte	0x28
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x1c
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0xb
+	.byte	0x26
+	.byte	0
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xc
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0x2
+	.byte	0xa
+	.byte	0
+	.byte	0
+	.byte	0xd
+	.byte	0x2e
+	.byte	0x1
+	.byte	0x3f
+	.byte	0xc
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0xc
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x40
+	.byte	0xa
+	.byte	0x97,0x42
+	.byte	0xc
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0xe
+	.byte	0x1d
+	.byte	0
+	.byte	0x31
+	.byte	0x13
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x58
+	.byte	0xb
+	.byte	0x59
+	.byte	0xb
+	.byte	0x57
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0xf
+	.byte	0x1d
+	.byte	0x1
+	.byte	0x31
+	.byte	0x13
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x58
+	.byte	0xb
+	.byte	0x59
+	.byte	0xb
+	.byte	0x57
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x10
+	.byte	0x5
+	.byte	0
+	.byte	0x31
+	.byte	0x13
+	.byte	0x2
+	.byte	0x6
+	.byte	0
+	.byte	0
+	.byte	0x11
+	.byte	0xb
+	.byte	0x1
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0
+	.byte	0
+	.byte	0x12
+	.byte	0x34
+	.byte	0
+	.byte	0x31
+	.byte	0x13
+	.byte	0x2
+	.byte	0x6
+	.byte	0
+	.byte	0
+	.byte	0x13
+	.byte	0x1d
+	.byte	0x1
+	.byte	0x31
+	.byte	0x13
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x58
+	.byte	0xb
+	.byte	0x59
+	.byte	0xb
+	.byte	0x57
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0x14
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0xc
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0xc
+	.byte	0x49
+	.byte	0x13
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x40
+	.byte	0xa
+	.byte	0x97,0x42
+	.byte	0xc
+	.byte	0
+	.byte	0
+	.byte	0x15
+	.byte	0x2e
+	.byte	0
+	.byte	0x3f
+	.byte	0xc
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0xc
+	.byte	0x11
+	.byte	0x1
+	.byte	0x12
+	.byte	0x1
+	.byte	0x40
+	.byte	0xa
+	.byte	0x97,0x42
+	.byte	0xc
+	.byte	0
+	.byte	0
+	.byte	0x16
+	.byte	0x2e
+	.byte	0x1
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0xc
+	.byte	0x49
+	.byte	0x13
+	.byte	0x20
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x17
+	.byte	0x5
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x18
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0x5
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x19
+	.byte	0x2e
+	.byte	0x1
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0xc
+	.byte	0x49
+	.byte	0x13
+	.byte	0x20
+	.byte	0xb
+	.byte	0x1
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x1a
+	.byte	0x5
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x1b
+	.byte	0x34
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x49
+	.byte	0x13
+	.byte	0
+	.byte	0
+	.byte	0x1c
+	.byte	0x2e
+	.byte	0
+	.byte	0x3
+	.byte	0x8
+	.byte	0x3a
+	.byte	0xb
+	.byte	0x3b
+	.byte	0xb
+	.byte	0x39
+	.byte	0xb
+	.byte	0x27
+	.byte	0xc
+	.byte	0x20
+	.byte	0xb
+	.byte	0
+	.byte	0
+	.byte	0
+	.section	.debug_loc,info
+.Ldebug_loc0:
+.LLST0:
+	.4byte	.LVL0
+	.4byte	.LVL1
+	.2byte	0x2
+	.byte	0x30
+	.byte	0x9f
+	.4byte	0
+	.4byte	0
+.LLST2:
+	.4byte	.LVL2
+	.4byte	.LVL3
+	.2byte	0x2
+	.byte	0x30
+	.byte	0x9f
+	.4byte	0
+	.4byte	0
+	.section	.debug_aranges,info
+	.4byte	0x2c
+	.2byte	0x2
+	.4byte	.Ldebug_info0
+	.byte	0x4
+	.byte	0
+	.2byte	0
+	.2byte	0
+	.4byte	.LFB14
+	.4byte	.LFE14-.LFB14
+	.4byte	.LFB15
+	.4byte	.LFE15-.LFB15
+	.4byte	.LFB16
+	.4byte	.LFE16-.LFB16
+	.4byte	0
+	.4byte	0
+	.section	.debug_ranges,info
+.Ldebug_ranges0:
+	.4byte	.LFB14
+	.4byte	.LFE14
+	.4byte	.LFB15
+	.4byte	.LFE15
+	.4byte	.LFB16
+	.4byte	.LFE16
+	.4byte	0
+	.4byte	0
+	.section	.debug_line,info
+.Ldebug_line0:
+	.section	.debug_str,info
+	.ident	"GCC: (Microchip Technology) 8.3.1 (XC-DSC, Microchip v3.31.00) Build date: Jan 30 2026  "
+
+
+
+	.section __c30_signature, info, data
+	.word 0x0001
+	.word 0x0007
+	.word 0x0000
+
+; MCHP configuration words
+
+	.set ___PA___,0
+	.end

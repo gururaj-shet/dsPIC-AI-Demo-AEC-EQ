@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <executable name="dist/dsPIC33AK128/production/perseus_512.X.production.elf">
+    <memory name="data">
+      <units>bytes</units>
+      <length>16384</length>
+      <used>15138</used>
+      <free>1246</free>
+    </memory>
+    <memory name="program">
+      <units>bytes</units>
+      <length>131068</length>
+      <used>114716</used>
+      <free>16352</free>
+    </memory>
+  </executable>
+</project>

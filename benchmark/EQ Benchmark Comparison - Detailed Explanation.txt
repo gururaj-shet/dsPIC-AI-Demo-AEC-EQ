@@ -1,0 +1,139 @@
+ What We're Comparing
+
+  ┌──────────────────────┬───────────────┬─────────────────────┬────────────────────┬─────────────────────┐
+  │    Implementation    │     File      │        Bands        │      Filters       │      Use Case       │
+  ├──────────────────────┼───────────────┼─────────────────────┼────────────────────┼─────────────────────┤
+  │ tone_ctrl (Previous) │ tone_ctrl.c   │ 3 (Bass/Mid/Treble) │ 3 biquads          │ Simple tone control │
+  ├──────────────────────┼───────────────┼─────────────────────┼────────────────────┼─────────────────────┤
+  │ eq_lib (New)         │ eq_api_33AK.c │ 8 (32Hz-4kHz)       │ 8 biquads cascaded │ Full graphic EQ     │
+  └──────────────────────┴───────────────┴─────────────────────┴────────────────────┴─────────────────────┘
+
+  ---
+  Benchmark Tests
+
+  Test 1: Single Biquad (Reference Baseline)
+
+  app_tone_process_bas(bench_output_tone, bench_output_tone);
+  - Measures one biquad filter only
+  - This is the baseline to understand per-filter cost
+  - Shows raw FPU/DSP performance for biquad operations
+
+  Test 2: tone_ctrl 3-Band EQ (Previous Implementation)
+
+  app_tone_process_tre(buffer, buffer);  // Treble - 8000 Hz
+  app_tone_process_mid(buffer, buffer);  // Mid - 1000 Hz
+  app_tone_process_bas(buffer, buffer);  // Bass - 125 Hz
+  - Measures 3 separate function calls
+  - Each processes the entire audio frame
+  - Total: 3 biquad filters
+
+  Test 3: eq_lib 8-Band EQ (New Implementation)
+
+  eq_perseus_process_mono(buffer, total_samples);
+  - Measures 8 cascaded biquads in single call
+  - Bands: 32, 62, 125, 250, 500, 1k, 2k, 4kHz
+  - Includes master gain application
+
+  ---
+  What Gets Measured
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │                    TIMING MEASUREMENT                        │
+  ├─────────────────────────────────────────────────────────────┤
+  │                                                              │
+  │   Timer Start ──►  [ Audio Processing ]  ──► Timer End      │
+  │                                                              │
+  │   Cycles = End - Start                                       │
+  │                                                              │
+  └─────────────────────────────────────────────────────────────┘
+
+  ┌───────────────┬─────────────────────────────────────────┬───────────────────────────────────────────────────────────────────────┐
+  │    Metric     │                 Formula                 │                                Meaning                                │
+  ├───────────────┼─────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+  │ Cycles/Frame  │ timer_end - timer_start                 │ Total CPU cycles to process one audio frame (32 samples × 4 channels) │
+  ├───────────────┼─────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+  │ Cycles/Sample │ Cycles/Frame ÷ (samples × channels)     │ Average cycles per audio sample                                       │
+  ├───────────────┼─────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+  │ CPU Load %    │ (Cycles/Frame × Frames/sec) ÷ Fcy × 100 │ Percentage of CPU time used                                           │
+  └───────────────┴─────────────────────────────────────────┴───────────────────────────────────────────────────────────────────────┘
+
+  ---
+  Efficiency Analysis
+
+  Efficiency Factor = (Expected Ratio) ÷ (Actual Ratio) × 100%
+
+  Where:
+    Expected Ratio = 8 bands ÷ 3 bands = 2.67×
+    Actual Ratio   = eq_lib cycles ÷ tone_ctrl cycles
+
+  ┌────────────┬──────────────────────────────────────────────────────┐
+  │ Efficiency │                       Meaning                        │
+  ├────────────┼──────────────────────────────────────────────────────┤
+  │ > 100%     │ New eq_lib is MORE efficient per-band than tone_ctrl │
+  ├────────────┼──────────────────────────────────────────────────────┤
+  │ = 100%     │ Both implementations have same per-band efficiency   │
+  ├────────────┼──────────────────────────────────────────────────────┤
+  │ < 100%     │ New eq_lib is LESS efficient per-band                │
+  └────────────┴──────────────────────────────────────────────────────┘
+
+  ---
+  Example Results Interpretation
+
+  ----------------------------------------
+  Implementation         | Cycles/Frame | Cycles/Sample
+  ----------------------------------------
+  Single Biquad (1 band) |       1500   |  11.7
+  tone_ctrl (3 bands)    |       4500   |  35.2
+  eq_lib (8 bands)       |      11000   |  85.9
+  ----------------------------------------
+
+  Comparison:
+    8-band EQ vs 3-band tone: 2.44x cycles
+    Expected ratio (8/3):     2.67x
+    Efficiency factor:        109.4%
+
+  Reading the results:
+
+  1. Single Biquad = 1500 cycles
+    - Baseline: one filter costs ~1500 cycles/frame
+  2. tone_ctrl = 4500 cycles (3 bands)
+    - 4500 ÷ 3 = 1500 cycles per band ✓ matches baseline
+  3. eq_lib = 11000 cycles (8 bands)
+    - 11000 ÷ 8 = 1375 cycles per band
+    - More efficient than tone_ctrl per-band!
+  4. Efficiency = 109.4%
+    - The 8-band EQ is 9.4% more efficient per-band
+    - Benefits from: loop optimization, reduced function call overhead, better cache usage
+
+  ---
+  CPU Load Calculation
+
+  CPU Load = (Cycles per Frame) × (Frames per Second) ÷ (CPU Frequency) × 100%
+
+  Example @ 100 MHz, 48kHz sample rate, 32 samples/frame:
+    Frames/sec = 48000 ÷ 32 = 1500 frames/sec
+
+    tone_ctrl:  4500 × 1500 ÷ 100,000,000 × 100 = 6.75%
+    eq_lib:    11000 × 1500 ÷ 100,000,000 × 100 = 16.5%
+
+  ---
+  Why This Matters
+
+  ┌───────────────┬─────────────────────┬────────────────────────┐
+  │    Aspect     │ tone_ctrl (3-band)  │    eq_lib (8-band)     │
+  ├───────────────┼─────────────────────┼────────────────────────┤
+  │ Flexibility   │ Fixed frequencies   │ Adjustable bands       │
+  ├───────────────┼─────────────────────┼────────────────────────┤
+  │ Control       │ 3 sliders           │ 8 sliders + presets    │
+  ├───────────────┼─────────────────────┼────────────────────────┤
+  │ CPU Cost      │ Lower               │ ~2.5× higher           │
+  ├───────────────┼─────────────────────┼────────────────────────┤
+  │ Audio Quality │ Basic tone shaping  │ Professional EQ        │
+  ├───────────────┼─────────────────────┼────────────────────────┤
+  │ GUI Control   │ Manual code changes │ Real-time UART control │
+  └───────────────┴─────────────────────┴────────────────────────┘
+
+  The benchmark helps you decide:
+  - Is the 8-band EQ worth the extra CPU cycles?
+  - Do you have enough CPU headroom for other audio processing?
+  - Is the implementation efficient (per-band cost)?
