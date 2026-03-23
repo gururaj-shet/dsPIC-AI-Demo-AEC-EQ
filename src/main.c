@@ -47,6 +47,7 @@
 #include "engine_synth.h"
 #include "click_crack_synth.h"
 #include "eq_lib/eq_perseus_wrapper.h"     // 8-band Graphic Equalizer
+#include "aec_33ak.h"                       // Acoustic Echo Cancellation
 
 
 #include "main.h"
@@ -130,6 +131,8 @@
   #define BTN_RELEASED_TRANSIENT    (0)
   #define BTN_RELEASED_BMODE        TOUCH_DetectReleased(3)
 
+  // AEC toggle: No touch sensor 4 available - use GUI instead
+  #define BTN_RELEASED_AEC          (0)
 
 #else
   #define BTN_RELEASED_MUTE         BUTTON_DetectReleased(1)
@@ -143,6 +146,8 @@
   #define BTN_RELEASED_TRANSIENT    (0)
 //  #define BTN_RELEASED_BMODE        (0)
   #define BTN_RELEASED_BMODE        BUTTON_DetectReleased(3)
+
+  #define BTN_RELEASED_AEC          (0)
 
 #endif //defined(__dsPIC33AK512MPS512__)
 
@@ -179,6 +184,7 @@ static void   local_usr_reverb( void );
 static void   local_usr_surround( void );
 static void   local_usr_Bmode( void );
 static void   local_usr_eq( void );        // 8-band Graphic Equalizer
+static void   local_usr_aec( void );       // Acoustic Echo Cancellation toggle
 
 
 
@@ -449,13 +455,18 @@ int main(void)
 //not in use    app_loudmeter_init();
     app_bassh_init();
 
+    // Initialize AEC (Acoustic Echo Cancellation)
+    extern aec_state_t g_aec_state;
+    aec_init(&g_aec_state, AEC_FILTER_ORDER, true);
+    printf(" AEC: Initialized with %d taps (64ms echo tail)\n", AEC_FILTER_ORDER);
+
     // engine sound test
     app_engine_synth_init();
     app_ccsynth_init();
 
 
     // init and start TDM
-    TDM_Start();
+    TDM_Start();;
 
 
 #if defined(__dsPIC33AK512MPS512__)
@@ -467,8 +478,6 @@ int main(void)
     extern void SST26_test(void);
     SST26_test();
 #endif //defined(__dsPIC33AK512MPS512__)
-
-
 
 
     ////////////////////////////////////
@@ -490,6 +499,7 @@ int main(void)
         local_usr_surround();
         local_usr_Bmode();
         local_usr_eq();             // 8-band Graphic Equalizer control
+        local_usr_aec();            // AEC toggle
 
         local_dbg_print();
 
@@ -657,23 +667,17 @@ static void local_dbg_print( void )
     // every 300ms
     if ((uint32_t)(cur - last_prt_2) >= 300) // Actively use overflow
     {
-        if( Ena_EngineSynth )
-        {
-            // do nothing
-        }
-        else
-        {
-//            printf("Lv=%2.2fdB Qt=%.2f | LPF:base:%+4.1f + bonus:%+4.1f = %+4.1fdB(cap=%.1f) | fc=%.0fHz\n",
-            printf("Lv=%2.2fdB Qt=%1.2f | LPF:base:%+4.1f + bonus:%+4.1f = %+4.1fdB | fc=%.0fHz\n",
-                    g_bassh.dbg_L_wide_db,
-                    g_bassh.dbg_quiet,
-                    g_bassh.dbg_lpf_base_db,
-                    g_bassh.dbg_lpf_bonus_db,
-                    g_bassh.dbg_lpf_gain_db,
-//                    g_bassh.dbg_cap_eff_db,
-                    g_bassh.dbg_low_fc);
+        extern uint8_t g_audio_level_in;
+        extern uint8_t g_audio_level_out;
+        extern aec_state_t g_aec_state;
+        extern bool g_aec_enabled;
+        float erle = aec_get_erle(&g_aec_state);
 
-        }
+        printf("In=%3d Out=%3d | AEC:%s ERLE=%+.1fdB\n",
+                g_audio_level_in,
+                g_audio_level_out,
+                g_aec_enabled ? "ON " : "OFF",
+                erle);
 
         last_prt_2 = cur;
     }
@@ -1199,5 +1203,32 @@ static void local_usr_eq( void )
 
     // Suppress unused variable warning
     (void)preset;
+}
+
+
+//===========================================================
+// AEC (Acoustic Echo Cancellation) User Control
+//===========================================================
+static void local_usr_aec( void )
+{
+    extern aec_state_t g_aec_state;
+    extern bool g_aec_enabled;
+
+    if( BTN_RELEASED_AEC )
+    {
+        wav_to_tdm_play_se();  // Play sound effect
+
+        g_aec_enabled = !g_aec_enabled;
+        aec_enable(&g_aec_state, g_aec_enabled);
+
+        if( g_aec_enabled )
+        {
+            printf(" AEC: Enabled (ERLE=%.1fdB)\n", aec_get_erle(&g_aec_state));
+        }
+        else
+        {
+            printf(" AEC: Disabled\n");
+        }
+    }
 }
 

@@ -11,7 +11,7 @@ build/dsPIC33AK512/production/_ext/1360937237/SPI_TDM_drv.o: \
  ../src/audio/engine_synth.h ../src/audio/click_crack_synth.h \
  ../src/eq_lib/eq_perseus_wrapper.h \
  ../src/eq_lib/../app_specific_config_defs.h ../src/eq_lib/eq_api_33AK.h \
- ../src/SPI_TDM_drv.h
+ ../src/audio/aec_33ak.h ../src/SPI_TDM_drv.h
 
 ../src/app_specific_config_defs.h:
 
@@ -62,5 +62,7 @@ build/dsPIC33AK512/production/_ext/1360937237/SPI_TDM_drv.o: \
 ../src/eq_lib/../app_specific_config_defs.h:
 
 ../src/eq_lib/eq_api_33AK.h:
+
+../src/audio/aec_33ak.h:
 
 ../src/SPI_TDM_drv.h:

@@ -1,5 +1,5 @@
 # 1 "../src/debug/app_debug.c"
-# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X//"
+# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "../src/debug/app_debug.c"
@@ -27208,11 +27208,154 @@ void eq_benchmark_run(void);
 
 void eq_benchmark_compare_output(void);
 # 23 "../src/debug/app_debug.c" 2
-# 37 "../src/debug/app_debug.c"
+# 1 "../src/audio/aec_33ak.h" 1
+# 48 "../src/audio/aec_33ak.h"
+typedef enum {
+    AEC_MODE_DISABLED = 0,
+    AEC_MODE_ENABLED,
+    AEC_MODE_BYPASS
+} aec_mode_t;
+
+
+typedef struct {
+    float band_energy[16];
+    float noise_energy[16];
+    float avg_noise_energy;
+    int hangover_count;
+    int frame_count;
+    
+# 61 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 61 "../src/audio/aec_33ak.h"
+         is_speech;
+    
+# 62 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 62 "../src/audio/aec_33ak.h"
+         first_frame;
+} aec_vad_state_t;
+
+
+typedef struct {
+    float down_history[48];
+    float up_history[48];
+    int down_phase;
+    int up_phase;
+} aec_src_state_t;
+
+
+typedef struct {
+    float coeffs[512];
+    float delay_line[512];
+    float energy;
+    float mu;
+    float prev_error;
+    int delay_idx;
+} aec_nlms_state_t;
+
+
+typedef struct {
+
+    aec_mode_t mode;
+    int filter_order;
+    int num_channels;
+
+
+    float mic_accum_48k[480];
+    float ref_accum_48k[480];
+    int accum_count;
+
+
+    float out_accum_48k[480];
+    int out_read_idx;
+    int out_avail;
+
+
+    float mic_8k[80];
+    float ref_8k[80];
+    float out_8k[80];
+
+
+    aec_nlms_state_t nlms;
+    aec_vad_state_t vad;
+    aec_src_state_t src;
+
+
+    float erle_db;
+    float echo_power;
+    float residual_power;
+
+
+    uint32_t frames_processed;
+    
+# 117 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 117 "../src/audio/aec_33ak.h"
+        adapt_enabled;
+
+} aec_state_t;
+# 131 "../src/audio/aec_33ak.h"
+void aec_init(aec_state_t* state, int filter_order, 
+# 131 "../src/audio/aec_33ak.h" 3 4
+                                                   _Bool 
+# 131 "../src/audio/aec_33ak.h"
+                                                        enable_vad);
+
+
+
+
+
+void aec_reset(aec_state_t* state);
+# 148 "../src/audio/aec_33ak.h"
+void aec_process(aec_state_t* state,
+                 const float* mic_in,
+                 const float* ref_in,
+                 float* out,
+                 int num_samples,
+                 int num_channels);
+
+
+
+
+
+
+void aec_enable(aec_state_t* state, 
+# 160 "../src/audio/aec_33ak.h" 3 4
+                                   _Bool 
+# 160 "../src/audio/aec_33ak.h"
+                                        enable);
+
+
+
+
+
+
+float aec_get_erle(const aec_state_t* state);
+
+
+
+
+
+
+
+# 174 "../src/audio/aec_33ak.h" 3 4
+_Bool 
+# 174 "../src/audio/aec_33ak.h"
+    aec_is_near_end_speech(const aec_state_t* state);
+
+
+
+
+
+
+void aec_set_step_size(aec_state_t* state, float mu);
+# 24 "../src/debug/app_debug.c" 2
+# 38 "../src/debug/app_debug.c"
 static void dbcapp_n_onmsg(dbc_msg_t* pmsg);
 static void dbcapp_m_onmsg(dbc_msg_t* pmsg);
 static void dbcapp_i_onmsg(dbc_msg_t* pmsg);
 static void dbcapp_e_onmsg(dbc_msg_t* pmsg);
+static void dbcapp_a_onmsg(dbc_msg_t* pmsg);
 
 
 
@@ -27220,32 +27363,32 @@ static void dbcapp_nt_app_test( dbc_msg_t* pmsg );
 static void dbcapp_na_app_execute( dbc_msg_t* pmsg );
 static void dbcapp_ni_app_execute( dbc_msg_t* pmsg );
 static void dbcapp_nm_app_test( dbc_msg_t* pmsg );
-# 58 "../src/debug/app_debug.c"
+# 60 "../src/debug/app_debug.c"
 void app_uart_rx_available(void)
 {
     uint8_t c;
     
-# 61 "../src/debug/app_debug.c" 3 4
+# 63 "../src/debug/app_debug.c" 3 4
    _Bool 
-# 61 "../src/debug/app_debug.c"
+# 63 "../src/debug/app_debug.c"
             result;
 
     c = UART1_Read();
 
     switch( c )
     {
-# 86 "../src/debug/app_debug.c"
+# 88 "../src/debug/app_debug.c"
     case 'B':
         printf("\n blipping start!!!\n");
         extern 
-# 88 "../src/debug/app_debug.c" 3 4
+# 90 "../src/debug/app_debug.c" 3 4
               _Bool 
-# 88 "../src/debug/app_debug.c"
+# 90 "../src/debug/app_debug.c"
                    Start_Blip;
         Start_Blip = 
-# 89 "../src/debug/app_debug.c" 3 4
+# 91 "../src/debug/app_debug.c" 3 4
                     1
-# 89 "../src/debug/app_debug.c"
+# 91 "../src/debug/app_debug.c"
                         ;
 
         while( UART1_IsRxReady() )
@@ -27320,13 +27463,14 @@ void app_onmsg(dbc_msg_t* msg)
     {
         case 'n': dbcapp_n_onmsg(msg); break;
         case 'e': dbcapp_e_onmsg(msg); break;
+        case 'a': dbcapp_a_onmsg(msg); break;
 
 
 
         default: break;
     }
 }
-# 179 "../src/debug/app_debug.c"
+# 182 "../src/debug/app_debug.c"
 static void dbcapp_n_onmsg(dbc_msg_t* pmsg)
 {
     switch (pmsg->name)
@@ -27368,7 +27512,7 @@ static void dbcapp_i_onmsg(dbc_msg_t* pmsg)
         pmsg->data_len = 0;
     }
 }
-# 236 "../src/debug/app_debug.c"
+# 239 "../src/debug/app_debug.c"
 static void dbcapp_nt_app_test( dbc_msg_t* pmsg )
 {
     uint8_t* pdata;
@@ -27471,7 +27615,7 @@ static void dbcapp_na_app_execute( dbc_msg_t* pmsg )
             pmsg->status = (0x80u);
             break;
         }
-# 348 "../src/debug/app_debug.c"
+# 351 "../src/debug/app_debug.c"
         default:
             pmsg->data_len = 0;
             pmsg->status = (0x02u);
@@ -27484,7 +27628,7 @@ static void dbcapp_na_app_execute( dbc_msg_t* pmsg )
         pmsg->status = (0x03u);
     }
 }
-# 376 "../src/debug/app_debug.c"
+# 379 "../src/debug/app_debug.c"
 static void dbcapp_e_onmsg(dbc_msg_t* pmsg)
 {
     uint8_t* pdata;
@@ -27655,9 +27799,9 @@ static void dbcapp_e_onmsg(dbc_msg_t* pmsg)
             if (pmsg->data_len >= 1)
             {
                 
-# 545 "../src/debug/app_debug.c" 3 4
+# 548 "../src/debug/app_debug.c" 3 4
                _Bool 
-# 545 "../src/debug/app_debug.c"
+# 548 "../src/debug/app_debug.c"
                     enable = (pdata[0] != 0);
                 eq_perseus_enable(enable);
                 printf("EQ %s\n", enable ? "enabled" : "bypassed");
@@ -27698,6 +27842,185 @@ static void dbcapp_e_onmsg(dbc_msg_t* pmsg)
         {
             pmsg->data_len = 0;
             pmsg->status = (0x03u);
+        }
+        break;
+
+    default:
+        pmsg->data_len = 0;
+        pmsg->status = (0x01u);
+        break;
+    }
+}
+# 609 "../src/debug/app_debug.c"
+static void dbcapp_a_onmsg(dbc_msg_t* pmsg)
+{
+    uint8_t* pdata;
+    extern aec_state_t g_aec_state;
+    extern 
+# 613 "../src/debug/app_debug.c" 3 4
+          _Bool 
+# 613 "../src/debug/app_debug.c"
+               g_aec_enabled;
+
+    pdata = (uint8_t*)&(pmsg->data[0]);
+
+    switch (pmsg->name)
+    {
+
+    case 'e':
+        if (pmsg->kind == '*')
+        {
+            if (pmsg->data_len >= 1)
+            {
+                
+# 625 "../src/debug/app_debug.c" 3 4
+               _Bool 
+# 625 "../src/debug/app_debug.c"
+                    enable = (pdata[0] != 0);
+                g_aec_enabled = enable;
+                aec_enable(&g_aec_state, enable);
+                printf("AEC %s\n", enable ? "enabled" : "disabled");
+                pmsg->status = (0x80u);
+            }
+            else
+            {
+                pmsg->status = (0x02u);
+            }
+            pmsg->data_len = 0;
+        }
+        else if (pmsg->kind == '?')
+        {
+            pmsg->data[0] = g_aec_enabled ? 1 : 0;
+            pmsg->data_len = 1;
+            pmsg->status = (0x80u);
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = (0x03u);
+        }
+        break;
+
+
+    case 's':
+        if (pmsg->kind == '?')
+        {
+            float erle = aec_get_erle(&g_aec_state);
+            
+# 655 "../src/debug/app_debug.c" 3 4
+           _Bool 
+# 655 "../src/debug/app_debug.c"
+                near_end = aec_is_near_end_speech(&g_aec_state);
+
+
+            int8_t erle_int = (int8_t)(erle > 127.0f ? 127 : (erle < -128.0f ? -128 : erle));
+
+            pmsg->data[0] = g_aec_enabled ? 1 : 0;
+            pmsg->data[1] = (uint8_t)erle_int;
+            pmsg->data[2] = near_end ? 1 : 0;
+            pmsg->data_len = 3;
+            pmsg->status = (0x80u);
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = (0x03u);
+        }
+        break;
+
+
+    case 'r':
+        if (pmsg->kind == '*')
+        {
+            aec_reset(&g_aec_state);
+            printf("AEC reset\n");
+            pmsg->status = (0x80u);
+            pmsg->data_len = 0;
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = (0x03u);
+        }
+        break;
+
+
+    case 'm':
+        if (pmsg->kind == '*')
+        {
+            if (pmsg->data_len >= 1)
+            {
+
+                float mu = (float)pdata[0] / 100.0f;
+                if (mu > 1.0f) mu = 1.0f;
+                aec_set_step_size(&g_aec_state, mu);
+                printf("AEC mu = %.2f\n", mu);
+                pmsg->status = (0x80u);
+            }
+            else
+            {
+                pmsg->status = (0x02u);
+            }
+            pmsg->data_len = 0;
+        }
+        else if (pmsg->kind == '?')
+        {
+
+            uint8_t mu_byte = (uint8_t)(g_aec_state.nlms.mu * 100.0f);
+            pmsg->data[0] = mu_byte;
+            pmsg->data_len = 1;
+            pmsg->status = (0x80u);
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = (0x03u);
+        }
+        break;
+
+
+    case 'x':
+        {
+            extern 
+# 726 "../src/debug/app_debug.c" 3 4
+                  _Bool 
+# 726 "../src/debug/app_debug.c"
+                       g_echo_sim_enabled;
+            extern float g_echo_sim_gain;
+
+            if (pmsg->kind == '*')
+            {
+                if (pmsg->data_len >= 1)
+                {
+                    g_echo_sim_enabled = (pdata[0] != 0);
+                    if (pmsg->data_len >= 2)
+                    {
+
+                        g_echo_sim_gain = (float)pdata[1] / 100.0f;
+                        if (g_echo_sim_gain > 1.0f) g_echo_sim_gain = 1.0f;
+                    }
+                    printf("Echo sim %s, gain=%.2f\n",
+                              g_echo_sim_enabled ? "ON" : "OFF", g_echo_sim_gain);
+                    pmsg->status = (0x80u);
+                }
+                else
+                {
+                    pmsg->status = (0x02u);
+                }
+                pmsg->data_len = 0;
+            }
+            else if (pmsg->kind == '?')
+            {
+                pmsg->data[0] = g_echo_sim_enabled ? 1 : 0;
+                pmsg->data[1] = (uint8_t)(g_echo_sim_gain * 100.0f);
+                pmsg->data_len = 2;
+                pmsg->status = (0x80u);
+            }
+            else
+            {
+                pmsg->data_len = 0;
+                pmsg->status = (0x03u);
+            }
         }
         break;
 

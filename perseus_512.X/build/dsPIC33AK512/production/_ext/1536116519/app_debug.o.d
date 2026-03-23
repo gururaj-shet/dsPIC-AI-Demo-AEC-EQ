@@ -5,7 +5,7 @@ build/dsPIC33AK512/production/_ext/1536116519/app_debug.o: \
  ../src/audio/bass_enhancer.h ../src/debug/app_debug.h \
  ../src/eq_lib/eq_perseus_wrapper.h \
  ../src/eq_lib/../app_specific_config_defs.h ../src/eq_lib/eq_api_33AK.h \
- ../src/debug/eq_benchmark.h
+ ../src/debug/eq_benchmark.h ../src/audio/aec_33ak.h
 
 ../src/app_specific_config_defs.h:
 
@@ -28,3 +28,5 @@ build/dsPIC33AK512/production/_ext/1536116519/app_debug.o: \
 ../src/eq_lib/eq_api_33AK.h:
 
 ../src/debug/eq_benchmark.h:
+
+../src/audio/aec_33ak.h:

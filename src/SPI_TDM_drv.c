@@ -33,6 +33,7 @@
 #include "engine_synth.h"
 #include "click_crack_synth.h"
 #include "eq_lib/eq_perseus_wrapper.h"
+#include "aec_33ak.h"
 
 #include "SPI_TDM_drv.h"
 
@@ -276,6 +277,20 @@ static int32_t    Rx_Data[ 2 * SLOTS_PER_FS * NUM_SAMPLE ] __attribute__((aligne
 static float      f_A_Data[ STAGE_1_PROC_CH * NUM_SAMPLE ];
 static float      f_B_Data[ STAGE_1_PROC_CH * NUM_SAMPLE ];
 
+// AEC state and buffers
+aec_state_t       g_aec_state;
+bool              g_aec_enabled = false;  // Disabled by default - enable via GUI
+static float      g_aec_mic_raw[ STAGE_1_PROC_CH * NUM_SAMPLE ];
+static float      g_aec_ref_buffer[ STAGE_1_PROC_CH * NUM_SAMPLE ];
+
+// Echo simulation for testing AEC without physical mic/speaker
+// Using 10ms delay (small buffer to save memory, but enough for testing)
+#define ECHO_SIM_DELAY_SAMPLES (1440)  // 30ms at 48kHz - audible echo delay
+#define ECHO_SIM_BUFFER_SIZE  (ECHO_SIM_DELAY_SAMPLES + NUM_SAMPLE * STAGE_1_PROC_CH)
+static float      g_echo_sim_buffer[ECHO_SIM_BUFFER_SIZE];
+static int        g_echo_sim_write_idx = 0;
+bool              g_echo_sim_enabled = false;  // Enable via command *ax01
+float             g_echo_sim_gain = 0.5f;      // Echo level (0.0-1.0)
 
 static uint32_t   Half_Tx_Addr = (uint32_t)&Tx_Data[SLOTS_PER_FS * NUM_SAMPLE];
 
@@ -420,6 +435,12 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 
 #endif//01
 
+    // Prepare AEC mic input buffer (copy raw input before processing)
+    if (g_aec_enabled)
+    {
+        memcpy(g_aec_mic_raw, &f_A_Data[0], NUM_SAMPLE * STAGE_1_PROC_CH * sizeof(float));
+    }
+
     // Calculate input audio level for GUI metering
     g_audio_level_in = calc_peak_level_u8( &f_A_Data[0], NUM_SAMPLE * STAGE_1_PROC_CH );
 
@@ -432,6 +453,64 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 
     // A->A : 8-band Graphic Equalizer
     eq_perseus_process_mono( &f_A_Data[0], NUM_SAMPLE * STAGE_1_PROC_CH );
+
+    // Store current processed audio in echo simulation buffer BEFORE adding echo
+    // This is the "speaker reference" - what would play on the speaker
+    if (g_echo_sim_enabled)
+    {
+        int i;
+        int frame_size = NUM_SAMPLE * STAGE_1_PROC_CH;
+        for (i = 0; i < frame_size; i++)
+        {
+            g_echo_sim_buffer[(g_echo_sim_write_idx + i) % ECHO_SIM_BUFFER_SIZE] = f_A_Data[i];
+        }
+        g_echo_sim_write_idx = (g_echo_sim_write_idx + frame_size) % ECHO_SIM_BUFFER_SIZE;
+    }
+
+    // Echo simulation: add delayed echo to simulate acoustic feedback
+    // This makes the "echo disturbance" audible when AEC is off
+    if (g_echo_sim_enabled)
+    {
+        int i;
+        int read_idx;
+        int frame_size = NUM_SAMPLE * STAGE_1_PROC_CH;
+
+        if (g_aec_enabled)
+        {
+            // AEC mode: mix echo into mic input, save reference
+            memcpy(g_aec_ref_buffer, &f_A_Data[0], NUM_SAMPLE * STAGE_1_PROC_CH * sizeof(float));
+            for (i = 0; i < frame_size; i++)
+            {
+                read_idx = (g_echo_sim_write_idx + ECHO_SIM_BUFFER_SIZE - ECHO_SIM_DELAY_SAMPLES + i) % ECHO_SIM_BUFFER_SIZE;
+                g_aec_mic_raw[i] += g_echo_sim_gain * g_echo_sim_buffer[read_idx];
+            }
+        }
+        else
+        {
+            // No AEC: mix echo directly into output so user hears the disturbance
+            for (i = 0; i < frame_size; i++)
+            {
+                read_idx = (g_echo_sim_write_idx + ECHO_SIM_BUFFER_SIZE - ECHO_SIM_DELAY_SAMPLES + i) % ECHO_SIM_BUFFER_SIZE;
+                f_A_Data[i] += g_echo_sim_gain * g_echo_sim_buffer[read_idx];
+            }
+        }
+    }
+
+    // AEC processing: remove speaker echo from mic input
+    if (g_aec_enabled)
+    {
+        if (!g_echo_sim_enabled)
+        {
+            // No echo sim - just use processed audio as reference
+            memcpy(g_aec_ref_buffer, &f_A_Data[0], NUM_SAMPLE * STAGE_1_PROC_CH * sizeof(float));
+        }
+        aec_process(&g_aec_state,
+                    g_aec_mic_raw,      // Contains input + simulated echo (if enabled)
+                    g_aec_ref_buffer,   // Reference (what goes to speaker)
+                    f_A_Data,           // Output
+                    NUM_SAMPLE,
+                    STAGE_1_PROC_CH);
+    }
 
     // A->A
     app_bassh_process(&f_A_Data[0], &f_A_Data[0]);

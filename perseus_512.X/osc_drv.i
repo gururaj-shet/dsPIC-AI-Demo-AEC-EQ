@@ -1,5 +1,5 @@
 # 1 "../src/osc_drv.c"
-# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X//"
+# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "../src/osc_drv.c"
@@ -26849,8 +26849,16 @@ void Osc_Configure_PLL2( CLK_GEN_SOURCE_T osc_src,
     PLL2CONbits.ON = 1;
     PLL2CONbits.OE = 1;
 
+    start_ms = GetTicks();
     PLL2CONbits.OSWEN = 1;
-    while (PLL2CONbits.OSWEN);
+    while (PLL2CONbits.OSWEN)
+    {
+        if( GetTicks() > start_ms + 500 )
+        {
+            printf("\n\nOsc_Configure_PLL2: timeout0 !! OSWEN stuck - check BCLK from codec.\n");
+            break;
+        }
+    }
 
 
     PLL2DIVbits.PLLFBDIV = u32_PLLFBD;
@@ -26882,7 +26890,7 @@ void Osc_Configure_PLL2( CLK_GEN_SOURCE_T osc_src,
         }
     }
 }
-# 289 "../src/osc_drv.c"
+# 297 "../src/osc_drv.c"
 static uint8_t osc_get_mul_div( uint32_t in_Fosc_Hz,
                                 uint32_t req_Fosc_Hz,
                                 uint32_t* p_outPLLFBD,

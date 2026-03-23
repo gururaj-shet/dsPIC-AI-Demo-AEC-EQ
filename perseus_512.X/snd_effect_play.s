@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\audio\\snd_effect_play.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\audio\\snd_effect_play.c"
 	.section	.text,code
 .Ltext0:
 	.section	.text,code
@@ -32312,7 +32312,7 @@ _notif_action_i16:
 	.file 5 "../src/SST26_drv.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0x68d
+	.4byte	0x633
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -32323,9 +32323,8 @@ _notif_action_i16:
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/audio/snd_effect_play.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0x18
 	.4byte	0
 	.4byte	0
@@ -32347,9 +32346,9 @@ _notif_action_i16:
 	.byte	0x2
 	.byte	0xa6
 	.byte	0x16
-	.4byte	0x220
+	.4byte	0x1c6
 	.byte	0x4
-	.4byte	0x20b
+	.4byte	0x1b1
 	.byte	0x2
 	.byte	0x2
 	.byte	0x5
@@ -32367,7 +32366,7 @@ _notif_action_i16:
 	.byte	0x2
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x25a
+	.4byte	0x200
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -32381,9 +32380,9 @@ _notif_action_i16:
 	.byte	0x2
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x297
+	.4byte	0x23d
 	.byte	0x4
-	.4byte	0x281
+	.4byte	0x227
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -32401,7 +32400,7 @@ _notif_action_i16:
 	.byte	0x5
 	.asciz	"int"
 	.byte	0x4
-	.4byte	0x2d6
+	.4byte	0x27c
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -32411,24 +32410,24 @@ _notif_action_i16:
 	.byte	0x4
 	.asciz	"double"
 	.byte	0x4
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x5
 	.asciz	"Pre_Gain_WAV"
 	.byte	0x3
 	.byte	0x20
 	.byte	0xe
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
 	.asciz	"se_play_state"
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2c6
+	.4byte	0x26c
 	.byte	0x1
 	.byte	0x21
 	.byte	0xe
-	.4byte	0x35c
+	.4byte	0x302
 	.byte	0x7
 	.asciz	"SE_SLEEP"
 	.byte	0
@@ -32447,22 +32446,22 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0x29
 	.byte	0x3
-	.4byte	0x310
+	.4byte	0x2b6
 	.byte	0x8
-	.4byte	0x21b
-	.4byte	0x382
+	.4byte	0x1c1
+	.4byte	0x328
 	.byte	0x9
-	.4byte	0x2c6
+	.4byte	0x26c
 	.2byte	0x7c07
 	.byte	0
 	.byte	0x4
-	.4byte	0x371
+	.4byte	0x317
 	.byte	0xa
 	.asciz	"notif_action_i16"
 	.byte	0x4
 	.byte	0x6
 	.byte	0xf
-	.4byte	0x382
+	.4byte	0x328
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -32472,7 +32471,7 @@ _notif_action_i16:
 	.byte	0x4
 	.2byte	0xa5f
 	.byte	0x10
-	.4byte	0x292
+	.4byte	0x238
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -32482,15 +32481,15 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0x3e
 	.byte	0x15
-	.4byte	0x35c
+	.4byte	0x302
 	.byte	0x5
 	.byte	0x3
 	.4byte	_Ply_Status
 	.byte	0x8
-	.4byte	0x20b
-	.4byte	0x3f6
+	.4byte	0x1b1
+	.4byte	0x39c
 	.byte	0xd
-	.4byte	0x2c6
+	.4byte	0x26c
 	.byte	0x1f
 	.byte	0
 	.byte	0xc
@@ -32498,7 +32497,7 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0x40
 	.byte	0x10
-	.4byte	0x3e6
+	.4byte	0x38c
 	.byte	0x5
 	.byte	0x3
 	.4byte	_WavData
@@ -32513,41 +32512,41 @@ _notif_action_i16:
 	.4byte	.LFE18
 	.4byte	.LLST0
 	.byte	0x1
-	.4byte	0x651
+	.4byte	0x5f7
 	.byte	0xf
 	.asciz	"in_buf"
 	.byte	0x1
 	.byte	0x5c
 	.byte	0x2c
-	.4byte	0x651
+	.4byte	0x5f7
 	.4byte	.LLST1
 	.byte	0xf
 	.asciz	"out_buf"
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2c
-	.4byte	0x657
+	.4byte	0x5fd
 	.4byte	.LLST2
 	.byte	0xf
 	.asciz	"in_buf_ch"
 	.byte	0x1
 	.byte	0x5e
 	.byte	0x29
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST3
 	.byte	0xf
 	.asciz	"frameSize"
 	.byte	0x1
 	.byte	0x5f
 	.byte	0x29
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST4
 	.byte	0xc
 	.asciz	"Wave_Idx"
 	.byte	0x1
 	.byte	0x61
 	.byte	0x15
-	.4byte	0x281
+	.4byte	0x227
 	.byte	0x5
 	.byte	0x3
 	.4byte	_Wave_Idx.26761
@@ -32556,66 +32555,66 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0x7e
 	.byte	0x14
-	.4byte	0x292
+	.4byte	0x238
 	.4byte	.LLST5
 	.byte	0x11
 	.asciz	"remainFrames"
 	.byte	0x1
 	.byte	0x8a
 	.byte	0x14
-	.4byte	0x292
+	.4byte	0x238
 	.byte	0x10
 	.asciz	"framesToCopy"
 	.byte	0x1
 	.byte	0x8b
 	.byte	0xf
-	.4byte	0x2dd
+	.4byte	0x283
 	.4byte	.LLST6
 	.byte	0x12
 	.4byte	.LBB9
 	.4byte	.LBE9
-	.4byte	0x508
+	.4byte	0x4ae
 	.byte	0x10
 	.asciz	"i"
 	.byte	0x1
 	.byte	0x66
 	.byte	0x12
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST15
 	.byte	0
 	.byte	0x12
 	.4byte	.LBB2
 	.4byte	.LBE2
-	.4byte	0x524
+	.4byte	0x4ca
 	.byte	0x10
 	.asciz	"i"
 	.byte	0x1
 	.byte	0x74
 	.byte	0x12
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST7
 	.byte	0
 	.byte	0x12
 	.4byte	.LBB10
 	.4byte	.LBE10
-	.4byte	0x540
+	.4byte	0x4e6
 	.byte	0x10
 	.asciz	"i"
 	.byte	0x1
 	.byte	0x82
 	.byte	0x12
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST16
 	.byte	0
 	.byte	0x13
 	.4byte	.Ldebug_ranges0+0
-	.4byte	0x5c9
+	.4byte	0x56f
 	.byte	0x10
 	.asciz	"n"
 	.byte	0x1
 	.byte	0x93
 	.byte	0xe
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST8
 	.byte	0x14
 	.4byte	.LBB4
@@ -32625,33 +32624,33 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0x95
 	.byte	0x13
-	.4byte	0x2dd
+	.4byte	0x283
 	.byte	0x10
 	.asciz	"notif_norm"
 	.byte	0x1
 	.byte	0x98
 	.byte	0x15
-	.4byte	0x2f4
+	.4byte	0x29a
 	.4byte	.LLST9
 	.byte	0x10
 	.asciz	"notif"
 	.byte	0x1
 	.byte	0x9b
 	.byte	0x15
-	.4byte	0x2f4
+	.4byte	0x29a
 	.4byte	.LLST10
 	.byte	0x11
 	.asciz	"L"
 	.byte	0x1
 	.byte	0x9e
 	.byte	0xf
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x10
 	.asciz	"R"
 	.byte	0x1
 	.byte	0x9f
 	.byte	0xf
-	.4byte	0x1e4
+	.4byte	0x18a
 	.4byte	.LLST11
 	.byte	0x14
 	.4byte	.LBB5
@@ -32661,7 +32660,7 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0xa4
 	.byte	0x12
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST12
 	.byte	0
 	.byte	0
@@ -32669,13 +32668,13 @@ _notif_action_i16:
 	.byte	0x12
 	.4byte	.LBB6
 	.4byte	.LBE6
-	.4byte	0x615
+	.4byte	0x5bb
 	.byte	0x10
 	.asciz	"n"
 	.byte	0x1
 	.byte	0xab
 	.byte	0xe
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST13
 	.byte	0x14
 	.4byte	.LBB7
@@ -32685,7 +32684,7 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0xad
 	.byte	0x13
-	.4byte	0x2dd
+	.4byte	0x283
 	.byte	0x14
 	.4byte	.LBB8
 	.4byte	.LBE8
@@ -32694,15 +32693,15 @@ _notif_action_i16:
 	.byte	0x1
 	.byte	0xae
 	.byte	0x12
-	.4byte	0x2d6
+	.4byte	0x27c
 	.4byte	.LLST14
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	0x15
 	.4byte	.LVL14
-	.4byte	0x682
-	.4byte	0x637
+	.4byte	0x628
+	.4byte	0x5dd
 	.byte	0x16
 	.byte	0x1
 	.byte	0x50
@@ -32723,7 +32722,7 @@ _notif_action_i16:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL50
-	.4byte	0x682
+	.4byte	0x628
 	.byte	0x16
 	.byte	0x1
 	.byte	0x51
@@ -32740,10 +32739,10 @@ _notif_action_i16:
 	.byte	0
 	.byte	0x18
 	.byte	0x4
-	.4byte	0x2f4
+	.4byte	0x29a
 	.byte	0x18
 	.byte	0x4
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x19
 	.byte	0x1
 	.asciz	"wav_to_tdm_play_se"
@@ -33487,10 +33486,10 @@ _notif_action_i16:
 	.2byte	0xa
 	.byte	0xf5
 	.byte	0x15
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0xf5
 	.byte	0x12
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x1e
 	.byte	0x9f
 	.4byte	0

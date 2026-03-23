@@ -235,11 +235,19 @@ void Osc_Configure_PLL2( CLK_GEN_SOURCE_T osc_src,
 
 
     PLL2CONbits.NOSC  = osc_src; // configure new osc
-    PLL2CONbits.ON    = 1;       // enable clock generator 
+    PLL2CONbits.ON    = 1;       // enable clock generator
     PLL2CONbits.OE    = 1;
 
+    start_ms = GetTicks();
     PLL2CONbits.OSWEN = 1;       // enable PLL switch
-    while (PLL2CONbits.OSWEN);
+    while (PLL2CONbits.OSWEN)
+    {
+        if( GetTicks() > start_ms + 500 )
+        {
+            printf("\n\nOsc_Configure_PLL2: timeout0 !! OSWEN stuck - check BCLK from codec.\n");
+            break;  // Don't hang, continue anyway
+        }
+    }
 
 
     PLL2DIVbits.PLLFBDIV = u32_PLLFBD;  // feedback div

@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\audio\\float_conversion.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\audio\\float_conversion.c"
 	.section	.text,code
 .Ltext0:
 	.section	*,code
@@ -708,7 +708,7 @@ _Pre_Gain_CODEC:	.space	4
 	.file 4 "c:\\program files\\microchip\\xc-dsc\\v3.31\\include\\stdio.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0x858
+	.4byte	0x7fe
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -719,9 +719,8 @@ _Pre_Gain_CODEC:	.space	4
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/audio/float_conversion.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0xa0
 	.4byte	0
 	.4byte	0
@@ -751,9 +750,9 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x2
 	.byte	0xac
 	.byte	0x19
-	.4byte	0x235
+	.4byte	0x1db
 	.byte	0x4
-	.4byte	0x220
+	.4byte	0x1c6
 	.byte	0x2
 	.byte	0x4
 	.byte	0x5
@@ -767,7 +766,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x2
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x262
+	.4byte	0x208
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -781,7 +780,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x2
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x29a
+	.4byte	0x240
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -795,13 +794,13 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x7
 	.asciz	"unsigned int"
 	.byte	0x4
-	.4byte	0x1ee
+	.4byte	0x194
 	.byte	0x3
 	.asciz	"size_t"
 	.byte	0x2
 	.byte	0xdd
 	.byte	0x16
-	.4byte	0x2c9
+	.4byte	0x26f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -811,13 +810,13 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x4
 	.asciz	"double"
 	.byte	0x4
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x5
 	.asciz	"Pre_Gain_CODEC"
 	.byte	0x3
 	.byte	0x1d
 	.byte	0xe
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -825,7 +824,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x3
 	.byte	0x1e
 	.byte	0xe
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -833,7 +832,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x3
 	.byte	0x1f
 	.byte	0xe
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -841,11 +840,11 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x3
 	.byte	0x20
 	.byte	0xe
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
-	.4byte	0x304
+	.4byte	0x2aa
 	.byte	0x1
 	.byte	0x29
 	.byte	0x7
@@ -853,7 +852,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x3
 	.4byte	_Pre_Gain_CODEC
 	.byte	0x6
-	.4byte	0x31d
+	.4byte	0x2c3
 	.byte	0x1
 	.byte	0x2a
 	.byte	0x7
@@ -861,7 +860,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x3
 	.4byte	_Post_Gain_PWM
 	.byte	0x6
-	.4byte	0x335
+	.4byte	0x2db
 	.byte	0x1
 	.byte	0x2b
 	.byte	0x7
@@ -869,7 +868,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x3
 	.4byte	_Post_Gain_CODEC
 	.byte	0x6
-	.4byte	0x34f
+	.4byte	0x2f5
 	.byte	0x1
 	.byte	0x2c
 	.byte	0x7
@@ -889,48 +888,48 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x51b
+	.4byte	0x4c1
 	.byte	0x8
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0xe0
 	.byte	0x2f
-	.4byte	0x51b
+	.4byte	0x4c1
 	.4byte	.LLST33
 	.byte	0x8
 	.4byte	.LASF1
 	.byte	0x1
 	.byte	0xe1
 	.byte	0x2c
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST34
 	.byte	0x9
 	.asciz	"slot"
 	.byte	0x1
 	.byte	0xe2
 	.byte	0x30
-	.4byte	0x252
+	.4byte	0x1f8
 	.4byte	.LLST35
 	.byte	0x9
 	.asciz	"output"
 	.byte	0x1
 	.byte	0xe3
 	.byte	0x31
-	.4byte	0x521
+	.4byte	0x4c7
 	.4byte	.LLST36
 	.byte	0x9
 	.asciz	"num_samples"
 	.byte	0x1
 	.byte	0xe4
 	.byte	0x2f
-	.4byte	0x2de
+	.4byte	0x284
 	.4byte	.LLST37
 	.byte	0xa
 	.asciz	"up_sample_factor"
 	.byte	0x1
 	.byte	0xe5
 	.byte	0x30
-	.4byte	0x252
+	.4byte	0x1f8
 	.byte	0x1
 	.byte	0x55
 	.byte	0x9
@@ -938,14 +937,14 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xe6
 	.byte	0x31
-	.4byte	0x289
+	.4byte	0x22f
 	.4byte	.LLST38
 	.byte	0xb
 	.asciz	"pwm_center"
 	.byte	0x1
 	.byte	0xe8
 	.byte	0xb
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x1
 	.byte	0x67
 	.byte	0xc
@@ -953,7 +952,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xea
 	.byte	0xb
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x4
 	.4byte	0x43866666
 	.byte	0xd
@@ -961,14 +960,14 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xeb
 	.byte	0xb
-	.4byte	0x1e5
+	.4byte	0x18b
 	.4byte	.LLST39
 	.byte	0xd
 	.asciz	"duty_range"
 	.byte	0x1
 	.byte	0xec
 	.byte	0xb
-	.4byte	0x1e5
+	.4byte	0x18b
 	.4byte	.LLST40
 	.byte	0xe
 	.4byte	.LBB18
@@ -978,7 +977,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xee
 	.byte	0x11
-	.4byte	0x2de
+	.4byte	0x284
 	.4byte	.LLST41
 	.byte	0xe
 	.4byte	.LBB19
@@ -988,14 +987,14 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xf1
 	.byte	0xf
-	.4byte	0x1e5
+	.4byte	0x18b
 	.4byte	.LLST42
 	.byte	0xd
 	.asciz	"duty_f"
 	.byte	0x1
 	.byte	0xf8
 	.byte	0xf
-	.4byte	0x1e5
+	.4byte	0x18b
 	.4byte	.LLST43
 	.byte	0xe
 	.4byte	.LBB20
@@ -1005,7 +1004,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xff
 	.byte	0x12
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST44
 	.byte	0
 	.byte	0
@@ -1013,10 +1012,10 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0
 	.byte	0xf
 	.byte	0x4
-	.4byte	0x2ff
+	.4byte	0x2a5
 	.byte	0xf
 	.byte	0x4
-	.4byte	0x220
+	.4byte	0x1c6
 	.byte	0x7
 	.byte	0x1
 	.asciz	"convert_tdm_float_to_int32"
@@ -1030,34 +1029,34 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x690
+	.4byte	0x636
 	.byte	0x8
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0xa2
 	.byte	0x2f
-	.4byte	0x51b
+	.4byte	0x4c1
 	.4byte	.LLST17
 	.byte	0x8
 	.4byte	.LASF1
 	.byte	0x1
 	.byte	0xa3
 	.byte	0x26
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST18
 	.byte	0x9
 	.asciz	"int_out"
 	.byte	0x1
 	.byte	0xa4
 	.byte	0x2b
-	.4byte	0x521
+	.4byte	0x4c7
 	.4byte	.LLST19
 	.byte	0x10
 	.4byte	.LASF2
 	.byte	0x1
 	.byte	0xa5
 	.byte	0x26
-	.4byte	0x1ee
+	.4byte	0x194
 	.byte	0x1
 	.byte	0x53
 	.byte	0x8
@@ -1065,56 +1064,56 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xa6
 	.byte	0x26
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST20
 	.byte	0xd
 	.asciz	"lo"
 	.byte	0x1
 	.byte	0xad
 	.byte	0x11
-	.4byte	0x2ff
+	.4byte	0x2a5
 	.4byte	.LLST21
 	.byte	0xd
 	.asciz	"hi"
 	.byte	0x1
 	.byte	0xae
 	.byte	0x11
-	.4byte	0x2ff
+	.4byte	0x2a5
 	.4byte	.LLST22
 	.byte	0xd
 	.asciz	"Cin"
 	.byte	0x1
 	.byte	0xb0
 	.byte	0xf
-	.4byte	0x2d9
+	.4byte	0x27f
 	.4byte	.LLST23
 	.byte	0xd
 	.asciz	"Cout"
 	.byte	0x1
 	.byte	0xb1
 	.byte	0xf
-	.4byte	0x2d9
+	.4byte	0x27f
 	.4byte	.LLST24
 	.byte	0xd
 	.asciz	"write_ch"
 	.byte	0x1
 	.byte	0xb2
 	.byte	0xf
-	.4byte	0x2d9
+	.4byte	0x27f
 	.4byte	.LLST25
 	.byte	0xd
 	.asciz	"in_ptr"
 	.byte	0x1
 	.byte	0xb4
 	.byte	0x12
-	.4byte	0x51b
+	.4byte	0x4c1
 	.4byte	.LLST26
 	.byte	0xd
 	.asciz	"out_ptr"
 	.byte	0x1
 	.byte	0xb5
 	.byte	0xe
-	.4byte	0x521
+	.4byte	0x4c7
 	.4byte	.LLST27
 	.byte	0xe
 	.4byte	.LBB9
@@ -1124,17 +1123,17 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xb7
 	.byte	0xe
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST28
 	.byte	0x11
 	.4byte	.Ldebug_ranges0+0x48
-	.4byte	0x679
+	.4byte	0x61f
 	.byte	0xd
 	.asciz	"ch"
 	.byte	0x1
 	.byte	0xba
 	.byte	0x12
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST29
 	.byte	0x12
 	.4byte	.Ldebug_ranges0+0x68
@@ -1143,14 +1142,14 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xbc
 	.byte	0x13
-	.4byte	0x1e5
+	.4byte	0x18b
 	.4byte	.LLST30
 	.byte	0xd
 	.asciz	"q31"
 	.byte	0x1
 	.byte	0xc0
 	.byte	0x15
-	.4byte	0x220
+	.4byte	0x1c6
 	.4byte	.LLST31
 	.byte	0
 	.byte	0
@@ -1161,7 +1160,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0xca
 	.byte	0x12
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST32
 	.byte	0
 	.byte	0
@@ -1177,34 +1176,34 @@ _Pre_Gain_CODEC:	.space	4
 	.4byte	.LFE18
 	.4byte	.LLST1
 	.byte	0x1
-	.4byte	0x7ee
+	.4byte	0x794
 	.byte	0x9
 	.asciz	"int_in"
 	.byte	0x1
 	.byte	0x5b
 	.byte	0x31
-	.4byte	0x7ee
+	.4byte	0x794
 	.4byte	.LLST2
 	.byte	0x8
 	.4byte	.LASF1
 	.byte	0x1
 	.byte	0x5c
 	.byte	0x26
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST3
 	.byte	0x9
 	.asciz	"float_out"
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x29
-	.4byte	0x7f4
+	.4byte	0x79a
 	.4byte	.LLST4
 	.byte	0x10
 	.4byte	.LASF2
 	.byte	0x1
 	.byte	0x5e
 	.byte	0x26
-	.4byte	0x1ee
+	.4byte	0x194
 	.byte	0x1
 	.byte	0x53
 	.byte	0x8
@@ -1212,56 +1211,56 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0x5f
 	.byte	0x26
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST5
 	.byte	0xd
 	.asciz	"lo"
 	.byte	0x1
 	.byte	0x67
 	.byte	0x11
-	.4byte	0x2ff
+	.4byte	0x2a5
 	.4byte	.LLST6
 	.byte	0xd
 	.asciz	"hi"
 	.byte	0x1
 	.byte	0x68
 	.byte	0x11
-	.4byte	0x2ff
+	.4byte	0x2a5
 	.4byte	.LLST7
 	.byte	0xd
 	.asciz	"Cin"
 	.byte	0x1
 	.byte	0x6a
 	.byte	0xf
-	.4byte	0x2d9
+	.4byte	0x27f
 	.4byte	.LLST8
 	.byte	0xd
 	.asciz	"Cout"
 	.byte	0x1
 	.byte	0x6b
 	.byte	0xf
-	.4byte	0x2d9
+	.4byte	0x27f
 	.4byte	.LLST9
 	.byte	0xd
 	.asciz	"read_ch"
 	.byte	0x1
 	.byte	0x6c
 	.byte	0xf
-	.4byte	0x2d9
+	.4byte	0x27f
 	.4byte	.LLST10
 	.byte	0xd
 	.asciz	"in_ptr"
 	.byte	0x1
 	.byte	0x6e
 	.byte	0x14
-	.4byte	0x7ee
+	.4byte	0x794
 	.4byte	.LLST11
 	.byte	0xd
 	.asciz	"out_ptr"
 	.byte	0x1
 	.byte	0x6f
 	.byte	0xc
-	.4byte	0x7f4
+	.4byte	0x79a
 	.4byte	.LLST12
 	.byte	0xe
 	.4byte	.LBB2
@@ -1271,17 +1270,17 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0x71
 	.byte	0xe
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST13
 	.byte	0x11
 	.4byte	.Ldebug_ranges0+0
-	.4byte	0x7d7
+	.4byte	0x77d
 	.byte	0xd
 	.asciz	"ch"
 	.byte	0x1
 	.byte	0x74
 	.byte	0x12
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST14
 	.byte	0x12
 	.4byte	.Ldebug_ranges0+0x18
@@ -1290,7 +1289,7 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0x76
 	.byte	0x13
-	.4byte	0x1e5
+	.4byte	0x18b
 	.4byte	.LLST15
 	.byte	0
 	.byte	0
@@ -1301,17 +1300,17 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x1
 	.byte	0x7d
 	.byte	0x12
-	.4byte	0x1ee
+	.4byte	0x194
 	.4byte	.LLST16
 	.byte	0
 	.byte	0
 	.byte	0
 	.byte	0xf
 	.byte	0x4
-	.4byte	0x230
+	.4byte	0x1d6
 	.byte	0xf
 	.byte	0x4
-	.4byte	0x1e5
+	.4byte	0x18b
 	.byte	0x13
 	.byte	0x1
 	.asciz	"convert_tdm_init"
@@ -1323,19 +1322,19 @@ _Pre_Gain_CODEC:	.space	4
 	.4byte	.LFE17
 	.4byte	.LLST0
 	.byte	0x1
-	.4byte	0x847
+	.4byte	0x7ed
 	.byte	0x14
 	.4byte	.LVL0
-	.4byte	0x847
+	.4byte	0x7ed
 	.byte	0x14
 	.4byte	.LVL1
-	.4byte	0x847
+	.4byte	0x7ed
 	.byte	0x14
 	.4byte	.LVL2
-	.4byte	0x847
+	.4byte	0x7ed
 	.byte	0x14
 	.4byte	.LVL3
-	.4byte	0x847
+	.4byte	0x7ed
 	.byte	0
 	.byte	0x15
 	.byte	0x1
@@ -1783,10 +1782,10 @@ _Pre_Gain_CODEC:	.space	4
 	.2byte	0xa
 	.byte	0xf5
 	.byte	0x12
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0xf5
 	.byte	0x14
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x1c
 	.byte	0x9f
 	.4byte	0
@@ -1807,10 +1806,10 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0xf5
 	.byte	0x19
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x1e
 	.byte	0x9f
 	.4byte	.LVL40
@@ -1822,10 +1821,10 @@ _Pre_Gain_CODEC:	.space	4
 	.2byte	0x16
 	.byte	0xf5
 	.byte	0x10
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x12
 	.byte	0xf4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x4
 	.4byte	0x3f800000
 	.byte	0x16
@@ -2014,10 +2013,10 @@ _Pre_Gain_CODEC:	.space	4
 	.2byte	0xa
 	.byte	0xf5
 	.byte	0x10
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0xf5
 	.byte	0x14
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x1e
 	.byte	0x9f
 	.4byte	.LVL24
@@ -2029,10 +2028,10 @@ _Pre_Gain_CODEC:	.space	4
 	.2byte	0x16
 	.byte	0xf5
 	.byte	0x10
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x12
 	.byte	0xf4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x4
 	.4byte	0xbf800000
 	.byte	0x16
@@ -2051,10 +2050,10 @@ _Pre_Gain_CODEC:	.space	4
 	.2byte	0x24
 	.byte	0xf5
 	.byte	0x10
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x12
 	.byte	0xf4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x4
 	.4byte	0xbf800000
 	.byte	0x16
@@ -2065,12 +2064,12 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x16
 	.byte	0x13
 	.byte	0xf4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x4
 	.4byte	0x4f000000
 	.byte	0x1e
 	.byte	0xf7
-	.byte	0xee,0x3
+	.byte	0x94,0x3
 	.byte	0xf7
 	.byte	0
 	.byte	0x9f
@@ -2254,17 +2253,17 @@ _Pre_Gain_CODEC:	.space	4
 	.byte	0x70
 	.byte	0
 	.byte	0xf7
-	.byte	0xee,0x3
+	.byte	0x94,0x3
 	.byte	0xf7
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x3
 	.4byte	_Pre_Gain_CODEC
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x1e
 	.byte	0xf4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x4
 	.4byte	0x30000000
 	.byte	0x1e
@@ -2274,10 +2273,10 @@ _Pre_Gain_CODEC:	.space	4
 	.2byte	0x16
 	.byte	0xf5
 	.byte	0x10
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x12
 	.byte	0xf4
-	.byte	0xe5,0x3
+	.byte	0x8b,0x3
 	.byte	0x4
 	.4byte	0xbf800000
 	.byte	0x16

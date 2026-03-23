@@ -20,7 +20,7 @@ build/dsPIC33AK512/debug/_ext/1360937237/main.o: ../src/main.c \
  ../src/audio/snd_effect_play.h ../src/pwm.h ../src/audio/engine_synth.h \
  ../src/audio/click_crack_synth.h ../src/eq_lib/eq_perseus_wrapper.h \
  ../src/eq_lib/../app_specific_config_defs.h ../src/eq_lib/eq_api_33AK.h \
- ../src/main.h
+ ../src/audio/aec_33ak.h ../src/main.h
 
 ../src/app_specific_config_defs.h:
 
@@ -115,5 +115,7 @@ build/dsPIC33AK512/debug/_ext/1360937237/main.o: ../src/main.c \
 ../src/eq_lib/../app_specific_config_defs.h:
 
 ../src/eq_lib/eq_api_33AK.h:
+
+../src/audio/aec_33ak.h:
 
 ../src/main.h:

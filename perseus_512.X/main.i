@@ -1,5 +1,5 @@
 # 1 "../src/main.c"
-# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X//"
+# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "../src/main.c"
@@ -29272,13 +29272,155 @@ void eq_perseus_reset_to_flat(void);
 
 eq_instance_t* eq_perseus_get_instance(void);
 # 50 "../src/main.c" 2
+# 1 "../src/audio/aec_33ak.h" 1
+# 48 "../src/audio/aec_33ak.h"
+typedef enum {
+    AEC_MODE_DISABLED = 0,
+    AEC_MODE_ENABLED,
+    AEC_MODE_BYPASS
+} aec_mode_t;
+
+
+typedef struct {
+    float band_energy[16];
+    float noise_energy[16];
+    float avg_noise_energy;
+    int hangover_count;
+    int frame_count;
+    
+# 61 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 61 "../src/audio/aec_33ak.h"
+         is_speech;
+    
+# 62 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 62 "../src/audio/aec_33ak.h"
+         first_frame;
+} aec_vad_state_t;
+
+
+typedef struct {
+    float down_history[48];
+    float up_history[48];
+    int down_phase;
+    int up_phase;
+} aec_src_state_t;
+
+
+typedef struct {
+    float coeffs[512];
+    float delay_line[512];
+    float energy;
+    float mu;
+    float prev_error;
+    int delay_idx;
+} aec_nlms_state_t;
+
+
+typedef struct {
+
+    aec_mode_t mode;
+    int filter_order;
+    int num_channels;
+
+
+    float mic_accum_48k[480];
+    float ref_accum_48k[480];
+    int accum_count;
+
+
+    float out_accum_48k[480];
+    int out_read_idx;
+    int out_avail;
+
+
+    float mic_8k[80];
+    float ref_8k[80];
+    float out_8k[80];
+
+
+    aec_nlms_state_t nlms;
+    aec_vad_state_t vad;
+    aec_src_state_t src;
+
+
+    float erle_db;
+    float echo_power;
+    float residual_power;
+
+
+    uint32_t frames_processed;
+    
+# 117 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 117 "../src/audio/aec_33ak.h"
+        adapt_enabled;
+
+} aec_state_t;
+# 131 "../src/audio/aec_33ak.h"
+void aec_init(aec_state_t* state, int filter_order, 
+# 131 "../src/audio/aec_33ak.h" 3 4
+                                                   _Bool 
+# 131 "../src/audio/aec_33ak.h"
+                                                        enable_vad);
+
+
+
+
+
+void aec_reset(aec_state_t* state);
+# 148 "../src/audio/aec_33ak.h"
+void aec_process(aec_state_t* state,
+                 const float* mic_in,
+                 const float* ref_in,
+                 float* out,
+                 int num_samples,
+                 int num_channels);
+
+
+
+
+
+
+void aec_enable(aec_state_t* state, 
+# 160 "../src/audio/aec_33ak.h" 3 4
+                                   _Bool 
+# 160 "../src/audio/aec_33ak.h"
+                                        enable);
+
+
+
+
+
+
+float aec_get_erle(const aec_state_t* state);
+
+
+
+
+
+
+
+# 174 "../src/audio/aec_33ak.h" 3 4
+_Bool 
+# 174 "../src/audio/aec_33ak.h"
+    aec_is_near_end_speech(const aec_state_t* state);
+
+
+
+
+
+
+void aec_set_step_size(aec_state_t* state, float mu);
+# 51 "../src/main.c" 2
 
 
 # 1 "../src/main.h" 1
-# 53 "../src/main.c" 2
-# 112 "../src/main.c"
+# 54 "../src/main.c" 2
+# 113 "../src/main.c"
 #pragma config FDEVOPT_ALTI2C2 = ON
-# 163 "../src/main.c"
+# 168 "../src/main.c"
 static void local_init_ports( void );
 
 static void local_dbg_touch_LED( void );
@@ -29298,7 +29440,8 @@ static void local_usr_reverb( void );
 static void local_usr_surround( void );
 static void local_usr_Bmode( void );
 static void local_usr_eq( void );
-# 192 "../src/main.c"
+static void local_usr_aec( void );
+# 198 "../src/main.c"
 extern audiogain_t My_Gain;
 
 extern tone_t My_ToneTre;
@@ -29306,7 +29449,7 @@ extern tone_t My_ToneMid;
 extern tone_t My_ToneBas;
 
 static uint8_t Bmode = 0;
-# 208 "../src/main.c"
+# 214 "../src/main.c"
 void __attribute__ ( ( interrupt, no_auto_psv ) ) _DefaultInterrupt(void)
 {
 
@@ -29334,7 +29477,7 @@ static void moveCursor(int row)
     if (row < 1) row = 1;
     printf("\x1b[%d;1H", row);
 }
-# 250 "../src/main.c"
+# 256 "../src/main.c"
 static void resetConsole()
 {
     term_init_safe();
@@ -29357,14 +29500,14 @@ static void test_uart_rx(void)
     if( UART1_IsRxReady() )
     {
         app_uart_rx_available();
-# 302 "../src/main.c"
+# 308 "../src/main.c"
     }
 }
-# 341 "../src/main.c"
+# 347 "../src/main.c"
 int main(void)
 {
     local_init_ports();
-# 357 "../src/main.c"
+# 363 "../src/main.c"
     Osc_Configure_PLL1( CLK_SIB_SOURCE_FRC, (8e+6) , (200e+6) );
 
     Set_OscSrc_to_CLKGEN1( CLK_SIB_SOURCE_PLL1 );
@@ -29406,9 +29549,9 @@ int main(void)
             LED_On(0xFF);
         }
         Ena_EngineSynth = 
-# 397 "../src/main.c" 3 4
+# 403 "../src/main.c" 3 4
                          1
-# 397 "../src/main.c"
+# 403 "../src/main.c"
                              ;
     }
     LED_Off(0xFF);
@@ -29465,12 +29608,21 @@ int main(void)
     app_bassh_init();
 
 
+    extern aec_state_t g_aec_state;
+    aec_init(&g_aec_state, 512, 
+# 460 "../src/main.c" 3 4
+                                            1
+# 460 "../src/main.c"
+                                                );
+    printf(" AEC: Initialized with %d taps (64ms echo tail)\n", 512);
+
+
     app_engine_synth_init();
     app_ccsynth_init();
 
 
 
-    TDM_Start();
+    TDM_Start();;
 
 
 
@@ -29481,7 +29633,12 @@ int main(void)
 
     extern void SST26_test(void);
     SST26_test();
-# 477 "../src/main.c"
+
+
+
+
+
+
     pwm_init();
 
 
@@ -29498,6 +29655,7 @@ int main(void)
         local_usr_surround();
         local_usr_Bmode();
         local_usr_eq();
+        local_usr_aec();
 
         local_dbg_print();
 
@@ -29521,64 +29679,64 @@ int main(void)
 
     return 0;
 }
-# 528 "../src/main.c"
+# 538 "../src/main.c"
 static void local_init_ports( void )
 {
 
 
     
-# 532 "../src/main.c" 3 4
+# 542 "../src/main.c" 3 4
    ANSELA 
-# 532 "../src/main.c"
+# 542 "../src/main.c"
           = 0;
     
-# 533 "../src/main.c" 3 4
+# 543 "../src/main.c" 3 4
    ANSELB 
-# 533 "../src/main.c"
+# 543 "../src/main.c"
           = 0;
     
-# 534 "../src/main.c" 3 4
+# 544 "../src/main.c" 3 4
    ANSELC 
-# 534 "../src/main.c"
+# 544 "../src/main.c"
           = 0;
     
-# 535 "../src/main.c" 3 4
+# 545 "../src/main.c" 3 4
    ANSELD 
-# 535 "../src/main.c"
+# 545 "../src/main.c"
           = 0;
-# 552 "../src/main.c"
+# 562 "../src/main.c"
     (
-# 552 "../src/main.c" 3 4
+# 562 "../src/main.c" 3 4
    ANSELH 
-# 552 "../src/main.c"
+# 562 "../src/main.c"
    &= ~(1u << (0)));
     (
-# 553 "../src/main.c" 3 4
+# 563 "../src/main.c" 3 4
    TRISHbits.TRISH0 
-# 553 "../src/main.c"
+# 563 "../src/main.c"
    = 0);
     (
-# 554 "../src/main.c" 3 4
+# 564 "../src/main.c" 3 4
    LATHbits.LATH0 
-# 554 "../src/main.c"
+# 564 "../src/main.c"
    = 1);
 
 
 
     (
-# 558 "../src/main.c" 3 4
+# 568 "../src/main.c" 3 4
    ANSELE 
-# 558 "../src/main.c"
+# 568 "../src/main.c"
    &= ~(1u << (4)));
     (
-# 559 "../src/main.c" 3 4
+# 569 "../src/main.c" 3 4
    TRISEbits.TRISE4 
-# 559 "../src/main.c"
+# 569 "../src/main.c"
    = 0);
     (
-# 560 "../src/main.c" 3 4
+# 570 "../src/main.c" 3 4
    LATEbits.LATE4 
-# 560 "../src/main.c"
+# 570 "../src/main.c"
    = 1);
 
 
@@ -29613,7 +29771,7 @@ static void local_dbg_touch_LED( void )
 
     }
 }
-# 625 "../src/main.c"
+# 635 "../src/main.c"
 static void local_dbg_RGB_pot( void )
 {
 
@@ -29649,23 +29807,21 @@ static void local_dbg_print( void )
 
     if ((uint32_t)(cur - last_prt_2) >= 300)
     {
-        if( Ena_EngineSynth )
-        {
+        extern uint8_t g_audio_level_in;
+        extern uint8_t g_audio_level_out;
+        extern aec_state_t g_aec_state;
+        extern 
+# 673 "../src/main.c" 3 4
+              _Bool 
+# 673 "../src/main.c"
+                   g_aec_enabled;
+        float erle = aec_get_erle(&g_aec_state);
 
-        }
-        else
-        {
-
-            printf("Lv=%2.2fdB Qt=%1.2f | LPF:base:%+4.1f + bonus:%+4.1f = %+4.1fdB | fc=%.0fHz\n",
-                    g_bassh.dbg_L_wide_db,
-                    g_bassh.dbg_quiet,
-                    g_bassh.dbg_lpf_base_db,
-                    g_bassh.dbg_lpf_bonus_db,
-                    g_bassh.dbg_lpf_gain_db,
-
-                    g_bassh.dbg_low_fc);
-
-        }
+        printf("In=%3d Out=%3d | AEC:%s ERLE=%+.1fdB\n",
+                g_audio_level_in,
+                g_audio_level_out,
+                g_aec_enabled ? "ON " : "OFF",
+                erle);
 
         last_prt_2 = cur;
     }
@@ -29681,13 +29837,13 @@ static void local_dbg_print( void )
         }
         else
         {
-# 705 "../src/main.c"
+# 709 "../src/main.c"
         }
 
         last_prt_3 = cur;
     }
 }
-# 756 "../src/main.c"
+# 760 "../src/main.c"
 static void local_dbg_print_pot( void )
 {
     static uint32_t last_prt = 0;
@@ -29698,7 +29854,7 @@ static void local_dbg_print_pot( void )
     {
 
         last_prt = cur;
-# 775 "../src/main.c"
+# 779 "../src/main.c"
     }
 }
 
@@ -29732,18 +29888,18 @@ static void local_usr_mute( void )
         {
             printf(" MUTE btn: start mute @%ld\n", GetTicks());
             app_mute_set( 
-# 807 "../src/main.c" 3 4
+# 811 "../src/main.c" 3 4
                          1 
-# 807 "../src/main.c"
+# 811 "../src/main.c"
                               );
         }
         else
         {
             printf(" MUTE btn: start unmute @%ld\n", GetTicks());
             app_mute_set( 
-# 812 "../src/main.c" 3 4
+# 816 "../src/main.c" 3 4
                          0 
-# 812 "../src/main.c"
+# 816 "../src/main.c"
                                );
         }
         button_mute ^= 1;
@@ -29760,7 +29916,7 @@ static void local_usr_mute( void )
                );
     }
 }
-# 840 "../src/main.c"
+# 844 "../src/main.c"
 static void local_usr_transient( void )
 {
     if( (0) )
@@ -29859,16 +30015,16 @@ static void local_usr_lpf_gain( void )
 
             app_hpf_set_gain( -99.9f );
             app_hpf_enable( 
-# 937 "../src/main.c" 3 4
+# 941 "../src/main.c" 3 4
                            1 
-# 937 "../src/main.c"
+# 941 "../src/main.c"
                                 );
 
             app_lpf_set_gain( (40.0f) );
             app_lpf_enable( 
-# 940 "../src/main.c" 3 4
+# 944 "../src/main.c" 3 4
                            1 
-# 940 "../src/main.c"
+# 944 "../src/main.c"
                                 );
             printf(" %+2.2f(dB) @%ld\n", (40.0f), GetTicks());
 
@@ -29879,16 +30035,16 @@ static void local_usr_lpf_gain( void )
             break;
         default:
             app_hpf_enable( 
-# 949 "../src/main.c" 3 4
+# 953 "../src/main.c" 3 4
                            0 
-# 949 "../src/main.c"
+# 953 "../src/main.c"
                                  );
             app_hpf_set_gain( 0.0f );
 
             app_lpf_enable( 
-# 952 "../src/main.c" 3 4
+# 956 "../src/main.c" 3 4
                            0 
-# 952 "../src/main.c"
+# 956 "../src/main.c"
                                  );
             app_lpf_set_gain( 0.0f );
             printf(" LPF OFF @%ld\n", GetTicks());
@@ -29898,7 +30054,7 @@ static void local_usr_lpf_gain( void )
         }
     }
 }
-# 1060 "../src/main.c"
+# 1064 "../src/main.c"
 static void local_usr_reverb( void )
 {
     static uint8_t button = 0;
@@ -29914,9 +30070,9 @@ static void local_usr_reverb( void )
         case 0:
             printf("enable.\n");
             app_ccsynth_set_enable(
-# 1074 "../src/main.c" 3 4
+# 1078 "../src/main.c" 3 4
                                   1
-# 1074 "../src/main.c"
+# 1078 "../src/main.c"
                                       );
 
             button++;
@@ -29924,9 +30080,9 @@ static void local_usr_reverb( void )
         default:
             printf("disable.\n");
             app_ccsynth_set_enable(
-# 1080 "../src/main.c" 3 4
+# 1084 "../src/main.c" 3 4
                                   0
-# 1080 "../src/main.c"
+# 1084 "../src/main.c"
                                        );
 
             button = 0;
@@ -29982,23 +30138,23 @@ static void local_usr_Bmode( void )
             printf(" Bass-Enhancer btn: enabled.\n");
 
             app_mute_set( 
-# 1134 "../src/main.c" 3 4
+# 1138 "../src/main.c" 3 4
                          1 
-# 1134 "../src/main.c"
+# 1138 "../src/main.c"
                               );
             delay_ms(100);
 
             app_bassh_enable( 
-# 1137 "../src/main.c" 3 4
+# 1141 "../src/main.c" 3 4
                              1 
-# 1137 "../src/main.c"
+# 1141 "../src/main.c"
                                   );
             delay_ms(100);
 
             app_mute_set( 
-# 1140 "../src/main.c" 3 4
+# 1144 "../src/main.c" 3 4
                          0 
-# 1140 "../src/main.c"
+# 1144 "../src/main.c"
                                );
 
             button++;
@@ -30006,9 +30162,9 @@ static void local_usr_Bmode( void )
         default:
             printf(" Bass-Enhancer btn: disabled.\n");
             app_bassh_enable( 
-# 1146 "../src/main.c" 3 4
+# 1150 "../src/main.c" 3 4
                              0 
-# 1146 "../src/main.c"
+# 1150 "../src/main.c"
                                    );
 
             button = 0;
@@ -30025,6 +30181,37 @@ static void local_usr_Bmode( void )
 static void local_usr_eq( void )
 {
     static uint8_t preset = 0;
-# 1201 "../src/main.c"
+# 1205 "../src/main.c"
     (void)preset;
+}
+
+
+
+
+
+static void local_usr_aec( void )
+{
+    extern aec_state_t g_aec_state;
+    extern 
+# 1215 "../src/main.c" 3 4
+          _Bool 
+# 1215 "../src/main.c"
+               g_aec_enabled;
+
+    if( (0) )
+    {
+        wav_to_tdm_play_se();
+
+        g_aec_enabled = !g_aec_enabled;
+        aec_enable(&g_aec_state, g_aec_enabled);
+
+        if( g_aec_enabled )
+        {
+            printf(" AEC: Enabled (ERLE=%.1fdB)\n", aec_get_erle(&g_aec_state));
+        }
+        else
+        {
+            printf(" AEC: Disabled\n");
+        }
+    }
 }

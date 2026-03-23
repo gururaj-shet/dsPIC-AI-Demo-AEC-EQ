@@ -20,6 +20,7 @@
 #include "app_debug.h"
 #include "eq_lib/eq_perseus_wrapper.h"
 #include "eq_benchmark.h"
+#include "aec_33ak.h"
 
 
 /***  Module Macros  **********************************************************/
@@ -38,6 +39,7 @@ static void  dbcapp_n_onmsg(dbc_msg_t* pmsg);
 static void  dbcapp_m_onmsg(dbc_msg_t* pmsg);
 static void  dbcapp_i_onmsg(dbc_msg_t* pmsg);
 static void  dbcapp_e_onmsg(dbc_msg_t* pmsg);  // EQ module handler
+static void  dbcapp_a_onmsg(dbc_msg_t* pmsg);  // AEC module handler
 
 
 
@@ -160,6 +162,7 @@ void app_onmsg(dbc_msg_t* msg)
     {
         case 'n': dbcapp_n_onmsg(msg); break;
         case 'e': dbcapp_e_onmsg(msg); break;  // EQ control
+        case 'a': dbcapp_a_onmsg(msg); break;  // AEC control
 //        case 'm': app_m_onmsg(msg); break;
 //        case 'i': app_i_onmsg(msg); break;
 
@@ -582,6 +585,180 @@ static void dbcapp_e_onmsg(dbc_msg_t* pmsg)
         {
             pmsg->data_len = 0;
             pmsg->status = DBC_ERR_UNSUPPORTED;
+        }
+        break;
+
+    default:
+        pmsg->data_len = 0;
+        pmsg->status = DBC_ERR_NOT_FOUND;
+        break;
+    }
+}
+
+
+/*******************************************************************************
+ * AEC Module Handler ('a')
+ *
+ * Protocol:
+ *   Enable:        *ae<0/1>\n              (01=enable, 00=disable)
+ *   Get enable:    ?ae\n
+ *   Get status:    ?as\n                   (returns enabled, ERLE, near-end)
+ *   Reset:         *ar\n                   (reset AEC filter)
+ *   Set step:      *am<mu_hex>\n           (mu=0-100, maps to 0.0-1.0)
+ ******************************************************************************/
+static void dbcapp_a_onmsg(dbc_msg_t* pmsg)
+{
+    uint8_t* pdata;
+    extern aec_state_t g_aec_state;
+    extern bool g_aec_enabled;
+
+    pdata = (uint8_t*)&(pmsg->data[0]);
+
+    switch (pmsg->name)
+    {
+    /* 'e' = Enable/disable AEC */
+    case 'e':
+        if (pmsg->kind == '*')  // Set enable state
+        {
+            if (pmsg->data_len >= 1)
+            {
+                bool enable = (pdata[0] != 0);  // 01=enable, 00=disable
+                g_aec_enabled = enable;
+                aec_enable(&g_aec_state, enable);
+                APPDBGPRT("AEC %s\n", enable ? "enabled" : "disabled");
+                pmsg->status = DBC_OK;
+            }
+            else
+            {
+                pmsg->status = DBC_ERR_BAD_DATA;
+            }
+            pmsg->data_len = 0;
+        }
+        else if (pmsg->kind == '?')  // Get enable state
+        {
+            pmsg->data[0] = g_aec_enabled ? 1 : 0;
+            pmsg->data_len = 1;
+            pmsg->status = DBC_OK;
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = DBC_ERR_UNSUPPORTED;
+        }
+        break;
+
+    /* 's' = Get AEC status (enabled, ERLE, near-end) */
+    case 's':
+        if (pmsg->kind == '?')
+        {
+            float erle = aec_get_erle(&g_aec_state);
+            bool near_end = aec_is_near_end_speech(&g_aec_state);
+
+            // Convert ERLE to signed byte (-128 to +127 dB range)
+            int8_t erle_int = (int8_t)(erle > 127.0f ? 127 : (erle < -128.0f ? -128 : erle));
+
+            pmsg->data[0] = g_aec_enabled ? 1 : 0;
+            pmsg->data[1] = (uint8_t)erle_int;
+            pmsg->data[2] = near_end ? 1 : 0;
+            pmsg->data_len = 3;
+            pmsg->status = DBC_OK;
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = DBC_ERR_UNSUPPORTED;
+        }
+        break;
+
+    /* 'r' = Reset AEC filter */
+    case 'r':
+        if (pmsg->kind == '*')
+        {
+            aec_reset(&g_aec_state);
+            APPDBGPRT("AEC reset\n");
+            pmsg->status = DBC_OK;
+            pmsg->data_len = 0;
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = DBC_ERR_UNSUPPORTED;
+        }
+        break;
+
+    /* 'm' = Set step size (mu) */
+    case 'm':
+        if (pmsg->kind == '*')
+        {
+            if (pmsg->data_len >= 1)
+            {
+                // mu_byte: 0-100 maps to 0.0-1.0
+                float mu = (float)pdata[0] / 100.0f;
+                if (mu > 1.0f) mu = 1.0f;
+                aec_set_step_size(&g_aec_state, mu);
+                APPDBGPRT("AEC mu = %.2f\n", mu);
+                pmsg->status = DBC_OK;
+            }
+            else
+            {
+                pmsg->status = DBC_ERR_BAD_DATA;
+            }
+            pmsg->data_len = 0;
+        }
+        else if (pmsg->kind == '?')
+        {
+            // Return current mu as 0-100
+            uint8_t mu_byte = (uint8_t)(g_aec_state.nlms.mu * 100.0f);
+            pmsg->data[0] = mu_byte;
+            pmsg->data_len = 1;
+            pmsg->status = DBC_OK;
+        }
+        else
+        {
+            pmsg->data_len = 0;
+            pmsg->status = DBC_ERR_UNSUPPORTED;
+        }
+        break;
+
+    /* 'x' = Echo simulation control (for testing AEC without physical mic) */
+    case 'x':
+        {
+            extern bool g_echo_sim_enabled;
+            extern float g_echo_sim_gain;
+
+            if (pmsg->kind == '*')  // Set echo sim state
+            {
+                if (pmsg->data_len >= 1)
+                {
+                    g_echo_sim_enabled = (pdata[0] != 0);
+                    if (pmsg->data_len >= 2)
+                    {
+                        // Second byte is gain (0-100 maps to 0.0-1.0)
+                        g_echo_sim_gain = (float)pdata[1] / 100.0f;
+                        if (g_echo_sim_gain > 1.0f) g_echo_sim_gain = 1.0f;
+                    }
+                    APPDBGPRT("Echo sim %s, gain=%.2f\n",
+                              g_echo_sim_enabled ? "ON" : "OFF", g_echo_sim_gain);
+                    pmsg->status = DBC_OK;
+                }
+                else
+                {
+                    pmsg->status = DBC_ERR_BAD_DATA;
+                }
+                pmsg->data_len = 0;
+            }
+            else if (pmsg->kind == '?')
+            {
+                pmsg->data[0] = g_echo_sim_enabled ? 1 : 0;
+                pmsg->data[1] = (uint8_t)(g_echo_sim_gain * 100.0f);
+                pmsg->data_len = 2;
+                pmsg->status = DBC_OK;
+            }
+            else
+            {
+                pmsg->data_len = 0;
+                pmsg->status = DBC_ERR_UNSUPPORTED;
+            }
         }
         break;
 

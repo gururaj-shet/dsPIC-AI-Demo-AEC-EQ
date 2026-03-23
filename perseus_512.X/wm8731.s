@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\wm8731.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\wm8731.c"
 	.section	.text,code
 .Ltext0:
 	.section	.text,code
@@ -1746,7 +1746,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.file 2 "c:\\program files\\microchip\\xc-dsc\\v3.31\\include\\bits\\alltypes.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0xdad
+	.4byte	0xd53
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -1757,9 +1757,8 @@ _g_us_wm8731_reg_left_line_in_value:
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/wm8731.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0
 	.4byte	0
 	.4byte	0
@@ -1789,7 +1788,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x2
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x22d
+	.4byte	0x1d3
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -1799,7 +1798,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x2
 	.byte	0xc7
 	.byte	0x18
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x2
 	.byte	0x7
@@ -1809,7 +1808,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x2
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -1839,7 +1838,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x48
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1849,7 +1848,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x49
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1859,7 +1858,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x4a
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1869,7 +1868,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x4b
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1879,7 +1878,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x4c
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1889,7 +1888,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x4d
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1899,7 +1898,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x4e
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1909,7 +1908,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x4f
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1919,7 +1918,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x50
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1929,7 +1928,7 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x51
 	.byte	0xa
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -1960,13 +1959,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x564
+	.4byte	0x50a
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x304
 	.byte	0x21
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -1983,13 +1982,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x5ac
+	.4byte	0x552
 	.byte	0x7
 	.4byte	.LASF1
 	.byte	0x1
 	.2byte	0x2f6
 	.byte	0x31
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2006,13 +2005,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x5f3
+	.4byte	0x599
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x295
 	.byte	0x2f
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2029,13 +2028,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x62f
+	.4byte	0x5d5
 	.byte	0x7
 	.4byte	.LASF1
 	.byte	0x1
 	.2byte	0x281
 	.byte	0x24
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2052,13 +2051,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x67f
+	.4byte	0x625
 	.byte	0x7
 	.4byte	.LASF1
 	.byte	0x1
 	.2byte	0x26f
 	.byte	0x38
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2075,13 +2074,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x6d0
+	.4byte	0x676
 	.byte	0x7
 	.4byte	.LASF1
 	.byte	0x1
 	.2byte	0x25c
 	.byte	0x39
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2163,13 +2162,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x7f0
+	.4byte	0x796
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x210
 	.byte	0x24
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2186,13 +2185,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x834
+	.4byte	0x7da
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x1fd
 	.byte	0x2c
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2209,13 +2208,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x875
+	.4byte	0x81b
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x1ea
 	.byte	0x29
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2232,13 +2231,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x8b9
+	.4byte	0x85f
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x1d7
 	.byte	0x2c
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2255,13 +2254,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x8fa
+	.4byte	0x8a0
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x1c4
 	.byte	0x29
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2278,13 +2277,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x93b
+	.4byte	0x8e1
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x1b1
 	.byte	0x29
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2301,13 +2300,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x97c
+	.4byte	0x922
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x19e
 	.byte	0x29
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2324,13 +2323,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x9c1
+	.4byte	0x967
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x18b
 	.byte	0x2d
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2347,13 +2346,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xa01
+	.4byte	0x9a7
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x174
 	.byte	0x28
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2370,13 +2369,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xa3e
+	.4byte	0x9e4
 	.byte	0x7
 	.4byte	.LASF1
 	.byte	0x1
 	.2byte	0x164
 	.byte	0x25
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2393,13 +2392,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xa88
+	.4byte	0xa2e
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x151
 	.byte	0x32
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2416,13 +2415,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xac1
+	.4byte	0xa67
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x13a
 	.byte	0x21
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2439,13 +2438,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xb01
+	.4byte	0xaa7
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x127
 	.byte	0x28
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2462,13 +2461,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xb40
+	.4byte	0xae6
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x114
 	.byte	0x27
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2485,13 +2484,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xb7b
+	.4byte	0xb21
 	.byte	0x7
 	.4byte	.LASF0
 	.byte	0x1
 	.2byte	0x101
 	.byte	0x23
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2508,13 +2507,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xbb5
+	.4byte	0xb5b
 	.byte	0x9
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0xee
 	.byte	0x24
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2531,13 +2530,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xbfe
+	.4byte	0xba4
 	.byte	0xa
 	.4byte	.LASF2
 	.byte	0x1
 	.byte	0xdd
 	.byte	0x31
-	.4byte	0x23e
+	.4byte	0x1e4
 	.4byte	.LLST3
 	.byte	0
 	.byte	0x8
@@ -2553,13 +2552,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xc46
+	.4byte	0xbec
 	.byte	0xa
 	.4byte	.LASF2
 	.byte	0x1
 	.byte	0xcc
 	.byte	0x30
-	.4byte	0x23e
+	.4byte	0x1e4
 	.4byte	.LLST2
 	.byte	0
 	.byte	0x8
@@ -2575,13 +2574,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xc89
+	.4byte	0xc2f
 	.byte	0x9
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0xb9
 	.byte	0x2d
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2598,13 +2597,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xcd0
+	.4byte	0xc76
 	.byte	0xa
 	.4byte	.LASF2
 	.byte	0x1
 	.byte	0xa8
 	.byte	0x2f
-	.4byte	0x23e
+	.4byte	0x1e4
 	.4byte	.LLST1
 	.byte	0
 	.byte	0x8
@@ -2620,13 +2619,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xd12
+	.4byte	0xcb8
 	.byte	0x9
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0x95
 	.byte	0x2c
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x1
 	.byte	0x50
 	.byte	0
@@ -2643,13 +2642,13 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xd58
+	.4byte	0xcfe
 	.byte	0xa
 	.4byte	.LASF2
 	.byte	0x1
 	.byte	0x84
 	.byte	0x2e
-	.4byte	0x23e
+	.4byte	0x1e4
 	.4byte	.LLST0
 	.byte	0
 	.byte	0xb
@@ -2664,19 +2663,19 @@ _g_us_wm8731_reg_left_line_in_value:
 	.byte	0x1
 	.byte	0x59
 	.byte	0x2c
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0xc
 	.asciz	"us_data"
 	.byte	0x1
 	.byte	0x59
 	.byte	0x4a
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0xd
 	.asciz	"tx_dat"
 	.byte	0x1
 	.byte	0x5d
 	.byte	0xd
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0
 	.byte	0
 	.section	.debug_abbrev,info

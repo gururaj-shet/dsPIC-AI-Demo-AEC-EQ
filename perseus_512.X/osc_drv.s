@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\osc_drv.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\osc_drv.c"
 	.section	.text,code
 .Ltext0:
 	.section	.text,code
@@ -421,153 +421,153 @@ _Osc_Configure_PLL1:
 .LVL13:
 .LBB4:
 .LBB5:
-	.loc 1 296 5
-	.loc 1 297 5
-	.loc 1 298 5
-	.loc 1 299 5
-	.loc 1 301 5
-	.loc 1 302 5
-	.loc 1 303 5
+	.loc 1 304 5
 	.loc 1 305 5
 	.loc 1 306 5
 	.loc 1 307 5
-	.loc 1 308 5
 	.loc 1 309 5
 	.loc 1 310 5
+	.loc 1 311 5
+	.loc 1 313 5
 	.loc 1 314 5
-	.loc 1 322 24 is_stmt 0
+	.loc 1 315 5
+	.loc 1 316 5
+	.loc 1 317 5
+	.loc 1 318 5
+	.loc 1 322 5
+	.loc 1 330 24 is_stmt 0
 	mov.l	w2,w9
 	movs.l	#0x1,w7
 	mov.l	w1,w0
 .LVL14:
 	mov.l	w0,[w15-40]
 	mov.l	w1,[w15-36]
-	.loc 1 364 20
+	.loc 1 372 20
 	mov.l	#0x77359400,w12
 	movs.l	#0x8,w10
 .LVL15:
 .L44:
-	.loc 1 326 27
+	.loc 1 334 27
 	mov.l	[w15-40],w2
 	mov.l	[w15-36],w3
 		
 	repeat	#__TARGET_DIVIDE_CYCLES32
 	divul	w2,w7
 	mov.l	w2,w11
-	.loc 1 328 44
+	.loc 1 336 44
 	mov.l	#0xFFB3B4C0,w0
 	add.l	w2,w0,w2
-	.loc 1 322 24
+	.loc 1 330 24
 	mov.w	#1,w4
 	mov.w	#7,w6
 .LVL16:
 .L49:
-	.loc 1 324 28
+	.loc 1 332 28
 	mov.w	#1,w3
 	mov.w	#7,w5
 .LVL17:
 .L47:
-	.loc 1 326 17 is_stmt 1
-	.loc 1 328 17
-	.loc 1 328 20 is_stmt 0
+	.loc 1 334 17 is_stmt 1
+	.loc 1 336 17
+	.loc 1 336 20 is_stmt 0
 	mov.l	#0x38444C0,w1
 	cp.l	w2,w1
 	.set ___BP___,33
 	bra	gtu,.L45
-	.loc 1 330 21 is_stmt 1
+	.loc 1 338 21 is_stmt 1
 .LVL18:
-	.loc 1 338 17
-	.loc 1 338 70 is_stmt 0
+	.loc 1 346 17
+	.loc 1 346 70 is_stmt 0
 	muluu.w	w3,w4,w8
-	.loc 1 338 57
+	.loc 1 346 57
 	mulss.l	w8,w9,w0
-	.loc 1 338 28
+	.loc 1 346 28
 	;	mov.l w0,w0
 	repeat	#__TARGET_DIVIDE_CYCLES32
 	divul	w0,w13
 	mov.l	w0,[w15-44]
 .LVL19:
-	.loc 1 340 17 is_stmt 1
-	.loc 1 340 39 is_stmt 0
+	.loc 1 348 17 is_stmt 1
+	.loc 1 348 39 is_stmt 0
 	sub.l	w0,#16,w14
-	.loc 1 340 20
+	.loc 1 348 20
 	cp.l	w14,#184
 	.set ___BP___,33
 	bra	gtu,.L45
-	.loc 1 342 21 is_stmt 1
+	.loc 1 350 21 is_stmt 1
 .LVL20:
-	.loc 1 350 17
-	.loc 1 350 26 is_stmt 0
+	.loc 1 358 17
+	.loc 1 358 26 is_stmt 0
 	mulss.l	w11,w0,w0
 .LVL21:
-	.loc 1 352 17 is_stmt 1
-	.loc 1 352 45 is_stmt 0
+	.loc 1 360 17 is_stmt 1
+	.loc 1 360 45 is_stmt 0
 	mov.l	#0xE2329B00,w14
 	add.l	w14,w0,w1
-	.loc 1 352 20
+	.loc 1 360 20
 	mov.l	#0x59682F00,w14
 	cp.l	w1,w14
 	.set ___BP___,33
 	bra	gtu,.L45
-	.loc 1 354 21 is_stmt 1
+	.loc 1 362 21 is_stmt 1
 .LVL22:
-	.loc 1 362 17
-	.loc 1 364 17
-	.loc 1 362 26 is_stmt 0
+	.loc 1 370 17
+	.loc 1 372 17
+	.loc 1 370 26 is_stmt 0
 	;	mov.l w0,w0
 .LVL23:
 	repeat	#__TARGET_DIVIDE_CYCLES32
 	divul	w0,w8
-	.loc 1 364 20
+	.loc 1 372 20
 	cp.l	w12,w0
 	.set ___BP___,33
 	bra	ltu,.L45
-	.loc 1 366 21 is_stmt 1
+	.loc 1 374 21 is_stmt 1
 .LVL24:
-	.loc 1 374 17
-	.loc 1 374 20 is_stmt 0
+	.loc 1 382 17
+	.loc 1 382 20 is_stmt 0
 	cp.w	w3,w4
 	.set ___BP___,33
 	bra	geu,.L46
 .LVL25:
 .L45:
-	.loc 1 324 57
+	.loc 1 332 57
 	inc.w	w3,w3
 .LVL26:
 	dtb	w5,.L47
-	.loc 1 390 13 is_stmt 1
-	.loc 1 322 53 is_stmt 0
+	.loc 1 398 13 is_stmt 1
+	.loc 1 330 53 is_stmt 0
 	inc.w	w4,w4
 .LVL27:
 	dtb	w6,.L49
-	.loc 1 395 9 is_stmt 1
+	.loc 1 403 9 is_stmt 1
 .LVL28:
 	add.l	w7,#1,w7
 .LVL29:
 	mov.l	[w15-32],w14
 	add.l	w14,w9,w9
 	dtb	w10,.L44
-	.loc 1 401 5
-	.loc 1 412 9
+	.loc 1 409 5
+	.loc 1 420 9
 	mov.sl	#.LC0,w0
 	rcall	_puts
 .LVL30:
 .L50:
-	.loc 1 414 9
-	.loc 1 414 17
-	.loc 1 414 9
-	.loc 1 414 17
+	.loc 1 422 9
+	.loc 1 422 17
+	.loc 1 422 9
+	.loc 1 422 17
 	bra	.L50
 .LVL31:
 .L46:
-	.loc 1 390 13
-	.loc 1 395 9
-	.loc 1 401 5
+	.loc 1 398 13
 	.loc 1 403 9
-	.loc 1 404 9
-	.loc 1 405 9
-	.loc 1 406 9
-	.loc 1 407 9
+	.loc 1 409 5
+	.loc 1 411 9
+	.loc 1 412 9
+	.loc 1 413 9
+	.loc 1 414 9
+	.loc 1 415 9
 .LBE5:
 .LBE4:
 	.loc 1 191 5
@@ -679,8 +679,11 @@ _Osc_Configure_PLL1:
 	.size	_Osc_Configure_PLL1, .-_Osc_Configure_PLL1
 	.section	*,code
 .LC1:
-	.asciz	"\012\012Osc_Configure_PLL2: timeout1 !! check MCLK is available."
+	.ascii	"\012\012Osc_Configure_PLL2: timeout0 !! OSWEN stuck - check BCLK fro"
+	.asciz	"m codec."
 .LC2:
+	.asciz	"\012\012Osc_Configure_PLL2: timeout1 !! check MCLK is available."
+.LC3:
 	.asciz	"\012\012Osc_Configure_PLL2: timeout2 !! check MCLK is available."
 	.section	.text,code
 	.align	4
@@ -701,8 +704,8 @@ _Osc_Configure_PLL2:
 	push.l	w13
 	push.l	w14
 .LCFI3:
-	mov.l	w0,[w15-44]
-	mov.l	w1,w9
+	mov.l	w0,[w15-52]
+	mov.l	w1,w7
 	mov.l	w2,[w15-40]
 	.loc 1 218 5
 	.loc 1 219 5
@@ -713,171 +716,170 @@ _Osc_Configure_PLL2:
 .LVL44:
 .LBB8:
 .LBB9:
-	.loc 1 296 5
-	.loc 1 297 5
-	.loc 1 298 5
-	.loc 1 299 5
-	.loc 1 301 5
-	.loc 1 302 5
-	.loc 1 303 5
+	.loc 1 304 5
 	.loc 1 305 5
 	.loc 1 306 5
 	.loc 1 307 5
-	.loc 1 308 5
 	.loc 1 309 5
 	.loc 1 310 5
+	.loc 1 311 5
+	.loc 1 313 5
 	.loc 1 314 5
-	.loc 1 322 24 is_stmt 0
-	mov.l	w2,w8
-	movs.l	#0x1,w0
+	.loc 1 315 5
+	.loc 1 316 5
+	.loc 1 317 5
+	.loc 1 318 5
+	.loc 1 322 5
+	.loc 1 330 24 is_stmt 0
+	mov.l	w2,w6
+	movs.l	#0x1,w1
 .LVL45:
-	mov.l	w0,[w15-32]
-	mov.l	w1,w0
-	mov.l	w0,[w15-52]
-	mov.l	w1,[w15-48]
-	.loc 1 328 20
-	mov.l	#0x38444C0,w7
-	.loc 1 352 20
-	mov.l	#0x59682F00,w13
-	.loc 1 364 20
-	movs.l	#0x8,w1
+	mov.l	w1,[w15-32]
+	mov.l	w7,w2
 .LVL46:
-	mov.l	w1,[w15-36]
+	mov.l	w2,[w15-48]
+	mov.l	w3,[w15-44]
+	.loc 1 336 20
+	mov.l	#0x38444C0,w5
+	.loc 1 360 20
+	mov.l	#0x59682F00,w13
+	.loc 1 372 20
+	movs.l	#0x8,w3
+	mov.l	w3,[w15-36]
 .LVL47:
 .L70:
-	.loc 1 326 27
-	mov.l	[w15-52],w0
-	mov.l	[w15-48],w1
+	.loc 1 334 27
+	mov.l	[w15-48],w0
+	mov.l	[w15-44],w1
 		
 	mov.l	[w15-32],w2
 	repeat	#__TARGET_DIVIDE_CYCLES32
 	divul	w0,w2
 	mov.l	w0,w12
-	.loc 1 328 44
-	mov.l	#0xFFB3B4C0,w4
-	add.l	w0,w4,w6
-	.loc 1 322 24
-	mov.w	#1,w5
+	.loc 1 336 44
+	mov.l	#0xFFB3B4C0,w3
+	add.l	w0,w3,w4
+	.loc 1 330 24
+	mov.w	#1,w9
 	mov.w	#7,w11
 .LVL48:
 .L75:
-	.loc 1 324 28
-	mov.w	#1,w2
-	mov.w	#7,w3
+	.loc 1 332 28
+	mov.w	#1,w8
+	mov.w	#7,w2
 .LVL49:
 .L73:
-	.loc 1 326 17 is_stmt 1
-	.loc 1 328 17
-	.loc 1 328 20 is_stmt 0
-	cp.l	w6,w7
+	.loc 1 334 17 is_stmt 1
+	.loc 1 336 17
+	.loc 1 336 20 is_stmt 0
+	cp.l	w4,w5
 	.set ___BP___,33
 	bra	gtu,.L71
-	.loc 1 330 21 is_stmt 1
+	.loc 1 338 21 is_stmt 1
 .LVL50:
-	.loc 1 338 17
-	.loc 1 338 70 is_stmt 0
-	muluu.w	w2,w5,w4
-	.loc 1 338 57
-	mulss.l	w4,w8,w0
-	.loc 1 338 28
+	.loc 1 346 17
+	.loc 1 346 70 is_stmt 0
+	muluu.w	w8,w9,w3
+	.loc 1 346 57
+	mulss.l	w3,w6,w0
+	.loc 1 346 28
 	;	mov.l w0,w0
 	repeat	#__TARGET_DIVIDE_CYCLES32
-	divul	w0,w9
+	divul	w0,w7
 	mov.l	w0,w10
 .LVL51:
-	.loc 1 340 17 is_stmt 1
-	.loc 1 340 39 is_stmt 0
+	.loc 1 348 17 is_stmt 1
+	.loc 1 348 39 is_stmt 0
 	sub.l	w0,#16,w14
-	.loc 1 340 20
+	.loc 1 348 20
 	cp.l	w14,#184
 	.set ___BP___,33
 	bra	gtu,.L71
-	.loc 1 342 21 is_stmt 1
+	.loc 1 350 21 is_stmt 1
 .LVL52:
-	.loc 1 350 17
-	.loc 1 350 26 is_stmt 0
+	.loc 1 358 17
+	.loc 1 358 26 is_stmt 0
 	mulss.l	w12,w0,w0
 .LVL53:
-	.loc 1 352 17 is_stmt 1
-	.loc 1 352 45 is_stmt 0
+	.loc 1 360 17 is_stmt 1
+	.loc 1 360 45 is_stmt 0
 	mov.l	#0xE2329B00,w14
 	add.l	w14,w0,w1
-	.loc 1 352 20
+	.loc 1 360 20
 	cp.l	w1,w13
 	.set ___BP___,33
 	bra	gtu,.L71
-	.loc 1 354 21 is_stmt 1
+	.loc 1 362 21 is_stmt 1
 .LVL54:
-	.loc 1 362 17
-	.loc 1 364 17
-	.loc 1 362 26 is_stmt 0
+	.loc 1 370 17
+	.loc 1 372 17
+	.loc 1 370 26 is_stmt 0
 	;	mov.l w0,w0
 .LVL55:
 	repeat	#__TARGET_DIVIDE_CYCLES32
-	divul	w0,w4
-	.loc 1 364 20
-	mov.l	#0x77359400,w4
+	divul	w0,w3
+	.loc 1 372 20
+	mov.l	#0x77359400,w3
 .LVL56:
-	cp.l	w4,w0
+	cp.l	w3,w0
 	.set ___BP___,33
 	bra	ltu,.L71
-	.loc 1 366 21 is_stmt 1
+	.loc 1 374 21 is_stmt 1
 .LVL57:
-	.loc 1 374 17
-	.loc 1 374 20 is_stmt 0
-	cp.w	w2,w5
+	.loc 1 382 17
+	.loc 1 382 20 is_stmt 0
+	cp.w	w8,w9
 	.set ___BP___,33
 	bra	geu,.L72
 .LVL58:
 .L71:
-	.loc 1 324 57
-	inc.w	w2,w2
+	.loc 1 332 57
+	inc.w	w8,w8
 .LVL59:
-	dtb	w3,.L73
-	.loc 1 390 13 is_stmt 1
-	.loc 1 322 53 is_stmt 0
-	inc.w	w5,w5
+	dtb	w2,.L73
+	.loc 1 398 13 is_stmt 1
+	.loc 1 330 53 is_stmt 0
+	inc.w	w9,w9
 .LVL60:
 	dtb	w11,.L75
-	.loc 1 395 9 is_stmt 1
+	.loc 1 403 9 is_stmt 1
 .LVL61:
-	mov.l	[w15-32],w0
-	add.l	w0,#1,w0
-	mov.l	w0,[w15-32]
+	mov.l	[w15-32],w1
+	add.l	w1,#1,w1
+	mov.l	w1,[w15-32]
 .LVL62:
 	mov.l	[w15-40],w2
-	add.l	w2,w8,w8
-	mov.l	[w15-36],w4
-	sub.l	w4,#1,w4
-	mov.l	w4,[w15-36]
+	add.l	w2,w6,w6
+	mov.l	[w15-36],w3
+	sub.l	w3,#1,w3
+	mov.l	w3,[w15-36]
 	bra	nz,.L70
-	.loc 1 401 5
-	.loc 1 412 9
+	.loc 1 409 5
+	.loc 1 420 9
 	mov.sl	#.LC0,w0
-.LVL63:
 	rcall	_puts
-.LVL64:
+.LVL63:
 .L76:
-	.loc 1 414 9
-	.loc 1 414 17
-	.loc 1 414 9
-	.loc 1 414 17
+	.loc 1 422 9
+	.loc 1 422 17
+	.loc 1 422 9
+	.loc 1 422 17
 	bra	.L76
-.LVL65:
+.LVL64:
 .L72:
-	.loc 1 390 13
-	.loc 1 395 9
-	.loc 1 401 5
+	.loc 1 398 13
 	.loc 1 403 9
-	.loc 1 404 9
-	.loc 1 405 9
-	.loc 1 406 9
-	.loc 1 407 9
+	.loc 1 409 5
+	.loc 1 411 9
+	.loc 1 412 9
+	.loc 1 413 9
+	.loc 1 414 9
+	.loc 1 415 9
 .LBE9:
 .LBE8:
 	.loc 1 237 5
 	.loc 1 237 22 is_stmt 0
-	sub.l	w15,#44,w14
+	sub.l	w15,#52,w14
 	and.b	[w14],#(0xf&0x7F),w1
 	mov.bz	_PLL2CONbits+1,w0
 	and1.b	w0,#(-16&0x7F),w0
@@ -890,143 +892,164 @@ _Osc_Configure_PLL2:
 	.loc 1 239 20 is_stmt 0
 	bset.b	_PLL2CONbits+1,#4
 	.loc 1 241 5 is_stmt 1
-	.loc 1 241 23 is_stmt 0
-	bset.b	_PLL2CONbits+2,#7
+	.loc 1 241 16 is_stmt 0
+	rcall	_GetTicks
+.LVL65:
 	.loc 1 242 5 is_stmt 1
-	mov.sl	#_PLL2CONbits+2,w1
+	.loc 1 242 23 is_stmt 0
+	bset.b	_PLL2CONbits+2,#7
+	.loc 1 243 5 is_stmt 1
+	mov.sl	#_PLL2CONbits+2,w12
+	.loc 1 245 35 is_stmt 0
+	mov.l	w0,w11
+	add.l	#500,w11
+.LVL66:
 .L77:
-	.loc 1 242 30 discriminator 1
-	.loc 1 242 23 is_stmt 0 discriminator 1
-	ze.bz	[w1],w0
+	.loc 1 243 23
+	ze.bz	[w12],w0
 	bfext.l	#7,#8,w0,w0
-	.loc 1 242 11 discriminator 1
+	.loc 1 243 11
 	cp.b	w0,#0
-	.set ___BP___,89
-	bra	nz,.L77
-	.loc 1 245 5 is_stmt 1
-	.loc 1 245 26 is_stmt 0
+	.set ___BP___,5
+	bra	z,.L78
+	.loc 1 245 9 is_stmt 1
+	.loc 1 245 13 is_stmt 0
+	rcall	_GetTicks
+.LVL67:
+	.loc 1 245 11
+	cp.l	w0,w11
+	.set ___BP___,94
+	bra	leu,.L77
+	.loc 1 247 13 is_stmt 1
+	mov.sl	#.LC1,w0
+	rcall	_puts
+.LVL68:
+	.loc 1 248 13
+.L78:
+	.loc 1 253 5
+	.loc 1 253 26 is_stmt 0
 	bfins.l	#8,#9,w10,_PLL2DIVbits
-	.loc 1 246 5 is_stmt 1
-	.loc 1 246 24 is_stmt 0
+	.loc 1 254 5 is_stmt 1
+	.loc 1 254 24 is_stmt 0
 	sub.l	w15,#32,w14
 	and.b	[w14],#(0xf&0x7F),w1
 	mov.bz	_PLL2DIVbits+3,w0
 	and1.b	w0,#(-16&0x7F),w0
 	ior.b	w0,w1,w0
 	mov.b	w0,_PLL2DIVbits+3
-	.loc 1 247 5 is_stmt 1
-	.loc 1 247 26 is_stmt 0
-	and.b	w2,#(0x7&0x7F),w0
+	.loc 1 255 5 is_stmt 1
+	.loc 1 255 26 is_stmt 0
+	and.b	w8,#(0x7&0x7F),w0
 	sl	w0,#3,w1
 	mov.bz	_PLL2DIVbits,w0
 	and1.b	w0,#(-57&0x7F),w0
 	ior.b	w0,w1,w0
 	mov.b	w0,_PLL2DIVbits
-	.loc 1 248 5 is_stmt 1
-	.loc 1 248 26 is_stmt 0
-	and.b	w5,#(0x7&0x7F),w5
-.LVL66:
+	.loc 1 256 5 is_stmt 1
+	.loc 1 256 26 is_stmt 0
+	and.b	w9,#(0x7&0x7F),w9
+.LVL69:
 	mov.bz	_PLL2DIVbits,w0
 	and1.b	w0,#(-8&0x7F),w0
-	ior.b	w0,w5,w0
+	ior.b	w0,w9,w0
 	mov.b	w0,_PLL2DIVbits
-	.loc 1 250 5 is_stmt 1
-	.loc 1 250 16 is_stmt 0
-	rcall	_GetTicks
-.LVL67:
-	.loc 1 252 5 is_stmt 1
-	.loc 1 252 25 is_stmt 0
-	bset.b	_PLL2CONbits+3,#6
-	.loc 1 253 5 is_stmt 1
-	mov.sl	#_PLL2CONbits+3,w8
-	.loc 1 255 35 is_stmt 0
-	mov.l	w0,w9
-.LVL68:
-	add.l	#500,w9
-.LVL69:
-.L78:
-	.loc 1 253 23
-	ze.bz	[w8],w0
-	bfext.l	#6,#1,w0,w0
-	.loc 1 253 11
-	cp.b	w0,#1
-	.set ___BP___,5
-	bra	nz,.L98
-	.loc 1 255 9 is_stmt 1
-	.loc 1 255 13 is_stmt 0
+	.loc 1 258 5 is_stmt 1
+	.loc 1 258 16 is_stmt 0
 	rcall	_GetTicks
 .LVL70:
-	.loc 1 255 11
-	cp.l	w0,w9
-	.set ___BP___,94
-	bra	leu,.L78
-	.loc 1 257 13 is_stmt 1
-	mov.sl	#.LC1,w0
-	rcall	_puts
+	.loc 1 260 5 is_stmt 1
+	.loc 1 260 25 is_stmt 0
+	bset.b	_PLL2CONbits+3,#6
+	.loc 1 261 5 is_stmt 1
+	mov.sl	#_PLL2CONbits+3,w8
 .LVL71:
-.L79:
-	.loc 1 258 13 discriminator 1
-	.loc 1 258 21 discriminator 1
-	.loc 1 258 13 discriminator 1
-	.loc 1 258 21 discriminator 1
-	bra	.L79
-.L98:
-	.loc 1 262 5
-	.loc 1 262 16 is_stmt 0
-	rcall	_GetTicks
-.LVL72:
-	.loc 1 264 5 is_stmt 1
-	.loc 1 264 26 is_stmt 0
-	bset.b	_PLL2CONbits+3,#4
-	.loc 1 265 5 is_stmt 1
-	.loc 1 267 35 is_stmt 0
+	.loc 1 263 35 is_stmt 0
 	mov.l	w0,w9
 	add.l	#500,w9
-.LVL73:
-.L81:
-	.loc 1 265 23
+.LVL72:
+.L80:
+	.loc 1 261 23
 	ze.bz	[w8],w0
-	bfext.l	#4,#1,w0,w0
-	.loc 1 265 11
-	cp.b	w0,#0
+	bfext.l	#6,#1,w0,w0
+	.loc 1 261 11
+	cp.b	w0,#1
 	.set ___BP___,5
-	bra	z,.L99
-	.loc 1 267 9 is_stmt 1
-	.loc 1 267 13 is_stmt 0
+	bra	nz,.L100
+	.loc 1 263 9 is_stmt 1
+	.loc 1 263 13 is_stmt 0
 	rcall	_GetTicks
-.LVL74:
-	.loc 1 267 11
+.LVL73:
+	.loc 1 263 11
 	cp.l	w0,w9
 	.set ___BP___,94
-	bra	leu,.L81
-	.loc 1 269 13 is_stmt 1
+	bra	leu,.L80
+	.loc 1 265 13 is_stmt 1
 	mov.sl	#.LC2,w0
 	rcall	_puts
+.LVL74:
+.L81:
+	.loc 1 266 13 discriminator 1
+	.loc 1 266 21 discriminator 1
+	.loc 1 266 13 discriminator 1
+	.loc 1 266 21 discriminator 1
+	bra	.L81
+.L100:
+	.loc 1 270 5
+	.loc 1 270 16 is_stmt 0
+	rcall	_GetTicks
 .LVL75:
-.L82:
-	.loc 1 270 13 discriminator 2
-	.loc 1 270 21 discriminator 2
-	.loc 1 270 13 discriminator 2
-	.loc 1 270 21 discriminator 2
-	bra	.L82
-.L99:
-	.loc 1 273 1 is_stmt 0
-	pop.l	w14
+	.loc 1 272 5 is_stmt 1
+	.loc 1 272 26 is_stmt 0
+	bset.b	_PLL2CONbits+3,#4
+	.loc 1 273 5 is_stmt 1
+	.loc 1 275 35 is_stmt 0
+	mov.l	w0,w9
+	add.l	#500,w9
 .LVL76:
-	pop.l	w13
+.L83:
+	.loc 1 273 23
+	ze.bz	[w8],w0
+	bfext.l	#4,#1,w0,w0
+	.loc 1 273 11
+	cp.b	w0,#0
+	.set ___BP___,5
+	bra	z,.L101
+	.loc 1 275 9 is_stmt 1
+	.loc 1 275 13 is_stmt 0
+	rcall	_GetTicks
 .LVL77:
-	pop.l	w12
+	.loc 1 275 11
+	cp.l	w0,w9
+	.set ___BP___,94
+	bra	leu,.L83
+	.loc 1 277 13 is_stmt 1
+	mov.sl	#.LC3,w0
+	rcall	_puts
 .LVL78:
-	pop.l	w11
+.L84:
+	.loc 1 278 13 discriminator 2
+	.loc 1 278 21 discriminator 2
+	.loc 1 278 13 discriminator 2
+	.loc 1 278 21 discriminator 2
+	bra	.L84
+.L101:
+	.loc 1 281 1 is_stmt 0
+	pop.l	w14
 .LVL79:
-	pop.l	w10
+	pop.l	w13
 .LVL80:
-	pop.l	w9
+	pop.l	w12
 .LVL81:
-	pop.l	w8
+	pop.l	w11
 .LVL82:
-	sub.l	w15,#28,w15
+	pop.l	w10
 .LVL83:
+	pop.l	w9
+.LVL84:
+	pop.l	w8
+.LVL85:
+	sub.l	w15,#28,w15
+.LVL86:
 	return	
 
 	.set ___PA___,0
@@ -1164,7 +1187,7 @@ _Osc_Configure_PLL2:
 	.file 6 "../src/tick_time.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0x190f
+	.4byte	0x18de
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -1175,9 +1198,8 @@ _Osc_Configure_PLL2:
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/osc_drv.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0
 	.4byte	0
 	.4byte	0
@@ -1211,7 +1233,7 @@ _Osc_Configure_PLL2:
 	.byte	0x2
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -1221,7 +1243,7 @@ _Osc_Configure_PLL2:
 	.byte	0x2
 	.byte	0xc7
 	.byte	0x18
-	.4byte	0x260
+	.4byte	0x206
 	.byte	0x2
 	.byte	0x2
 	.byte	0x7
@@ -1231,7 +1253,7 @@ _Osc_Configure_PLL2:
 	.byte	0x2
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x287
+	.4byte	0x22d
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -1250,13 +1272,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5136
 	.byte	0x10
-	.4byte	0x3df
+	.4byte	0x385
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x5137
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1268,7 +1290,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5138
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0
@@ -1280,7 +1302,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5139
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1292,7 +1314,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x513a
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1304,7 +1326,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x513b
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1316,7 +1338,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x513d
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1328,7 +1350,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x513e
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1340,7 +1362,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x513f
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1352,7 +1374,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5141
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -1364,7 +1386,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5142
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1376,7 +1398,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5143
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -1388,7 +1410,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5144
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1400,7 +1422,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5146
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1412,7 +1434,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5148
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1425,15 +1447,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5149
 	.byte	0x3
-	.4byte	0x2bd
+	.4byte	0x263
 	.byte	0x8
-	.4byte	0x3df
+	.4byte	0x385
 	.byte	0x9
 	.asciz	"CLK1CONbits"
 	.byte	0x3
 	.2byte	0x514a
 	.byte	0x1d
-	.4byte	0x3f4
+	.4byte	0x39a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1442,13 +1464,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x514e
 	.byte	0x10
-	.4byte	0x450
+	.4byte	0x3f6
 	.byte	0x5
 	.4byte	.LASF11
 	.byte	0x3
 	.2byte	0x5150
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x9
 	.byte	0
@@ -1460,7 +1482,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5151
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -1473,15 +1495,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5153
 	.byte	0x3
-	.4byte	0x410
+	.4byte	0x3b6
 	.byte	0x8
-	.4byte	0x450
+	.4byte	0x3f6
 	.byte	0x9
 	.asciz	"CLK1DIVbits"
 	.byte	0x3
 	.2byte	0x5154
 	.byte	0x1d
-	.4byte	0x465
+	.4byte	0x40b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1490,13 +1512,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51be
 	.byte	0x10
-	.4byte	0x5a3
+	.4byte	0x549
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x51bf
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1508,7 +1530,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c0
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0
@@ -1520,7 +1542,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c1
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1532,7 +1554,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c2
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1544,7 +1566,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c3
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1556,7 +1578,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c5
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1568,7 +1590,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c6
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1580,7 +1602,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c7
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1592,7 +1614,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51c9
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -1604,7 +1626,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51ca
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1616,7 +1638,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51cb
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -1628,7 +1650,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51cc
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1640,7 +1662,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51ce
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1652,7 +1674,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51d0
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1665,15 +1687,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51d1
 	.byte	0x3
-	.4byte	0x481
+	.4byte	0x427
 	.byte	0x8
-	.4byte	0x5a3
+	.4byte	0x549
 	.byte	0x9
 	.asciz	"CLK5CONbits"
 	.byte	0x3
 	.2byte	0x51d2
 	.byte	0x1d
-	.4byte	0x5b8
+	.4byte	0x55e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1682,13 +1704,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51d6
 	.byte	0x10
-	.4byte	0x614
+	.4byte	0x5ba
 	.byte	0x5
 	.4byte	.LASF11
 	.byte	0x3
 	.2byte	0x51d8
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x9
 	.byte	0
@@ -1700,7 +1722,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51d9
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -1713,15 +1735,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51db
 	.byte	0x3
-	.4byte	0x5d4
+	.4byte	0x57a
 	.byte	0x8
-	.4byte	0x614
+	.4byte	0x5ba
 	.byte	0x9
 	.asciz	"CLK5DIVbits"
 	.byte	0x3
 	.2byte	0x51dc
 	.byte	0x1d
-	.4byte	0x629
+	.4byte	0x5cf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1730,13 +1752,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e0
 	.byte	0x10
-	.4byte	0x767
+	.4byte	0x70d
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x51e1
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1748,7 +1770,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e2
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0
@@ -1760,7 +1782,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e3
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1772,7 +1794,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e4
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1784,7 +1806,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e5
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1796,7 +1818,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e7
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1808,7 +1830,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e8
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1820,7 +1842,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51e9
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1832,7 +1854,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51eb
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -1844,7 +1866,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51ec
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1856,7 +1878,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51ed
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -1868,7 +1890,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51ee
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1880,7 +1902,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51f0
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1892,7 +1914,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51f2
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1905,15 +1927,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51f3
 	.byte	0x3
-	.4byte	0x645
+	.4byte	0x5eb
 	.byte	0x8
-	.4byte	0x767
+	.4byte	0x70d
 	.byte	0x9
 	.asciz	"CLK6CONbits"
 	.byte	0x3
 	.2byte	0x51f4
 	.byte	0x1d
-	.4byte	0x77c
+	.4byte	0x722
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1922,13 +1944,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51f8
 	.byte	0x10
-	.4byte	0x7d8
+	.4byte	0x77e
 	.byte	0x5
 	.4byte	.LASF11
 	.byte	0x3
 	.2byte	0x51fa
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x9
 	.byte	0
@@ -1940,7 +1962,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51fb
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -1953,15 +1975,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x51fd
 	.byte	0x3
-	.4byte	0x798
+	.4byte	0x73e
 	.byte	0x8
-	.4byte	0x7d8
+	.4byte	0x77e
 	.byte	0x9
 	.asciz	"CLK6DIVbits"
 	.byte	0x3
 	.2byte	0x51fe
 	.byte	0x1d
-	.4byte	0x7ed
+	.4byte	0x793
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1970,13 +1992,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5224
 	.byte	0x10
-	.4byte	0x92b
+	.4byte	0x8d1
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x5225
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -1988,7 +2010,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5226
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0
@@ -2000,7 +2022,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5227
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2012,7 +2034,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5228
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2024,7 +2046,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5229
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2036,7 +2058,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x522b
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2048,7 +2070,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x522c
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2060,7 +2082,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x522d
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2072,7 +2094,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x522f
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -2084,7 +2106,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5230
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2096,7 +2118,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5231
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -2108,7 +2130,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5232
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2120,7 +2142,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5234
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2132,7 +2154,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5236
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2145,15 +2167,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5237
 	.byte	0x3
-	.4byte	0x809
+	.4byte	0x7af
 	.byte	0x8
-	.4byte	0x92b
+	.4byte	0x8d1
 	.byte	0x9
 	.asciz	"CLK8CONbits"
 	.byte	0x3
 	.2byte	0x5238
 	.byte	0x1d
-	.4byte	0x940
+	.4byte	0x8e6
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2162,13 +2184,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x523c
 	.byte	0x10
-	.4byte	0x99c
+	.4byte	0x942
 	.byte	0x5
 	.4byte	.LASF11
 	.byte	0x3
 	.2byte	0x523e
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x9
 	.byte	0
@@ -2180,7 +2202,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x523f
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -2193,15 +2215,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5241
 	.byte	0x3
-	.4byte	0x95c
+	.4byte	0x902
 	.byte	0x8
-	.4byte	0x99c
+	.4byte	0x942
 	.byte	0x9
 	.asciz	"CLK8DIVbits"
 	.byte	0x3
 	.2byte	0x5242
 	.byte	0x1d
-	.4byte	0x9b1
+	.4byte	0x957
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2210,13 +2232,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5246
 	.byte	0x10
-	.4byte	0xaef
+	.4byte	0xa95
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x5247
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2228,7 +2250,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5248
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0
@@ -2240,7 +2262,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5249
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2252,7 +2274,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x524a
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2264,7 +2286,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x524b
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2276,7 +2298,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x524d
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2288,7 +2310,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x524e
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2300,7 +2322,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x524f
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2312,7 +2334,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5251
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -2324,7 +2346,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5252
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2336,7 +2358,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5253
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -2348,7 +2370,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5254
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2360,7 +2382,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5256
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2372,7 +2394,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5258
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2385,15 +2407,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5259
 	.byte	0x3
-	.4byte	0x9cd
+	.4byte	0x973
 	.byte	0x8
-	.4byte	0xaef
+	.4byte	0xa95
 	.byte	0x9
 	.asciz	"CLK9CONbits"
 	.byte	0x3
 	.2byte	0x525a
 	.byte	0x1d
-	.4byte	0xb04
+	.4byte	0xaaa
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2402,13 +2424,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x525e
 	.byte	0x10
-	.4byte	0xb60
+	.4byte	0xb06
 	.byte	0x5
 	.4byte	.LASF11
 	.byte	0x3
 	.2byte	0x5260
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x9
 	.byte	0
@@ -2420,7 +2442,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5261
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -2433,15 +2455,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5263
 	.byte	0x3
-	.4byte	0xb20
+	.4byte	0xac6
 	.byte	0x8
-	.4byte	0xb60
+	.4byte	0xb06
 	.byte	0x9
 	.asciz	"CLK9DIVbits"
 	.byte	0x3
 	.2byte	0x5264
 	.byte	0x1d
-	.4byte	0xb75
+	.4byte	0xb1b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2450,13 +2472,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52ac
 	.byte	0x10
-	.4byte	0xcb4
+	.4byte	0xc5a
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x52ad
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2468,7 +2490,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52ae
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0
@@ -2480,7 +2502,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52af
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2492,7 +2514,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b0
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2504,7 +2526,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b1
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2516,7 +2538,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b3
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2528,7 +2550,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b4
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2540,7 +2562,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b5
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2552,7 +2574,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b7
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -2564,7 +2586,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b8
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2576,7 +2598,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52b9
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -2588,7 +2610,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52ba
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2600,7 +2622,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52bc
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2612,7 +2634,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52be
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2625,15 +2647,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52bf
 	.byte	0x3
-	.4byte	0xb91
+	.4byte	0xb37
 	.byte	0x8
-	.4byte	0xcb4
+	.4byte	0xc5a
 	.byte	0x9
 	.asciz	"CLK12CONbits"
 	.byte	0x3
 	.2byte	0x52c0
 	.byte	0x1e
-	.4byte	0xcca
+	.4byte	0xc70
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2642,13 +2664,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52c4
 	.byte	0x10
-	.4byte	0xd28
+	.4byte	0xcce
 	.byte	0x5
 	.4byte	.LASF11
 	.byte	0x3
 	.2byte	0x52c6
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x9
 	.byte	0
@@ -2660,7 +2682,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52c7
 	.byte	0xc
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -2673,15 +2695,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x52c9
 	.byte	0x3
-	.4byte	0xce7
+	.4byte	0xc8d
 	.byte	0x8
-	.4byte	0xd28
+	.4byte	0xcce
 	.byte	0x9
 	.asciz	"CLK12DIVbits"
 	.byte	0x3
 	.2byte	0x52ca
 	.byte	0x1e
-	.4byte	0xd3e
+	.4byte	0xce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2690,13 +2712,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5312
 	.byte	0x10
-	.4byte	0xe94
+	.4byte	0xe3a
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x5313
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2708,7 +2730,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5315
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2720,7 +2742,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5316
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2732,7 +2754,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5317
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2744,7 +2766,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5319
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2756,7 +2778,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x531a
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2768,7 +2790,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x531b
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2780,7 +2802,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x531d
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -2792,7 +2814,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x531e
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2804,7 +2826,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x531f
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -2816,7 +2838,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5320
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2828,7 +2850,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5321
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -2840,7 +2862,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5322
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -2852,7 +2874,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5323
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -2864,7 +2886,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5324
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -2877,15 +2899,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5325
 	.byte	0x3
-	.4byte	0xd5b
+	.4byte	0xd01
 	.byte	0x8
-	.4byte	0xe94
+	.4byte	0xe3a
 	.byte	0x9
 	.asciz	"PLL1CONbits"
 	.byte	0x3
 	.2byte	0x5326
 	.byte	0x1d
-	.4byte	0xea9
+	.4byte	0xe4f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2894,13 +2916,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x532a
 	.byte	0x10
-	.4byte	0xf2e
+	.4byte	0xed4
 	.byte	0x5
 	.4byte	.LASF14
 	.byte	0x3
 	.2byte	0x532b
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -2912,7 +2934,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x532c
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x2
@@ -2924,7 +2946,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x532e
 	.byte	0xc
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x4
 	.byte	0x9
 	.byte	0xf
@@ -2936,7 +2958,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5330
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2949,15 +2971,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5332
 	.byte	0x3
-	.4byte	0xec5
+	.4byte	0xe6b
 	.byte	0x8
-	.4byte	0xf2e
+	.4byte	0xed4
 	.byte	0x9
 	.asciz	"PLL1DIVbits"
 	.byte	0x3
 	.2byte	0x5333
 	.byte	0x1d
-	.4byte	0xf43
+	.4byte	0xee9
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -2966,13 +2988,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5340
 	.byte	0x10
-	.4byte	0x1098
+	.4byte	0x103e
 	.byte	0x5
 	.4byte	.LASF0
 	.byte	0x3
 	.2byte	0x5341
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2984,7 +3006,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5343
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -2996,7 +3018,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5344
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -3008,7 +3030,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5345
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -3020,7 +3042,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5347
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -3032,7 +3054,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5348
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -3044,7 +3066,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5349
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -3056,7 +3078,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x534b
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -3068,7 +3090,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x534c
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -3080,7 +3102,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x534d
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -3092,7 +3114,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x534e
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -3104,7 +3126,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x534f
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -3116,7 +3138,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5350
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -3128,7 +3150,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5351
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -3140,7 +3162,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5352
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -3153,15 +3175,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5353
 	.byte	0x3
-	.4byte	0xf5f
+	.4byte	0xf05
 	.byte	0x8
-	.4byte	0x1098
+	.4byte	0x103e
 	.byte	0x9
 	.asciz	"PLL2CONbits"
 	.byte	0x3
 	.2byte	0x5354
 	.byte	0x1d
-	.4byte	0x10ad
+	.4byte	0x1053
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -3170,13 +3192,13 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5358
 	.byte	0x10
-	.4byte	0x1132
+	.4byte	0x10d8
 	.byte	0x5
 	.4byte	.LASF14
 	.byte	0x3
 	.2byte	0x5359
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -3188,7 +3210,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x535a
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x2
@@ -3200,7 +3222,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x535c
 	.byte	0xc
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x4
 	.byte	0x9
 	.byte	0xf
@@ -3212,7 +3234,7 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x535e
 	.byte	0xb
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -3225,15 +3247,15 @@ _Osc_Configure_PLL2:
 	.byte	0x3
 	.2byte	0x5360
 	.byte	0x3
-	.4byte	0x10c9
+	.4byte	0x106f
 	.byte	0x8
-	.4byte	0x1132
+	.4byte	0x10d8
 	.byte	0x9
 	.asciz	"PLL2DIVbits"
 	.byte	0x3
 	.2byte	0x5361
 	.byte	0x1d
-	.4byte	0x1147
+	.4byte	0x10ed
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -3252,11 +3274,11 @@ _Osc_Configure_PLL2:
 	.asciz	"CLK_GEN_SOURCE_Tag"
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x1d6
+	.4byte	0x17c
 	.byte	0x4
 	.byte	0x9
 	.byte	0xe
-	.4byte	0x129d
+	.4byte	0x1243
 	.byte	0xb
 	.asciz	"CLK_SIB_SOURCE_OFF"
 	.byte	0
@@ -3296,137 +3318,137 @@ _Osc_Configure_PLL2:
 	.byte	0x4
 	.byte	0x18
 	.byte	0x3
-	.4byte	0x117e
+	.4byte	0x1124
 	.byte	0xc
 	.asciz	"osc_get_mul_div"
 	.byte	0x1
-	.2byte	0x121
+	.2byte	0x129
 	.byte	0x10
 	.byte	0x1
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x1
-	.4byte	0x1423
+	.4byte	0x13c9
 	.byte	0xd
 	.4byte	.LASF17
 	.byte	0x1
-	.2byte	0x121
+	.2byte	0x129
 	.byte	0x2a
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0xd
 	.4byte	.LASF18
 	.byte	0x1
-	.2byte	0x122
+	.2byte	0x12a
 	.byte	0x2a
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0xe
 	.asciz	"p_outPLLFBD"
 	.byte	0x1
-	.2byte	0x123
+	.2byte	0x12b
 	.byte	0x2b
-	.4byte	0x1423
+	.4byte	0x13c9
 	.byte	0xe
 	.asciz	"p_outPLLPOST1"
 	.byte	0x1
-	.2byte	0x124
+	.2byte	0x12c
 	.byte	0x2b
-	.4byte	0x1429
+	.4byte	0x13cf
 	.byte	0xe
 	.asciz	"p_outPLLPOST2"
 	.byte	0x1
-	.2byte	0x125
+	.2byte	0x12d
 	.byte	0x2b
-	.4byte	0x1429
+	.4byte	0x13cf
 	.byte	0xe
 	.asciz	"p_outPLLPRE"
 	.byte	0x1
-	.2byte	0x126
+	.2byte	0x12e
 	.byte	0x2b
-	.4byte	0x1429
+	.4byte	0x13cf
 	.byte	0xf
 	.4byte	.LASF19
 	.byte	0x1
-	.2byte	0x128
+	.2byte	0x130
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0xf
 	.4byte	.LASF20
 	.byte	0x1
-	.2byte	0x129
+	.2byte	0x131
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0xf
 	.4byte	.LASF21
 	.byte	0x1
-	.2byte	0x12a
+	.2byte	0x132
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0xf
 	.4byte	.LASF22
 	.byte	0x1
-	.2byte	0x12b
+	.2byte	0x133
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x10
 	.asciz	"u32_FPLLI"
 	.byte	0x1
-	.2byte	0x12d
+	.2byte	0x135
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x10
 	.asciz	"u32_FVCO"
 	.byte	0x1
-	.2byte	0x12e
+	.2byte	0x136
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x10
 	.asciz	"u32_Fosc"
 	.byte	0x1
-	.2byte	0x12f
+	.2byte	0x137
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x10
 	.asciz	"stage1"
 	.byte	0x1
-	.2byte	0x131
+	.2byte	0x139
 	.byte	0xd
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x10
 	.asciz	"stage2"
 	.byte	0x1
-	.2byte	0x132
+	.2byte	0x13a
 	.byte	0xd
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x10
 	.asciz	"stage3"
 	.byte	0x1
-	.2byte	0x133
+	.2byte	0x13b
 	.byte	0xd
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x10
 	.asciz	"stage4"
 	.byte	0x1
-	.2byte	0x134
+	.2byte	0x13c
 	.byte	0xd
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x10
 	.asciz	"stage5"
 	.byte	0x1
-	.2byte	0x135
+	.2byte	0x13d
 	.byte	0xd
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0x10
 	.asciz	"stage_required_clk_met"
 	.byte	0x1
-	.2byte	0x136
+	.2byte	0x13e
 	.byte	0xd
-	.4byte	0x22e
+	.4byte	0x1d4
 	.byte	0
 	.byte	0x11
 	.byte	0x4
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x11
 	.byte	0x4
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x12
 	.byte	0x1
 	.asciz	"Osc_Configure_PLL2"
@@ -3438,135 +3460,135 @@ _Osc_Configure_PLL2:
 	.4byte	.LFE7
 	.4byte	.LLST31
 	.byte	0x1
-	.4byte	0x1609
+	.4byte	0x15d8
 	.byte	0x13
 	.asciz	"osc_src"
 	.byte	0x1
 	.byte	0xd6
 	.byte	0x2b
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST32
 	.byte	0x14
 	.4byte	.LASF17
 	.byte	0x1
 	.byte	0xd7
 	.byte	0x23
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST33
 	.byte	0x14
 	.4byte	.LASF18
 	.byte	0x1
 	.byte	0xd8
 	.byte	0x23
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST34
 	.byte	0x15
 	.asciz	"start_ms"
 	.byte	0x1
 	.byte	0xda
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST35
 	.byte	0x16
 	.4byte	.LASF19
 	.byte	0x1
 	.byte	0xdb
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST36
 	.byte	0x16
 	.4byte	.LASF20
 	.byte	0x1
 	.byte	0xdc
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.4byte	.LLST37
 	.byte	0x16
 	.4byte	.LASF21
 	.byte	0x1
 	.byte	0xdd
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.4byte	.LLST38
 	.byte	0x16
 	.4byte	.LASF22
 	.byte	0x1
 	.byte	0xde
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.4byte	.LLST39
 	.byte	0x17
-	.4byte	0x12b6
+	.4byte	0x125c
 	.4byte	.LBB8
 	.4byte	.LBE8
 	.byte	0x1
 	.byte	0xe1
 	.byte	0xa
-	.4byte	0x15ba
+	.4byte	0x1560
 	.byte	0x18
-	.4byte	0x1332
+	.4byte	0x12d8
 	.4byte	.LLST40
 	.byte	0x18
-	.4byte	0x131b
+	.4byte	0x12c1
 	.4byte	.LLST41
 	.byte	0x18
-	.4byte	0x1304
+	.4byte	0x12aa
 	.4byte	.LLST42
 	.byte	0x18
-	.4byte	0x12ef
+	.4byte	0x1295
 	.4byte	.LLST43
 	.byte	0x18
-	.4byte	0x12e2
+	.4byte	0x1288
 	.4byte	.LLST44
 	.byte	0x18
-	.4byte	0x12d5
+	.4byte	0x127b
 	.4byte	.LLST45
 	.byte	0x19
 	.4byte	.LBB9
 	.4byte	.LBE9
 	.byte	0x1a
-	.4byte	0x1347
+	.4byte	0x12ed
 	.4byte	.LLST46
 	.byte	0x1a
-	.4byte	0x1354
+	.4byte	0x12fa
 	.4byte	.LLST47
 	.byte	0x1a
-	.4byte	0x1361
+	.4byte	0x1307
 	.4byte	.LLST48
 	.byte	0x1a
-	.4byte	0x136e
+	.4byte	0x1314
 	.4byte	.LLST49
 	.byte	0x1b
-	.4byte	0x137b
+	.4byte	0x1321
 	.byte	0x1
 	.byte	0x5c
 	.byte	0x1a
-	.4byte	0x138e
+	.4byte	0x1334
 	.4byte	.LLST50
 	.byte	0x1a
-	.4byte	0x13a0
+	.4byte	0x1346
 	.4byte	.LLST51
 	.byte	0x1a
-	.4byte	0x13b2
+	.4byte	0x1358
 	.4byte	.LLST52
 	.byte	0x1a
-	.4byte	0x13c2
+	.4byte	0x1368
 	.4byte	.LLST53
 	.byte	0x1a
-	.4byte	0x13d2
+	.4byte	0x1378
 	.4byte	.LLST54
 	.byte	0x1a
-	.4byte	0x13e2
+	.4byte	0x1388
 	.4byte	.LLST55
 	.byte	0x1c
-	.4byte	0x13f2
+	.4byte	0x1398
 	.byte	0
 	.byte	0x1a
-	.4byte	0x1402
+	.4byte	0x13a8
 	.4byte	.LLST56
 	.byte	0x1d
-	.4byte	.LVL64
-	.4byte	0x18eb
+	.4byte	.LVL63
+	.4byte	0x18ba
 	.byte	0x1e
 	.byte	0x1
 	.byte	0x50
@@ -3577,15 +3599,15 @@ _Osc_Configure_PLL2:
 	.byte	0
 	.byte	0
 	.byte	0x1f
-	.4byte	.LVL67
-	.4byte	0x1904
+	.4byte	.LVL65
+	.4byte	0x18d3
 	.byte	0x1f
-	.4byte	.LVL70
-	.4byte	0x1904
+	.4byte	.LVL67
+	.4byte	0x18d3
 	.byte	0x20
-	.4byte	.LVL71
-	.4byte	0x18eb
-	.4byte	0x15e3
+	.4byte	.LVL68
+	.4byte	0x18ba
+	.4byte	0x1589
 	.byte	0x1e
 	.byte	0x1
 	.byte	0x50
@@ -3594,20 +3616,37 @@ _Osc_Configure_PLL2:
 	.4byte	.LC1
 	.byte	0
 	.byte	0x1f
-	.4byte	.LVL72
-	.4byte	0x1904
+	.4byte	.LVL70
+	.4byte	0x18d3
 	.byte	0x1f
+	.4byte	.LVL73
+	.4byte	0x18d3
+	.byte	0x20
 	.4byte	.LVL74
-	.4byte	0x1904
-	.byte	0x1d
-	.4byte	.LVL75
-	.4byte	0x18eb
+	.4byte	0x18ba
+	.4byte	0x15b2
 	.byte	0x1e
 	.byte	0x1
 	.byte	0x50
 	.byte	0x5
 	.byte	0x3
 	.4byte	.LC2
+	.byte	0
+	.byte	0x1f
+	.4byte	.LVL75
+	.4byte	0x18d3
+	.byte	0x1f
+	.4byte	.LVL77
+	.4byte	0x18d3
+	.byte	0x1d
+	.4byte	.LVL78
+	.4byte	0x18ba
+	.byte	0x1e
+	.byte	0x1
+	.byte	0x50
+	.byte	0x5
+	.byte	0x3
+	.4byte	.LC3
 	.byte	0
 	.byte	0
 	.byte	0x12
@@ -3621,127 +3660,127 @@ _Osc_Configure_PLL2:
 	.4byte	.LFE6
 	.4byte	.LLST6
 	.byte	0x1
-	.4byte	0x177c
+	.4byte	0x174b
 	.byte	0x13
 	.asciz	"osc_src"
 	.byte	0x1
 	.byte	0xaa
 	.byte	0x2b
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST7
 	.byte	0x14
 	.4byte	.LASF17
 	.byte	0x1
 	.byte	0xab
 	.byte	0x23
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST8
 	.byte	0x14
 	.4byte	.LASF18
 	.byte	0x1
 	.byte	0xac
 	.byte	0x23
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST9
 	.byte	0x16
 	.4byte	.LASF19
 	.byte	0x1
 	.byte	0xae
 	.byte	0xe
-	.4byte	0x276
+	.4byte	0x21c
 	.4byte	.LLST10
 	.byte	0x16
 	.4byte	.LASF20
 	.byte	0x1
 	.byte	0xaf
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.4byte	.LLST11
 	.byte	0x16
 	.4byte	.LASF21
 	.byte	0x1
 	.byte	0xb0
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.4byte	.LLST12
 	.byte	0x16
 	.4byte	.LASF22
 	.byte	0x1
 	.byte	0xb1
 	.byte	0xe
-	.4byte	0x24f
+	.4byte	0x1f5
 	.4byte	.LLST13
 	.byte	0x21
-	.4byte	0x12b6
+	.4byte	0x125c
 	.4byte	.LBB4
 	.4byte	.LBE4
 	.byte	0x1
 	.byte	0xb3
 	.byte	0xa
 	.byte	0x18
-	.4byte	0x1332
+	.4byte	0x12d8
 	.4byte	.LLST14
 	.byte	0x18
-	.4byte	0x131b
+	.4byte	0x12c1
 	.4byte	.LLST15
 	.byte	0x18
-	.4byte	0x1304
+	.4byte	0x12aa
 	.4byte	.LLST16
 	.byte	0x18
-	.4byte	0x12ef
+	.4byte	0x1295
 	.4byte	.LLST17
 	.byte	0x18
-	.4byte	0x12e2
+	.4byte	0x1288
 	.4byte	.LLST18
 	.byte	0x18
-	.4byte	0x12d5
+	.4byte	0x127b
 	.4byte	.LLST19
 	.byte	0x19
 	.4byte	.LBB5
 	.4byte	.LBE5
 	.byte	0x1a
-	.4byte	0x1347
+	.4byte	0x12ed
 	.4byte	.LLST20
 	.byte	0x1a
-	.4byte	0x1354
+	.4byte	0x12fa
 	.4byte	.LLST21
 	.byte	0x1a
-	.4byte	0x1361
+	.4byte	0x1307
 	.4byte	.LLST22
 	.byte	0x1a
-	.4byte	0x136e
+	.4byte	0x1314
 	.4byte	.LLST23
 	.byte	0x1b
-	.4byte	0x137b
+	.4byte	0x1321
 	.byte	0x1
 	.byte	0x5b
 	.byte	0x1a
-	.4byte	0x138e
+	.4byte	0x1334
 	.4byte	.LLST24
 	.byte	0x1a
-	.4byte	0x13a0
+	.4byte	0x1346
 	.4byte	.LLST25
 	.byte	0x1a
-	.4byte	0x13b2
+	.4byte	0x1358
 	.4byte	.LLST26
 	.byte	0x1a
-	.4byte	0x13c2
+	.4byte	0x1368
 	.4byte	.LLST27
 	.byte	0x1a
-	.4byte	0x13d2
+	.4byte	0x1378
 	.4byte	.LLST28
 	.byte	0x1a
-	.4byte	0x13e2
+	.4byte	0x1388
 	.4byte	.LLST29
 	.byte	0x1c
-	.4byte	0x13f2
+	.4byte	0x1398
 	.byte	0
 	.byte	0x1a
-	.4byte	0x1402
+	.4byte	0x13a8
 	.4byte	.LLST30
 	.byte	0x1d
 	.4byte	.LVL30
-	.4byte	0x18eb
+	.4byte	0x18ba
 	.byte	0x1e
 	.byte	0x1
 	.byte	0x50
@@ -3765,13 +3804,13 @@ _Osc_Configure_PLL2:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x17ba
+	.4byte	0x1789
 	.byte	0x14
 	.4byte	.LASF23
 	.byte	0x1
 	.byte	0x99
 	.byte	0x2e
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST5
 	.byte	0
 	.byte	0x22
@@ -3787,13 +3826,13 @@ _Osc_Configure_PLL2:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x17f7
+	.4byte	0x17c6
 	.byte	0x14
 	.4byte	.LASF23
 	.byte	0x1
 	.byte	0x87
 	.byte	0x2d
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST4
 	.byte	0
 	.byte	0x22
@@ -3809,13 +3848,13 @@ _Osc_Configure_PLL2:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x1834
+	.4byte	0x1803
 	.byte	0x14
 	.4byte	.LASF23
 	.byte	0x1
 	.byte	0x74
 	.byte	0x2d
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST3
 	.byte	0
 	.byte	0x22
@@ -3831,13 +3870,13 @@ _Osc_Configure_PLL2:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x1871
+	.4byte	0x1840
 	.byte	0x14
 	.4byte	.LASF23
 	.byte	0x1
 	.byte	0x61
 	.byte	0x2d
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST2
 	.byte	0
 	.byte	0x22
@@ -3853,13 +3892,13 @@ _Osc_Configure_PLL2:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x18ae
+	.4byte	0x187d
 	.byte	0x14
 	.4byte	.LASF23
 	.byte	0x1
 	.byte	0x4f
 	.byte	0x2d
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST1
 	.byte	0
 	.byte	0x22
@@ -3875,13 +3914,13 @@ _Osc_Configure_PLL2:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x18eb
+	.4byte	0x18ba
 	.byte	0x14
 	.4byte	.LASF23
 	.byte	0x1
 	.byte	0x38
 	.byte	0x2d
-	.4byte	0x129d
+	.4byte	0x1243
 	.4byte	.LLST0
 	.byte	0
 	.byte	0x23
@@ -4468,66 +4507,77 @@ _Osc_Configure_PLL2:
 	.4byte	0
 .LLST32:
 	.4byte	.LVL43
-	.4byte	.LVL45
+	.4byte	.LVL47
 	.2byte	0x1
 	.byte	0x50
-	.4byte	.LVL45
-	.4byte	.LVL76
+	.4byte	.LVL47
+	.4byte	.LVL79
+	.2byte	0x2
+	.byte	0x7f
+	.byte	0x4c
+	.4byte	.LVL79
+	.4byte	.LVL80
+	.2byte	0x2
+	.byte	0x7f
+	.byte	0x50
+	.4byte	.LVL80
+	.4byte	.LVL81
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x54
-	.4byte	.LVL76
-	.4byte	.LVL77
+	.4byte	.LVL81
+	.4byte	.LVL82
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x58
-	.4byte	.LVL77
-	.4byte	.LVL78
+	.4byte	.LVL82
+	.4byte	.LVL83
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x5c
-	.4byte	.LVL78
-	.4byte	.LVL79
+	.4byte	.LVL83
+	.4byte	.LVL84
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x60
-	.4byte	.LVL79
-	.4byte	.LVL80
+	.4byte	.LVL84
+	.4byte	.LVL85
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x64
-	.4byte	.LVL80
-	.4byte	.LVL81
+	.4byte	.LVL85
+	.4byte	.LVL86
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x68
-	.4byte	.LVL81
-	.4byte	.LVL82
-	.2byte	0x2
-	.byte	0x7f
-	.byte	0x6c
-	.4byte	.LVL82
-	.4byte	.LVL83
-	.2byte	0x2
-	.byte	0x7f
-	.byte	0x70
-	.4byte	.LVL83
+	.4byte	.LVL86
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x7f
-	.byte	0xc
+	.byte	0x4
 	.4byte	0
 	.4byte	0
 .LLST33:
 	.4byte	.LVL43
-	.4byte	.LVL46
+	.4byte	.LVL45
 	.2byte	0x1
 	.byte	0x51
-	.4byte	.LVL46
-	.4byte	.LVL68
+	.4byte	.LVL45
+	.4byte	.LVL63-1
 	.2byte	0x1
-	.byte	0x59
-	.4byte	.LVL68
+	.byte	0x57
+	.4byte	.LVL63-1
+	.4byte	.LVL64
+	.2byte	0x4
+	.byte	0xf3
+	.byte	0x1
+	.byte	0x51
+	.byte	0x9f
+	.4byte	.LVL64
+	.4byte	.LVL65-1
+	.2byte	0x1
+	.byte	0x57
+	.4byte	.LVL65-1
 	.4byte	.LFE7
 	.2byte	0x4
 	.byte	0xf3
@@ -4538,50 +4588,54 @@ _Osc_Configure_PLL2:
 	.4byte	0
 .LLST34:
 	.4byte	.LVL43
-	.4byte	.LVL47
+	.4byte	.LVL46
 	.2byte	0x1
 	.byte	0x52
+	.4byte	.LVL46
 	.4byte	.LVL47
-	.4byte	.LVL76
+	.2byte	0x1
+	.byte	0x56
+	.4byte	.LVL47
+	.4byte	.LVL79
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x58
-	.4byte	.LVL76
-	.4byte	.LVL77
+	.4byte	.LVL79
+	.4byte	.LVL80
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x5c
-	.4byte	.LVL77
-	.4byte	.LVL78
+	.4byte	.LVL80
+	.4byte	.LVL81
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x60
-	.4byte	.LVL78
-	.4byte	.LVL79
+	.4byte	.LVL81
+	.4byte	.LVL82
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x64
-	.4byte	.LVL79
-	.4byte	.LVL80
+	.4byte	.LVL82
+	.4byte	.LVL83
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x68
-	.4byte	.LVL80
-	.4byte	.LVL81
+	.4byte	.LVL83
+	.4byte	.LVL84
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x6c
-	.4byte	.LVL81
-	.4byte	.LVL82
+	.4byte	.LVL84
+	.4byte	.LVL85
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x70
-	.4byte	.LVL82
-	.4byte	.LVL83
+	.4byte	.LVL85
+	.4byte	.LVL86
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x74
-	.4byte	.LVL83
+	.4byte	.LVL86
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x7f
@@ -4589,22 +4643,32 @@ _Osc_Configure_PLL2:
 	.4byte	0
 	.4byte	0
 .LLST35:
-	.4byte	.LVL67
-	.4byte	.LVL69
+	.4byte	.LVL65
+	.4byte	.LVL66
 	.2byte	0x1
 	.byte	0x50
-	.4byte	.LVL69
+	.4byte	.LVL66
+	.4byte	.LVL70
+	.2byte	0x4
+	.byte	0x7b
+	.byte	0x8c,0x7c
+	.byte	0x9f
+	.4byte	.LVL70
 	.4byte	.LVL72
+	.2byte	0x1
+	.byte	0x50
+	.4byte	.LVL72
+	.4byte	.LVL75
 	.2byte	0x4
 	.byte	0x79
 	.byte	0x8c,0x7c
 	.byte	0x9f
-	.4byte	.LVL72
-	.4byte	.LVL73
+	.4byte	.LVL75
+	.4byte	.LVL76
 	.2byte	0x1
 	.byte	0x50
-	.4byte	.LVL73
-	.4byte	.LVL81
+	.4byte	.LVL76
+	.4byte	.LVL84
 	.2byte	0x4
 	.byte	0x79
 	.byte	0x8c,0x7c
@@ -4612,68 +4676,68 @@ _Osc_Configure_PLL2:
 	.4byte	0
 	.4byte	0
 .LLST36:
-	.4byte	.LVL65
-	.4byte	.LVL80
+	.4byte	.LVL64
+	.4byte	.LVL83
 	.2byte	0x1
 	.byte	0x5a
 	.4byte	0
 	.4byte	0
 .LLST37:
-	.4byte	.LVL65
-	.4byte	.LVL67-1
+	.4byte	.LVL64
+	.4byte	.LVL71
 	.2byte	0x1
-	.byte	0x52
+	.byte	0x58
 	.4byte	0
 	.4byte	0
 .LLST38:
-	.4byte	.LVL65
-	.4byte	.LVL66
+	.4byte	.LVL64
+	.4byte	.LVL69
 	.2byte	0x1
-	.byte	0x55
+	.byte	0x59
 	.4byte	0
 	.4byte	0
 .LLST39:
-	.4byte	.LVL65
-	.4byte	.LVL76
+	.4byte	.LVL64
+	.4byte	.LVL79
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x60
-	.4byte	.LVL76
-	.4byte	.LVL77
+	.4byte	.LVL79
+	.4byte	.LVL80
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x64
-	.4byte	.LVL77
-	.4byte	.LVL78
+	.4byte	.LVL80
+	.4byte	.LVL81
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x68
-	.4byte	.LVL78
-	.4byte	.LVL79
+	.4byte	.LVL81
+	.4byte	.LVL82
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x6c
-	.4byte	.LVL79
-	.4byte	.LVL80
+	.4byte	.LVL82
+	.4byte	.LVL83
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x70
-	.4byte	.LVL80
-	.4byte	.LVL81
+	.4byte	.LVL83
+	.4byte	.LVL84
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x74
-	.4byte	.LVL81
-	.4byte	.LVL82
+	.4byte	.LVL84
+	.4byte	.LVL85
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x78
-	.4byte	.LVL82
-	.4byte	.LVL83
+	.4byte	.LVL85
+	.4byte	.LVL86
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x7c
-	.4byte	.LVL83
+	.4byte	.LVL86
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x7f
@@ -4682,47 +4746,51 @@ _Osc_Configure_PLL2:
 	.4byte	0
 .LLST40:
 	.4byte	.LVL44
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5330
+	.4byte	.Ldebug_info0+5240
 	.byte	0
 	.4byte	0
 	.4byte	0
 .LLST41:
 	.4byte	.LVL44
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5314
+	.4byte	.Ldebug_info0+5224
 	.byte	0
 	.4byte	0
 	.4byte	0
 .LLST42:
 	.4byte	.LVL44
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5298
+	.4byte	.Ldebug_info0+5208
 	.byte	0
 	.4byte	0
 	.4byte	0
 .LLST43:
 	.4byte	.LVL44
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5282
+	.4byte	.Ldebug_info0+5192
 	.byte	0
 	.4byte	0
 	.4byte	0
 .LLST44:
 	.4byte	.LVL44
-	.4byte	.LVL47
+	.4byte	.LVL46
 	.2byte	0x1
 	.byte	0x52
+	.4byte	.LVL46
 	.4byte	.LVL47
-	.4byte	.LVL65
+	.2byte	0x1
+	.byte	0x56
+	.4byte	.LVL47
+	.4byte	.LVL64
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x58
@@ -4730,13 +4798,20 @@ _Osc_Configure_PLL2:
 	.4byte	0
 .LLST45:
 	.4byte	.LVL44
-	.4byte	.LVL46
+	.4byte	.LVL45
 	.2byte	0x1
 	.byte	0x51
-	.4byte	.LVL46
-	.4byte	.LVL65
+	.4byte	.LVL45
+	.4byte	.LVL63-1
 	.2byte	0x1
-	.byte	0x59
+	.byte	0x57
+	.4byte	.LVL63-1
+	.4byte	.LVL64
+	.2byte	0x4
+	.byte	0xf3
+	.byte	0x1
+	.byte	0x51
+	.byte	0x9f
 	.4byte	0
 	.4byte	0
 .LLST46:
@@ -4755,9 +4830,9 @@ _Osc_Configure_PLL2:
 	.4byte	.LVL49
 	.4byte	.LVL60
 	.2byte	0x1
-	.byte	0x52
+	.byte	0x58
 	.4byte	.LVL60
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x2
 	.byte	0x38
 	.byte	0x9f
@@ -4772,9 +4847,9 @@ _Osc_Configure_PLL2:
 	.4byte	.LVL48
 	.4byte	.LVL61
 	.2byte	0x1
-	.byte	0x55
+	.byte	0x59
 	.4byte	.LVL61
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x2
 	.byte	0x38
 	.byte	0x9f
@@ -4802,11 +4877,11 @@ _Osc_Configure_PLL2:
 	.byte	0x1
 	.byte	0x9f
 	.4byte	.LVL62
-	.4byte	.LVL63
+	.4byte	.LVL63-1
 	.2byte	0x1
-	.byte	0x50
-	.4byte	.LVL63
-	.4byte	.LVL65
+	.byte	0x51
+	.4byte	.LVL63-1
+	.4byte	.LVL64
 	.2byte	0x2
 	.byte	0x7f
 	.byte	0x60
@@ -4835,11 +4910,11 @@ _Osc_Configure_PLL2:
 	.byte	0x70
 	.byte	0
 	.byte	0xf7
-	.byte	0xd6,0x3
-	.byte	0x74
+	.byte	0xfc,0x2
+	.byte	0x73
 	.byte	0
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x1b
 	.byte	0xf7
 	.byte	0
@@ -4853,11 +4928,11 @@ _Osc_Configure_PLL2:
 	.byte	0
 	.byte	0x1e
 	.byte	0xf7
-	.byte	0xd6,0x3
-	.byte	0x74
+	.byte	0xfc,0x2
+	.byte	0x73
 	.byte	0
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x1b
 	.byte	0xf7
 	.byte	0
@@ -4871,20 +4946,20 @@ _Osc_Configure_PLL2:
 	.byte	0
 	.byte	0x1e
 	.byte	0xf7
-	.byte	0xd6,0x3
-	.byte	0x72
+	.byte	0xfc,0x2
+	.byte	0x78
 	.byte	0
 	.byte	0xa
 	.2byte	0xffff
 	.byte	0x1a
-	.byte	0x75
+	.byte	0x79
 	.byte	0
 	.byte	0xa
 	.2byte	0xffff
 	.byte	0x1a
 	.byte	0x1e
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x1b
 	.byte	0xf7
 	.byte	0
@@ -4902,7 +4977,7 @@ _Osc_Configure_PLL2:
 	.2byte	0x2
 	.byte	0x31
 	.byte	0x9f
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x31
@@ -4920,7 +4995,7 @@ _Osc_Configure_PLL2:
 	.2byte	0x2
 	.byte	0x31
 	.byte	0x9f
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x31
@@ -4938,7 +5013,7 @@ _Osc_Configure_PLL2:
 	.2byte	0x2
 	.byte	0x31
 	.byte	0x9f
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x31
@@ -4956,7 +5031,7 @@ _Osc_Configure_PLL2:
 	.2byte	0x2
 	.byte	0x31
 	.byte	0x9f
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.4byte	.LFE7
 	.2byte	0x2
 	.byte	0x31
@@ -4965,7 +5040,7 @@ _Osc_Configure_PLL2:
 	.4byte	0
 .LLST56:
 	.4byte	.LVL44
-	.4byte	.LVL65
+	.4byte	.LVL64
 	.2byte	0x2
 	.byte	0x30
 	.byte	0x9f
@@ -5180,7 +5255,7 @@ _Osc_Configure_PLL2:
 	.4byte	.LVL31
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5783
+	.4byte	.Ldebug_info0+5734
 	.byte	0
 	.4byte	0
 	.4byte	0
@@ -5189,7 +5264,7 @@ _Osc_Configure_PLL2:
 	.4byte	.LVL31
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5767
+	.4byte	.Ldebug_info0+5718
 	.byte	0
 	.4byte	0
 	.4byte	0
@@ -5198,7 +5273,7 @@ _Osc_Configure_PLL2:
 	.4byte	.LVL31
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5751
+	.4byte	.Ldebug_info0+5702
 	.byte	0
 	.4byte	0
 	.4byte	0
@@ -5207,7 +5282,7 @@ _Osc_Configure_PLL2:
 	.4byte	.LVL31
 	.2byte	0x6
 	.byte	0xf2
-	.4byte	.Ldebug_info0+5735
+	.4byte	.Ldebug_info0+5686
 	.byte	0
 	.4byte	0
 	.4byte	0
@@ -5321,11 +5396,11 @@ _Osc_Configure_PLL2:
 	.byte	0x70
 	.byte	0
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x78
 	.byte	0
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x1b
 	.byte	0xf7
 	.byte	0
@@ -5340,11 +5415,11 @@ _Osc_Configure_PLL2:
 	.byte	0x6
 	.byte	0x1e
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x78
 	.byte	0
 	.byte	0xf7
-	.byte	0xd6,0x3
+	.byte	0xfc,0x2
 	.byte	0x1b
 	.byte	0xf7
 	.byte	0

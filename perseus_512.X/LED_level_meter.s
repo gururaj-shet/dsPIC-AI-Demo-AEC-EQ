@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\audio\\LED_level_meter.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\audio\\LED_level_meter.c"
 	.section	.text,code
 .Ltext0:
 	.section	.text,code
@@ -266,7 +266,7 @@ _smoothed_peak:
 	.file 3 "../src/curiosity/button_led.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0x4b3
+	.4byte	0x459
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -277,9 +277,8 @@ _smoothed_peak:
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/audio/LED_level_meter.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0x70
 	.4byte	0
 	.4byte	0
@@ -317,7 +316,7 @@ _smoothed_peak:
 	.byte	0x2
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x255
+	.4byte	0x1fb
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -331,7 +330,7 @@ _smoothed_peak:
 	.byte	0x2
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x28d
+	.4byte	0x233
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -349,7 +348,7 @@ _smoothed_peak:
 	.byte	0x2
 	.byte	0xdd
 	.byte	0x16
-	.4byte	0x1fe
+	.4byte	0x1a4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -359,13 +358,13 @@ _smoothed_peak:
 	.byte	0x4
 	.asciz	"double"
 	.byte	0x4
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x5
 	.asciz	"smoothed_peak"
 	.byte	0x1
 	.byte	0x31
 	.byte	0xe
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x5
 	.byte	0x3
 	.4byte	_smoothed_peak
@@ -374,7 +373,7 @@ _smoothed_peak:
 	.byte	0x1
 	.byte	0x32
 	.byte	0xe
-	.4byte	0x1e4
+	.4byte	0x18a
 	.byte	0x5
 	.byte	0x3
 	.4byte	_level_accum
@@ -383,25 +382,25 @@ _smoothed_peak:
 	.byte	0x1
 	.byte	0x33
 	.byte	0x11
-	.4byte	0x27c
+	.4byte	0x222
 	.byte	0x5
 	.byte	0x3
 	.4byte	_sample_count
 	.byte	0x6
-	.4byte	0x2e4
-	.4byte	0x34a
+	.4byte	0x28a
+	.4byte	0x2f0
 	.byte	0x7
-	.4byte	0x1fe
+	.4byte	0x1a4
 	.byte	0x7
 	.byte	0
 	.byte	0x4
-	.4byte	0x33a
+	.4byte	0x2e0
 	.byte	0x5
 	.asciz	"thresholds"
 	.byte	0x1
 	.byte	0x3d
 	.byte	0x14
-	.4byte	0x34a
+	.4byte	0x2f0
 	.byte	0x5
 	.byte	0x3
 	.4byte	_thresholds
@@ -416,37 +415,37 @@ _smoothed_peak:
 	.4byte	.LFE17
 	.4byte	.LLST0
 	.byte	0x1
-	.4byte	0x4a2
+	.4byte	0x448
 	.byte	0x9
 	.asciz	"input"
 	.byte	0x1
 	.byte	0x5a
 	.byte	0x24
-	.4byte	0x4a2
+	.4byte	0x448
 	.4byte	.LLST1
 	.byte	0x9
 	.asciz	"in_buf_ch"
 	.byte	0x1
 	.byte	0x5a
 	.byte	0x32
-	.4byte	0x2c3
+	.4byte	0x269
 	.4byte	.LLST2
 	.byte	0x9
 	.asciz	"frame_samples"
 	.byte	0x1
 	.byte	0x5a
 	.byte	0x44
-	.4byte	0x2c3
+	.4byte	0x269
 	.4byte	.LLST3
 	.byte	0xa
 	.4byte	.Ldebug_ranges0+0
-	.4byte	0x420
+	.4byte	0x3c6
 	.byte	0xb
 	.asciz	"i"
 	.byte	0x1
 	.byte	0x5c
 	.byte	0x11
-	.4byte	0x2c3
+	.4byte	0x269
 	.4byte	.LLST4
 	.byte	0xc
 	.4byte	.LBB3
@@ -456,21 +455,21 @@ _smoothed_peak:
 	.byte	0x1
 	.byte	0x5e
 	.byte	0xf
-	.4byte	0x1e4
+	.4byte	0x18a
 	.4byte	.LLST5
 	.byte	0xb
 	.asciz	"r"
 	.byte	0x1
 	.byte	0x5f
 	.byte	0xf
-	.4byte	0x1e4
+	.4byte	0x18a
 	.4byte	.LLST6
 	.byte	0xb
 	.asciz	"avg"
 	.byte	0x1
 	.byte	0x60
 	.byte	0xf
-	.4byte	0x1e4
+	.4byte	0x18a
 	.4byte	.LLST7
 	.byte	0
 	.byte	0
@@ -481,48 +480,48 @@ _smoothed_peak:
 	.byte	0x1
 	.byte	0x69
 	.byte	0xf
-	.4byte	0x1e4
+	.4byte	0x18a
 	.4byte	.LLST8
 	.byte	0xb
 	.asciz	"attack_coeff"
 	.byte	0x1
 	.byte	0x6e
 	.byte	0x15
-	.4byte	0x2e4
+	.4byte	0x28a
 	.4byte	.LLST9
 	.byte	0xb
 	.asciz	"release_coeff"
 	.byte	0x1
 	.byte	0x6f
 	.byte	0x15
-	.4byte	0x2e4
+	.4byte	0x28a
 	.4byte	.LLST10
 	.byte	0xb
 	.asciz	"mask"
 	.byte	0x1
 	.byte	0x7a
 	.byte	0x11
-	.4byte	0x245
+	.4byte	0x1eb
 	.4byte	.LLST11
 	.byte	0xa
 	.4byte	.Ldebug_ranges0+0x48
-	.4byte	0x497
+	.4byte	0x43d
 	.byte	0xb
 	.asciz	"i"
 	.byte	0x1
 	.byte	0x7c
 	.byte	0x12
-	.4byte	0x2bc
+	.4byte	0x262
 	.4byte	.LLST12
 	.byte	0
 	.byte	0xe
 	.4byte	.LVL15
-	.4byte	0x4a8
+	.4byte	0x44e
 	.byte	0
 	.byte	0
 	.byte	0xf
 	.byte	0x4
-	.4byte	0x2e4
+	.4byte	0x28a
 	.byte	0x10
 	.byte	0x1
 	.byte	0x1
@@ -847,17 +846,17 @@ _smoothed_peak:
 	.byte	0
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x19
 	.byte	0x74
 	.byte	0
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x19
 	.byte	0x22
 	.byte	0xf4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x4
 	.4byte	0x3f000000
 	.byte	0x1e
@@ -876,12 +875,12 @@ _smoothed_peak:
 	.4byte	_level_accum
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0xf5
 	.byte	0
-	.byte	0xed,0x3
+	.byte	0x93,0x3
 	.byte	0xf7
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x1b
 	.byte	0x9f
 	.4byte	.LVL10
@@ -891,15 +890,15 @@ _smoothed_peak:
 	.4byte	_level_accum
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x75
 	.byte	0
 	.byte	0xf7
-	.byte	0xfe,0x3
+	.byte	0xa4,0x3
 	.byte	0xf7
-	.byte	0xed,0x3
+	.byte	0x93,0x3
 	.byte	0xf7
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x1b
 	.byte	0x9f
 	.4byte	.LVL17
@@ -913,12 +912,12 @@ _smoothed_peak:
 	.4byte	_level_accum
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0xf5
 	.byte	0
-	.byte	0xed,0x3
+	.byte	0x93,0x3
 	.byte	0xf7
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x1b
 	.byte	0x9f
 	.4byte	.LVL21
@@ -928,15 +927,15 @@ _smoothed_peak:
 	.4byte	_level_accum
 	.byte	0xf6
 	.byte	0x4
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x75
 	.byte	0
 	.byte	0xf7
-	.byte	0xfe,0x3
+	.byte	0xa4,0x3
 	.byte	0xf7
-	.byte	0xed,0x3
+	.byte	0x93,0x3
 	.byte	0xf7
-	.byte	0xe4,0x3
+	.byte	0x8a,0x3
 	.byte	0x1b
 	.byte	0x9f
 	.4byte	0

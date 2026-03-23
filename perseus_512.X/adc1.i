@@ -1,5 +1,5 @@
 # 1 "../src/adc/adc1.c"
-# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X//"
+# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "../src/adc/adc1.c"

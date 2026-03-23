@@ -1,5 +1,5 @@
 # 1 "../src/SPI_TDM_drv.c"
-# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X//"
+# 1 "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "../src/SPI_TDM_drv.c"
@@ -27967,6 +27967,148 @@ void eq_perseus_reset_to_flat(void);
 
 eq_instance_t* eq_perseus_get_instance(void);
 # 36 "../src/SPI_TDM_drv.c" 2
+# 1 "../src/audio/aec_33ak.h" 1
+# 48 "../src/audio/aec_33ak.h"
+typedef enum {
+    AEC_MODE_DISABLED = 0,
+    AEC_MODE_ENABLED,
+    AEC_MODE_BYPASS
+} aec_mode_t;
+
+
+typedef struct {
+    float band_energy[16];
+    float noise_energy[16];
+    float avg_noise_energy;
+    int hangover_count;
+    int frame_count;
+    
+# 61 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 61 "../src/audio/aec_33ak.h"
+         is_speech;
+    
+# 62 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 62 "../src/audio/aec_33ak.h"
+         first_frame;
+} aec_vad_state_t;
+
+
+typedef struct {
+    float down_history[48];
+    float up_history[48];
+    int down_phase;
+    int up_phase;
+} aec_src_state_t;
+
+
+typedef struct {
+    float coeffs[512];
+    float delay_line[512];
+    float energy;
+    float mu;
+    float prev_error;
+    int delay_idx;
+} aec_nlms_state_t;
+
+
+typedef struct {
+
+    aec_mode_t mode;
+    int filter_order;
+    int num_channels;
+
+
+    float mic_accum_48k[480];
+    float ref_accum_48k[480];
+    int accum_count;
+
+
+    float out_accum_48k[480];
+    int out_read_idx;
+    int out_avail;
+
+
+    float mic_8k[80];
+    float ref_8k[80];
+    float out_8k[80];
+
+
+    aec_nlms_state_t nlms;
+    aec_vad_state_t vad;
+    aec_src_state_t src;
+
+
+    float erle_db;
+    float echo_power;
+    float residual_power;
+
+
+    uint32_t frames_processed;
+    
+# 117 "../src/audio/aec_33ak.h" 3 4
+   _Bool 
+# 117 "../src/audio/aec_33ak.h"
+        adapt_enabled;
+
+} aec_state_t;
+# 131 "../src/audio/aec_33ak.h"
+void aec_init(aec_state_t* state, int filter_order, 
+# 131 "../src/audio/aec_33ak.h" 3 4
+                                                   _Bool 
+# 131 "../src/audio/aec_33ak.h"
+                                                        enable_vad);
+
+
+
+
+
+void aec_reset(aec_state_t* state);
+# 148 "../src/audio/aec_33ak.h"
+void aec_process(aec_state_t* state,
+                 const float* mic_in,
+                 const float* ref_in,
+                 float* out,
+                 int num_samples,
+                 int num_channels);
+
+
+
+
+
+
+void aec_enable(aec_state_t* state, 
+# 160 "../src/audio/aec_33ak.h" 3 4
+                                   _Bool 
+# 160 "../src/audio/aec_33ak.h"
+                                        enable);
+
+
+
+
+
+
+float aec_get_erle(const aec_state_t* state);
+
+
+
+
+
+
+
+# 174 "../src/audio/aec_33ak.h" 3 4
+_Bool 
+# 174 "../src/audio/aec_33ak.h"
+    aec_is_near_end_speech(const aec_state_t* state);
+
+
+
+
+
+
+void aec_set_step_size(aec_state_t* state, float mu);
+# 37 "../src/SPI_TDM_drv.c" 2
 
 # 1 "../src/SPI_TDM_drv.h" 1
 # 24 "../src/SPI_TDM_drv.h"
@@ -27985,8 +28127,8 @@ extern
 extern void DMA_BaseInit(void);
 extern void DMA_VaridateInit(void);
 extern void TDM_Start( void );
-# 38 "../src/SPI_TDM_drv.c" 2
-# 238 "../src/SPI_TDM_drv.c"
+# 39 "../src/SPI_TDM_drv.c" 2
+# 239 "../src/SPI_TDM_drv.c"
 static void dma_config(void);
 static void dma0_rx_config(void);
 static void dma1_tx_config(void);
@@ -28013,13 +28155,13 @@ static uint8_t calc_peak_level_u8(float* buf, int num_samples);
 
 
 
-# 263 "../src/SPI_TDM_drv.c" 3 4
+# 264 "../src/SPI_TDM_drv.c" 3 4
 _Bool 
-# 263 "../src/SPI_TDM_drv.c"
+# 264 "../src/SPI_TDM_drv.c"
         Ena_EngineSynth = 
-# 263 "../src/SPI_TDM_drv.c" 3 4
+# 264 "../src/SPI_TDM_drv.c" 3 4
                           0
-# 263 "../src/SPI_TDM_drv.c"
+# 264 "../src/SPI_TDM_drv.c"
                                ;
 
 
@@ -28037,8 +28179,38 @@ static float f_A_Data[ (2) * (32) ];
 static float f_B_Data[ (2) * (32) ];
 
 
+aec_state_t g_aec_state;
+
+# 282 "../src/SPI_TDM_drv.c" 3 4
+_Bool 
+# 282 "../src/SPI_TDM_drv.c"
+                 g_aec_enabled = 
+# 282 "../src/SPI_TDM_drv.c" 3 4
+                                 0
+# 282 "../src/SPI_TDM_drv.c"
+                                      ;
+static float g_aec_mic_raw[ (2) * (32) ];
+static float g_aec_ref_buffer[ (2) * (32) ];
+
+
+
+
+
+static float g_echo_sim_buffer[((1440) + (32) * (2))];
+static int g_echo_sim_write_idx = 0;
+
+# 292 "../src/SPI_TDM_drv.c" 3 4
+_Bool 
+# 292 "../src/SPI_TDM_drv.c"
+                 g_echo_sim_enabled = 
+# 292 "../src/SPI_TDM_drv.c" 3 4
+                                      0
+# 292 "../src/SPI_TDM_drv.c"
+                                           ;
+float g_echo_sim_gain = 0.5f;
+
 static uint32_t Half_Tx_Addr = (uint32_t)&Tx_Data[(8) * (32)];
-# 290 "../src/SPI_TDM_drv.c"
+# 305 "../src/SPI_TDM_drv.c"
 void DMA_BaseInit(void)
 {
     if( !DMACONbits.ON )
@@ -28050,14 +28222,14 @@ void DMA_BaseInit(void)
 
 
         
-# 300 "../src/SPI_TDM_drv.c" 3 4
+# 315 "../src/SPI_TDM_drv.c" 3 4
        DMAHIGH 
-# 300 "../src/SPI_TDM_drv.c"
+# 315 "../src/SPI_TDM_drv.c"
                = (0x00FFFFFF);
         
-# 301 "../src/SPI_TDM_drv.c" 3 4
+# 316 "../src/SPI_TDM_drv.c" 3 4
        DMALOW 
-# 301 "../src/SPI_TDM_drv.c"
+# 316 "../src/SPI_TDM_drv.c"
                = (0x00000100);
     }
     else
@@ -28076,23 +28248,23 @@ void DMA_VaridateInit(void)
         while(1);
     }
     if( !((
-# 318 "../src/SPI_TDM_drv.c" 3 4
+# 333 "../src/SPI_TDM_drv.c" 3 4
           DMAHIGH
-# 318 "../src/SPI_TDM_drv.c"
+# 333 "../src/SPI_TDM_drv.c"
                  ==(0x00FFFFFF)) && (
-# 318 "../src/SPI_TDM_drv.c" 3 4
+# 333 "../src/SPI_TDM_drv.c" 3 4
                                            DMALOW
-# 318 "../src/SPI_TDM_drv.c"
+# 333 "../src/SPI_TDM_drv.c"
                                                  ==(0x00000100))) )
     {
         printf(" Unexpected!! DMAHIGH=0x%lx DMALOW==0x%lx Halt Now.\n", 
-# 320 "../src/SPI_TDM_drv.c" 3 4
+# 335 "../src/SPI_TDM_drv.c" 3 4
                                                                        DMAHIGH
-# 320 "../src/SPI_TDM_drv.c"
+# 335 "../src/SPI_TDM_drv.c"
                                                                               , 
-# 320 "../src/SPI_TDM_drv.c" 3 4
+# 335 "../src/SPI_TDM_drv.c" 3 4
                                                                                 DMALOW
-# 320 "../src/SPI_TDM_drv.c"
+# 335 "../src/SPI_TDM_drv.c"
                                                                                       );
         while(1);
     }
@@ -28116,28 +28288,28 @@ void TDM_Start( void )
 
     frame_data_SPI_1();
 }
-# 355 "../src/SPI_TDM_drv.c"
+# 370 "../src/SPI_TDM_drv.c"
 void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 {
     uint32_t dma_stat;
     uint32_t dma_tx_addr;
     int32_t* dest_ptr;
     int32_t* src_ptr;
-# 370 "../src/SPI_TDM_drv.c"
+# 385 "../src/SPI_TDM_drv.c"
     
-# 370 "../src/SPI_TDM_drv.c" 3 4
+# 385 "../src/SPI_TDM_drv.c" 3 4
    IFS2bits.DMA0IF 
-# 370 "../src/SPI_TDM_drv.c"
+# 385 "../src/SPI_TDM_drv.c"
             = 0;
     dma_stat = 
-# 371 "../src/SPI_TDM_drv.c" 3 4
+# 386 "../src/SPI_TDM_drv.c" 3 4
               DMA0STAT
-# 371 "../src/SPI_TDM_drv.c"
+# 386 "../src/SPI_TDM_drv.c"
                       ;
     
-# 372 "../src/SPI_TDM_drv.c" 3 4
+# 387 "../src/SPI_TDM_drv.c" 3 4
    DMA0STAT 
-# 372 "../src/SPI_TDM_drv.c"
+# 387 "../src/SPI_TDM_drv.c"
             = 0;
 
 
@@ -28152,9 +28324,9 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 
 
     dma_tx_addr = 
-# 385 "../src/SPI_TDM_drv.c" 3 4
+# 400 "../src/SPI_TDM_drv.c" 3 4
                   DMA1SRC
-# 385 "../src/SPI_TDM_drv.c"
+# 400 "../src/SPI_TDM_drv.c"
                          ;
 
     if( dma_tx_addr >= Half_Tx_Addr )
@@ -28170,9 +28342,9 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 
 
     if( dma_stat & 
-# 399 "../src/SPI_TDM_drv.c" 3 4
+# 414 "../src/SPI_TDM_drv.c" 3 4
                   0x00000010 
-# 399 "../src/SPI_TDM_drv.c"
+# 414 "../src/SPI_TDM_drv.c"
                                       )
     {
 
@@ -28180,19 +28352,25 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
         src_ptr = (int32_t*)&Rx_Data[ (0) ];
     }
     if( dma_stat & 
-# 405 "../src/SPI_TDM_drv.c" 3 4
+# 420 "../src/SPI_TDM_drv.c" 3 4
                   0x00000020 
-# 405 "../src/SPI_TDM_drv.c"
+# 420 "../src/SPI_TDM_drv.c"
                                       )
     {
 
 
         src_ptr = (int32_t*)&Rx_Data[ ((8) * (32)) ];
     }
-# 419 "../src/SPI_TDM_drv.c"
+# 434 "../src/SPI_TDM_drv.c"
     convert_tdm_int32_to_float( src_ptr, (8), &f_A_Data[0], (2), (32) );
 
 
+
+
+    if (g_aec_enabled)
+    {
+        memcpy(g_aec_mic_raw, &f_A_Data[0], (32) * (2) * sizeof(float));
+    }
 
 
     g_audio_level_in = calc_peak_level_u8( &f_A_Data[0], (32) * (2) );
@@ -28206,6 +28384,64 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 
 
     eq_perseus_process_mono( &f_A_Data[0], (32) * (2) );
+
+
+
+    if (g_echo_sim_enabled)
+    {
+        int i;
+        int frame_size = (32) * (2);
+        for (i = 0; i < frame_size; i++)
+        {
+            g_echo_sim_buffer[(g_echo_sim_write_idx + i) % ((1440) + (32) * (2))] = f_A_Data[i];
+        }
+        g_echo_sim_write_idx = (g_echo_sim_write_idx + frame_size) % ((1440) + (32) * (2));
+    }
+
+
+
+    if (g_echo_sim_enabled)
+    {
+        int i;
+        int read_idx;
+        int frame_size = (32) * (2);
+
+        if (g_aec_enabled)
+        {
+
+            memcpy(g_aec_ref_buffer, &f_A_Data[0], (32) * (2) * sizeof(float));
+            for (i = 0; i < frame_size; i++)
+            {
+                read_idx = (g_echo_sim_write_idx + ((1440) + (32) * (2)) - (1440) + i) % ((1440) + (32) * (2));
+                g_aec_mic_raw[i] += g_echo_sim_gain * g_echo_sim_buffer[read_idx];
+            }
+        }
+        else
+        {
+
+            for (i = 0; i < frame_size; i++)
+            {
+                read_idx = (g_echo_sim_write_idx + ((1440) + (32) * (2)) - (1440) + i) % ((1440) + (32) * (2));
+                f_A_Data[i] += g_echo_sim_gain * g_echo_sim_buffer[read_idx];
+            }
+        }
+    }
+
+
+    if (g_aec_enabled)
+    {
+        if (!g_echo_sim_enabled)
+        {
+
+            memcpy(g_aec_ref_buffer, &f_A_Data[0], (32) * (2) * sizeof(float));
+        }
+        aec_process(&g_aec_state,
+                    g_aec_mic_raw,
+                    g_aec_ref_buffer,
+                    f_A_Data,
+                    (32),
+                    (2));
+    }
 
 
     app_bassh_process(&f_A_Data[0], &f_A_Data[0]);
@@ -28254,7 +28490,7 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA0Interrupt(void)
 
 
 }
-# 759 "../src/SPI_TDM_drv.c"
+# 838 "../src/SPI_TDM_drv.c"
 void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA1Interrupt(void)
 {
     uint32_t dma_stat;
@@ -28262,19 +28498,19 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA1Interrupt(void)
 
 
     
-# 765 "../src/SPI_TDM_drv.c" 3 4
+# 844 "../src/SPI_TDM_drv.c" 3 4
    IFS2bits.DMA1IF 
-# 765 "../src/SPI_TDM_drv.c"
+# 844 "../src/SPI_TDM_drv.c"
             = 0;
     dma_stat = 
-# 766 "../src/SPI_TDM_drv.c" 3 4
+# 845 "../src/SPI_TDM_drv.c" 3 4
               DMA1STAT
-# 766 "../src/SPI_TDM_drv.c"
+# 845 "../src/SPI_TDM_drv.c"
                       ;
     
-# 767 "../src/SPI_TDM_drv.c" 3 4
+# 846 "../src/SPI_TDM_drv.c" 3 4
    DMA1STAT 
-# 767 "../src/SPI_TDM_drv.c"
+# 846 "../src/SPI_TDM_drv.c"
             = 0;
 
 
@@ -28284,9 +28520,9 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA1Interrupt(void)
 
 
     if( dma_stat & 
-# 775 "../src/SPI_TDM_drv.c" 3 4
+# 854 "../src/SPI_TDM_drv.c" 3 4
                   0x00000010 
-# 775 "../src/SPI_TDM_drv.c"
+# 854 "../src/SPI_TDM_drv.c"
                                       )
     {
 
@@ -28297,9 +28533,9 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA1Interrupt(void)
 
     }
     if( dma_stat & 
-# 784 "../src/SPI_TDM_drv.c" 3 4
+# 863 "../src/SPI_TDM_drv.c" 3 4
                   0x00000020 
-# 784 "../src/SPI_TDM_drv.c"
+# 863 "../src/SPI_TDM_drv.c"
                                       )
     {
 
@@ -28310,7 +28546,7 @@ void __attribute__ ( ( interrupt, no_auto_psv ) ) _DMA1Interrupt(void)
 
     }
 }
-# 855 "../src/SPI_TDM_drv.c"
+# 934 "../src/SPI_TDM_drv.c"
 static void dma_config(void)
 {
 
@@ -28334,31 +28570,31 @@ static void dma0_rx_config(void)
 
 
     
-# 877 "../src/SPI_TDM_drv.c" 3 4
+# 956 "../src/SPI_TDM_drv.c" 3 4
    DMA0CH 
-# 877 "../src/SPI_TDM_drv.c"
+# 956 "../src/SPI_TDM_drv.c"
            = 0;
 
     DMA0CHbits.CHEN = 0;
 
     
-# 881 "../src/SPI_TDM_drv.c" 3 4
+# 960 "../src/SPI_TDM_drv.c" 3 4
    DMA0SRC 
-# 881 "../src/SPI_TDM_drv.c"
+# 960 "../src/SPI_TDM_drv.c"
            = (uint32_t)&
-# 881 "../src/SPI_TDM_drv.c" 3 4
+# 960 "../src/SPI_TDM_drv.c" 3 4
                         SPI1BUF
-# 881 "../src/SPI_TDM_drv.c"
+# 960 "../src/SPI_TDM_drv.c"
                                ;
     
-# 882 "../src/SPI_TDM_drv.c" 3 4
+# 961 "../src/SPI_TDM_drv.c" 3 4
    DMA0DST 
-# 882 "../src/SPI_TDM_drv.c"
+# 961 "../src/SPI_TDM_drv.c"
            = (uint32_t)&Rx_Data;
     
-# 883 "../src/SPI_TDM_drv.c" 3 4
+# 962 "../src/SPI_TDM_drv.c" 3 4
    DMA0CNT 
-# 883 "../src/SPI_TDM_drv.c"
+# 962 "../src/SPI_TDM_drv.c"
            = (sizeof(Rx_Data) / sizeof((Rx_Data)[0]));
 
 
@@ -28397,19 +28633,19 @@ static void dma0_rx_config(void)
 
 
     
-# 920 "../src/SPI_TDM_drv.c" 3 4
+# 999 "../src/SPI_TDM_drv.c" 3 4
    IPC9bits.DMA0IP 
-# 920 "../src/SPI_TDM_drv.c"
+# 999 "../src/SPI_TDM_drv.c"
               = (4);
     
-# 921 "../src/SPI_TDM_drv.c" 3 4
+# 1000 "../src/SPI_TDM_drv.c" 3 4
    IFS2bits.DMA0IF 
-# 921 "../src/SPI_TDM_drv.c"
+# 1000 "../src/SPI_TDM_drv.c"
               = 0;
     
-# 922 "../src/SPI_TDM_drv.c" 3 4
+# 1001 "../src/SPI_TDM_drv.c" 3 4
    IEC2bits.DMA0IE 
-# 922 "../src/SPI_TDM_drv.c"
+# 1001 "../src/SPI_TDM_drv.c"
               = 1;
 
 
@@ -28425,31 +28661,31 @@ static void dma1_tx_config(void)
 
 
     
-# 936 "../src/SPI_TDM_drv.c" 3 4
+# 1015 "../src/SPI_TDM_drv.c" 3 4
    DMA1CH 
-# 936 "../src/SPI_TDM_drv.c"
+# 1015 "../src/SPI_TDM_drv.c"
            = 0;
 
     DMA1CHbits.CHEN = 0;
 
     
-# 940 "../src/SPI_TDM_drv.c" 3 4
+# 1019 "../src/SPI_TDM_drv.c" 3 4
    DMA1SRC 
-# 940 "../src/SPI_TDM_drv.c"
+# 1019 "../src/SPI_TDM_drv.c"
            = (uint32_t)&Tx_Data;
     
-# 941 "../src/SPI_TDM_drv.c" 3 4
+# 1020 "../src/SPI_TDM_drv.c" 3 4
    DMA1DST 
-# 941 "../src/SPI_TDM_drv.c"
+# 1020 "../src/SPI_TDM_drv.c"
            = (uint32_t)&
-# 941 "../src/SPI_TDM_drv.c" 3 4
+# 1020 "../src/SPI_TDM_drv.c" 3 4
                         SPI1BUF
-# 941 "../src/SPI_TDM_drv.c"
+# 1020 "../src/SPI_TDM_drv.c"
                                ;
     
-# 942 "../src/SPI_TDM_drv.c" 3 4
+# 1021 "../src/SPI_TDM_drv.c" 3 4
    DMA1CNT 
-# 942 "../src/SPI_TDM_drv.c"
+# 1021 "../src/SPI_TDM_drv.c"
            = (sizeof(Tx_Data) / sizeof((Tx_Data)[0]));
 
 
@@ -28485,19 +28721,19 @@ static void dma1_tx_config(void)
     DMA1SELbits.CHSEL = 0x7;
 
     
-# 976 "../src/SPI_TDM_drv.c" 3 4
+# 1055 "../src/SPI_TDM_drv.c" 3 4
    IPC9bits.DMA1IP 
-# 976 "../src/SPI_TDM_drv.c"
+# 1055 "../src/SPI_TDM_drv.c"
               = (4);
     
-# 977 "../src/SPI_TDM_drv.c" 3 4
+# 1056 "../src/SPI_TDM_drv.c" 3 4
    IFS2bits.DMA1IF 
-# 977 "../src/SPI_TDM_drv.c"
+# 1056 "../src/SPI_TDM_drv.c"
               = 0;
     
-# 978 "../src/SPI_TDM_drv.c" 3 4
+# 1057 "../src/SPI_TDM_drv.c" 3 4
    IEC2bits.DMA1IE 
-# 978 "../src/SPI_TDM_drv.c"
+# 1057 "../src/SPI_TDM_drv.c"
               = 1;
 
 
@@ -28505,147 +28741,147 @@ static void dma1_tx_config(void)
 
     DMA1CHbits.CHEN = 1;
 }
-# 998 "../src/SPI_TDM_drv.c"
+# 1077 "../src/SPI_TDM_drv.c"
 static void config_pins_SPI_1_mst(void)
 {
     (
-# 1000 "../src/SPI_TDM_drv.c" 3 4
+# 1079 "../src/SPI_TDM_drv.c" 3 4
    ANSELE 
-# 1000 "../src/SPI_TDM_drv.c"
+# 1079 "../src/SPI_TDM_drv.c"
    &= ~(1u << (5)));
     (
-# 1001 "../src/SPI_TDM_drv.c" 3 4
+# 1080 "../src/SPI_TDM_drv.c" 3 4
    ANSELE 
-# 1001 "../src/SPI_TDM_drv.c"
+# 1080 "../src/SPI_TDM_drv.c"
    &= ~(1u << (10)));
     (
-# 1002 "../src/SPI_TDM_drv.c" 3 4
+# 1081 "../src/SPI_TDM_drv.c" 3 4
    ANSELG 
-# 1002 "../src/SPI_TDM_drv.c"
+# 1081 "../src/SPI_TDM_drv.c"
    &= ~(1u << (9)));
     (
-# 1003 "../src/SPI_TDM_drv.c" 3 4
+# 1082 "../src/SPI_TDM_drv.c" 3 4
    ANSELG 
-# 1003 "../src/SPI_TDM_drv.c"
+# 1082 "../src/SPI_TDM_drv.c"
    &= ~(1u << (4)));
 
     
-# 1005 "../src/SPI_TDM_drv.c" 3 4
+# 1084 "../src/SPI_TDM_drv.c" 3 4
    RPOR17bits.RP70R 
-# 1005 "../src/SPI_TDM_drv.c"
+# 1084 "../src/SPI_TDM_drv.c"
                    = (27);
     
-# 1006 "../src/SPI_TDM_drv.c" 3 4
+# 1085 "../src/SPI_TDM_drv.c" 3 4
    RPOR18bits.RP75R 
-# 1006 "../src/SPI_TDM_drv.c"
+# 1085 "../src/SPI_TDM_drv.c"
                    = (26);
 
     
-# 1008 "../src/SPI_TDM_drv.c" 3 4
+# 1087 "../src/SPI_TDM_drv.c" 3 4
    RPINR14bits.SDI1R 
-# 1008 "../src/SPI_TDM_drv.c"
+# 1087 "../src/SPI_TDM_drv.c"
                    = 106;
     
-# 1009 "../src/SPI_TDM_drv.c" 3 4
+# 1088 "../src/SPI_TDM_drv.c" 3 4
    RPOR25bits.RP101R 
-# 1009 "../src/SPI_TDM_drv.c"
+# 1088 "../src/SPI_TDM_drv.c"
                    = (25);
 
     (
-# 1011 "../src/SPI_TDM_drv.c" 3 4
+# 1090 "../src/SPI_TDM_drv.c" 3 4
    TRISEbits.TRISE5 
-# 1011 "../src/SPI_TDM_drv.c"
+# 1090 "../src/SPI_TDM_drv.c"
    = 0);
     (
-# 1012 "../src/SPI_TDM_drv.c" 3 4
+# 1091 "../src/SPI_TDM_drv.c" 3 4
    TRISEbits.TRISE10 
-# 1012 "../src/SPI_TDM_drv.c"
+# 1091 "../src/SPI_TDM_drv.c"
    = 0);
     (
-# 1013 "../src/SPI_TDM_drv.c" 3 4
+# 1092 "../src/SPI_TDM_drv.c" 3 4
    TRISGbits.TRISG9 
-# 1013 "../src/SPI_TDM_drv.c"
+# 1092 "../src/SPI_TDM_drv.c"
    = 1);
     (
-# 1014 "../src/SPI_TDM_drv.c" 3 4
+# 1093 "../src/SPI_TDM_drv.c" 3 4
    TRISGbits.TRISG4 
-# 1014 "../src/SPI_TDM_drv.c"
+# 1093 "../src/SPI_TDM_drv.c"
    = 0);
 }
 
 static void config_pins_SPI_1_slv(void)
 {
     (
-# 1019 "../src/SPI_TDM_drv.c" 3 4
+# 1098 "../src/SPI_TDM_drv.c" 3 4
    ANSELE 
-# 1019 "../src/SPI_TDM_drv.c"
+# 1098 "../src/SPI_TDM_drv.c"
    &= ~(1u << (5)));
     (
-# 1020 "../src/SPI_TDM_drv.c" 3 4
+# 1099 "../src/SPI_TDM_drv.c" 3 4
    ANSELE 
-# 1020 "../src/SPI_TDM_drv.c"
+# 1099 "../src/SPI_TDM_drv.c"
    &= ~(1u << (10)));
     (
-# 1021 "../src/SPI_TDM_drv.c" 3 4
+# 1100 "../src/SPI_TDM_drv.c" 3 4
    ANSELG 
-# 1021 "../src/SPI_TDM_drv.c"
+# 1100 "../src/SPI_TDM_drv.c"
    &= ~(1u << (9)));
     (
-# 1022 "../src/SPI_TDM_drv.c" 3 4
+# 1101 "../src/SPI_TDM_drv.c" 3 4
    ANSELG 
-# 1022 "../src/SPI_TDM_drv.c"
+# 1101 "../src/SPI_TDM_drv.c"
    &= ~(1u << (4)));
 
     
-# 1024 "../src/SPI_TDM_drv.c" 3 4
+# 1103 "../src/SPI_TDM_drv.c" 3 4
    RPINR15bits.SS1R 
-# 1024 "../src/SPI_TDM_drv.c"
+# 1103 "../src/SPI_TDM_drv.c"
                    = 70;
     
-# 1025 "../src/SPI_TDM_drv.c" 3 4
+# 1104 "../src/SPI_TDM_drv.c" 3 4
    RPINR14bits.SCK1R 
-# 1025 "../src/SPI_TDM_drv.c"
+# 1104 "../src/SPI_TDM_drv.c"
                    = 75;
 
     
-# 1027 "../src/SPI_TDM_drv.c" 3 4
+# 1106 "../src/SPI_TDM_drv.c" 3 4
    RPINR14bits.SDI1R 
-# 1027 "../src/SPI_TDM_drv.c"
+# 1106 "../src/SPI_TDM_drv.c"
                    = 106;
     
-# 1028 "../src/SPI_TDM_drv.c" 3 4
+# 1107 "../src/SPI_TDM_drv.c" 3 4
    RPOR25bits.RP101R 
-# 1028 "../src/SPI_TDM_drv.c"
+# 1107 "../src/SPI_TDM_drv.c"
                    = (25);
 
     (
-# 1030 "../src/SPI_TDM_drv.c" 3 4
+# 1109 "../src/SPI_TDM_drv.c" 3 4
    TRISEbits.TRISE5 
-# 1030 "../src/SPI_TDM_drv.c"
+# 1109 "../src/SPI_TDM_drv.c"
    = 1);
     (
-# 1031 "../src/SPI_TDM_drv.c" 3 4
+# 1110 "../src/SPI_TDM_drv.c" 3 4
    TRISEbits.TRISE10 
-# 1031 "../src/SPI_TDM_drv.c"
+# 1110 "../src/SPI_TDM_drv.c"
    = 1);
     (
-# 1032 "../src/SPI_TDM_drv.c" 3 4
+# 1111 "../src/SPI_TDM_drv.c" 3 4
    TRISGbits.TRISG9 
-# 1032 "../src/SPI_TDM_drv.c"
+# 1111 "../src/SPI_TDM_drv.c"
    = 1);
     (
-# 1033 "../src/SPI_TDM_drv.c" 3 4
+# 1112 "../src/SPI_TDM_drv.c" 3 4
    TRISGbits.TRISG4 
-# 1033 "../src/SPI_TDM_drv.c"
+# 1112 "../src/SPI_TDM_drv.c"
    = 0);
 }
-# 1218 "../src/SPI_TDM_drv.c"
+# 1297 "../src/SPI_TDM_drv.c"
 static void frame_data_SPI_1(void)
 {
     
-# 1220 "../src/SPI_TDM_drv.c" 3 4
+# 1299 "../src/SPI_TDM_drv.c" 3 4
    SPI1CON1 
-# 1220 "../src/SPI_TDM_drv.c"
+# 1299 "../src/SPI_TDM_drv.c"
              = 0;
 
 
@@ -28666,7 +28902,7 @@ static void frame_data_SPI_1(void)
 
     SPI1CON1bits.MODE32 = 1;
     SPI1CON1bits.MODE16 = 0;
-# 1248 "../src/SPI_TDM_drv.c"
+# 1327 "../src/SPI_TDM_drv.c"
     SPI1CON1bits.MCLKEN = 1;
 
     SPI1CON1bits.FRMPOL = 1;
@@ -28678,16 +28914,16 @@ static void frame_data_SPI_1(void)
     SPI1CON1bits.FRMSYPW = 1;
 
     SPI1CON1bits.FRMCNT = 3;
-# 1268 "../src/SPI_TDM_drv.c"
+# 1347 "../src/SPI_TDM_drv.c"
     SPI1CON1bits.SPIFE = 0;
-# 1333 "../src/SPI_TDM_drv.c"
+# 1412 "../src/SPI_TDM_drv.c"
     SPI1CON1bits.CKE = 0;
     SPI1CON1bits.CKP = 1;
-# 1344 "../src/SPI_TDM_drv.c"
+# 1423 "../src/SPI_TDM_drv.c"
     
-# 1344 "../src/SPI_TDM_drv.c" 3 4
+# 1423 "../src/SPI_TDM_drv.c" 3 4
    SPI1BRG 
-# 1344 "../src/SPI_TDM_drv.c"
+# 1423 "../src/SPI_TDM_drv.c"
            = (6);
 
 
@@ -28698,25 +28934,25 @@ static void frame_data_SPI_1(void)
 
 
     
-# 1353 "../src/SPI_TDM_drv.c" 3 4
+# 1432 "../src/SPI_TDM_drv.c" 3 4
    IEC2bits.SPI1RXIE 
-# 1353 "../src/SPI_TDM_drv.c"
+# 1432 "../src/SPI_TDM_drv.c"
                         = 0;
     
-# 1354 "../src/SPI_TDM_drv.c" 3 4
+# 1433 "../src/SPI_TDM_drv.c" 3 4
    IEC2bits.SPI1TXIE 
-# 1354 "../src/SPI_TDM_drv.c"
+# 1433 "../src/SPI_TDM_drv.c"
                         = 0;
 
     
-# 1356 "../src/SPI_TDM_drv.c" 3 4
+# 1435 "../src/SPI_TDM_drv.c" 3 4
    IFS2bits.SPI1RXIF 
-# 1356 "../src/SPI_TDM_drv.c"
+# 1435 "../src/SPI_TDM_drv.c"
                         = 0;
     
-# 1357 "../src/SPI_TDM_drv.c" 3 4
+# 1436 "../src/SPI_TDM_drv.c" 3 4
    IFS2bits.SPI1TXIF 
-# 1357 "../src/SPI_TDM_drv.c"
+# 1436 "../src/SPI_TDM_drv.c"
                         = 0;
 
 
@@ -28732,9 +28968,9 @@ static void frame_data_SPI_1(void)
 
 static void local_dma_debug_halt( uint8_t dma_x, uint32_t dma_stat )
 {
-# 1407 "../src/SPI_TDM_drv.c"
+# 1486 "../src/SPI_TDM_drv.c"
 }
-# 1420 "../src/SPI_TDM_drv.c"
+# 1499 "../src/SPI_TDM_drv.c"
 static uint8_t calc_peak_level_u8(float* buf, int num_samples)
 {
     float peak = 0.0f;

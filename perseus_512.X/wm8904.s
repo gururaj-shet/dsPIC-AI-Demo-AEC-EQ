@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\wm8904.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\wm8904.c"
 	.section	.text,code
 .Ltext0:
 	.section	.text,code
@@ -676,7 +676,7 @@ _wm8904_init:
 	.file 7 "c:\\program files\\microchip\\xc-dsc\\v3.31\\include\\stdio.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0xee4
+	.4byte	0xe8a
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -687,9 +687,8 @@ _wm8904_init:
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/wm8904.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0x18
 	.4byte	0
 	.4byte	0
@@ -719,7 +718,7 @@ _wm8904_init:
 	.byte	0x2
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x22d
+	.4byte	0x1d3
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -729,7 +728,7 @@ _wm8904_init:
 	.byte	0x2
 	.byte	0xc7
 	.byte	0x18
-	.4byte	0x24f
+	.4byte	0x1f5
 	.byte	0x2
 	.byte	0x2
 	.byte	0x7
@@ -739,9 +738,9 @@ _wm8904_init:
 	.byte	0x2
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x27b
+	.4byte	0x221
 	.byte	0x4
-	.4byte	0x265
+	.4byte	0x20b
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -764,13 +763,13 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x359c
 	.byte	0x10
-	.4byte	0x49c
+	.4byte	0x442
 	.byte	0x6
 	.asciz	"SEN"
 	.byte	0x3
 	.2byte	0x359d
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -782,7 +781,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x359e
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -794,7 +793,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x359f
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -806,7 +805,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a0
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -818,7 +817,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a1
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -830,7 +829,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a2
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -842,7 +841,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a3
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -854,7 +853,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a4
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -866,7 +865,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a6
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -878,7 +877,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a7
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -890,7 +889,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a8
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -902,7 +901,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35a9
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -914,7 +913,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35aa
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -926,7 +925,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35ac
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -938,7 +937,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35ad
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -950,7 +949,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35ae
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -962,7 +961,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35af
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -974,7 +973,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35b0
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -986,7 +985,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35b1
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -998,7 +997,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35b2
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1010,7 +1009,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35b3
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -1022,7 +1021,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35b5
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -1035,15 +1034,15 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35b7
 	.byte	0x3
-	.4byte	0x2c1
+	.4byte	0x267
 	.byte	0x4
-	.4byte	0x49c
+	.4byte	0x442
 	.byte	0x8
 	.asciz	"I2C2CON1bits"
 	.byte	0x3
 	.2byte	0x35b8
 	.byte	0x1e
-	.4byte	0x4b2
+	.4byte	0x458
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
@@ -1051,7 +1050,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35bb
 	.byte	0x1a
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -1060,13 +1059,13 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35bc
 	.byte	0x10
-	.4byte	0x619
+	.4byte	0x5bf
 	.byte	0x6
 	.asciz	"TBF"
 	.byte	0x3
 	.2byte	0x35bd
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -1078,7 +1077,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35be
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -1090,7 +1089,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35bf
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -1102,7 +1101,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c0
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -1114,7 +1113,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c1
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -1126,7 +1125,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c2
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1138,7 +1137,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c3
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -1150,7 +1149,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c4
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1162,7 +1161,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c5
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -1174,7 +1173,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c6
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -1186,7 +1185,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c7
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -1198,7 +1197,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35c9
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1210,7 +1209,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35ca
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -1222,7 +1221,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35cb
 	.byte	0xb
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -1235,15 +1234,15 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35ce
 	.byte	0x3
-	.4byte	0x4e4
+	.4byte	0x48a
 	.byte	0x4
-	.4byte	0x619
+	.4byte	0x5bf
 	.byte	0x8
 	.asciz	"I2C2STAT1bits"
 	.byte	0x3
 	.2byte	0x35cf
 	.byte	0x1f
-	.4byte	0x630
+	.4byte	0x5d6
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
@@ -1251,7 +1250,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x35f6
 	.byte	0x1a
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
@@ -1259,7 +1258,7 @@ _wm8904_init:
 	.byte	0x3
 	.2byte	0x3640
 	.byte	0x1a
-	.4byte	0x276
+	.4byte	0x21c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -1287,15 +1286,15 @@ _wm8904_init:
 	.2byte	0x126
 	.byte	0xc
 	.byte	0x1
-	.4byte	0x6e4
+	.4byte	0x68a
 	.byte	0x1
-	.4byte	0x6e4
+	.4byte	0x68a
 	.byte	0xb
 	.asciz	"data"
 	.byte	0x1
 	.2byte	0x128
 	.byte	0xe
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0
 	.byte	0x2
 	.byte	0x1
@@ -1307,27 +1306,27 @@ _wm8904_init:
 	.byte	0xe0
 	.byte	0x11
 	.byte	0x1
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0x1
-	.4byte	0x728
+	.4byte	0x6ce
 	.byte	0xd
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0xe0
 	.byte	0x29
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0xe
 	.asciz	"uc_data"
 	.byte	0x1
 	.byte	0xe4
 	.byte	0xd
-	.4byte	0x728
+	.4byte	0x6ce
 	.byte	0
 	.byte	0xf
-	.4byte	0x21d
-	.4byte	0x738
+	.4byte	0x1c3
+	.4byte	0x6de
 	.byte	0x10
-	.4byte	0x2aa
+	.4byte	0x250
 	.byte	0x1
 	.byte	0
 	.byte	0x11
@@ -1337,25 +1336,25 @@ _wm8904_init:
 	.byte	0xd
 	.byte	0x1
 	.byte	0x1
-	.4byte	0x781
+	.4byte	0x727
 	.byte	0xd
 	.4byte	.LASF0
 	.byte	0x1
 	.byte	0x9e
 	.byte	0x26
-	.4byte	0x21d
+	.4byte	0x1c3
 	.byte	0x12
 	.asciz	"us_data"
 	.byte	0x1
 	.byte	0x9e
 	.byte	0x44
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0xe
 	.asciz	"read_dat"
 	.byte	0x1
 	.byte	0xa0
 	.byte	0xe
-	.4byte	0x23e
+	.4byte	0x1e4
 	.byte	0
 	.byte	0x13
 	.byte	0x1
@@ -1370,24 +1369,24 @@ _wm8904_init:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xc3f
+	.4byte	0xbe5
 	.byte	0x14
-	.4byte	0x6ad
+	.4byte	0x653
 	.4byte	.LBB14
 	.4byte	.Ldebug_ranges0+0
 	.byte	0x1
 	.byte	0x7d
 	.byte	0xa
-	.4byte	0x804
+	.4byte	0x7aa
 	.byte	0x15
 	.4byte	.Ldebug_ranges0+0
 	.byte	0x16
-	.4byte	0x6d5
+	.4byte	0x67b
 	.4byte	.LLST9
 	.byte	0x17
 	.4byte	.LVL40
-	.4byte	0x6ed
-	.4byte	0x7d8
+	.4byte	0x693
+	.4byte	0x77e
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1396,8 +1395,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL42
-	.4byte	0xe74
-	.4byte	0x7ef
+	.4byte	0xe1a
+	.4byte	0x795
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1407,7 +1406,7 @@ _wm8904_init:
 	.byte	0
 	.byte	0x19
 	.4byte	.LVL46
-	.4byte	0xe74
+	.4byte	0xe1a
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1418,17 +1417,17 @@ _wm8904_init:
 	.byte	0
 	.byte	0
 	.byte	0x1a
-	.4byte	0x691
+	.4byte	0x637
 	.4byte	.LBB18
 	.4byte	.LBE18
 	.byte	0x1
 	.byte	0x89
 	.byte	0x5
-	.4byte	0xbff
+	.4byte	0xba5
 	.byte	0x17
 	.4byte	.LVL47
-	.4byte	0x738
-	.4byte	0x830
+	.4byte	0x6de
+	.4byte	0x7d6
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1442,8 +1441,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL48
-	.4byte	0xe8d
-	.4byte	0x844
+	.4byte	0xe33
+	.4byte	0x7ea
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1453,8 +1452,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL49
-	.4byte	0x738
-	.4byte	0x85c
+	.4byte	0x6de
+	.4byte	0x802
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1468,8 +1467,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL50
-	.4byte	0x738
-	.4byte	0x875
+	.4byte	0x6de
+	.4byte	0x81b
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1484,8 +1483,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL51
-	.4byte	0xe8d
-	.4byte	0x888
+	.4byte	0xe33
+	.4byte	0x82e
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1494,8 +1493,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL52
-	.4byte	0x738
-	.4byte	0x8a1
+	.4byte	0x6de
+	.4byte	0x847
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1510,8 +1509,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL53
-	.4byte	0x738
-	.4byte	0x8b9
+	.4byte	0x6de
+	.4byte	0x85f
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1525,8 +1524,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL54
-	.4byte	0x738
-	.4byte	0x8d1
+	.4byte	0x6de
+	.4byte	0x877
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1540,8 +1539,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL55
-	.4byte	0x738
-	.4byte	0x8e9
+	.4byte	0x6de
+	.4byte	0x88f
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1555,8 +1554,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL56
-	.4byte	0x738
-	.4byte	0x902
+	.4byte	0x6de
+	.4byte	0x8a8
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1571,8 +1570,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL57
-	.4byte	0x738
-	.4byte	0x91b
+	.4byte	0x6de
+	.4byte	0x8c1
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1587,8 +1586,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL58
-	.4byte	0x738
-	.4byte	0x934
+	.4byte	0x6de
+	.4byte	0x8da
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1603,8 +1602,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL59
-	.4byte	0x738
-	.4byte	0x94d
+	.4byte	0x6de
+	.4byte	0x8f3
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1619,8 +1618,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL60
-	.4byte	0x738
-	.4byte	0x965
+	.4byte	0x6de
+	.4byte	0x90b
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1634,8 +1633,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL61
-	.4byte	0x738
-	.4byte	0x97e
+	.4byte	0x6de
+	.4byte	0x924
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1650,8 +1649,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL62
-	.4byte	0x738
-	.4byte	0x999
+	.4byte	0x6de
+	.4byte	0x93f
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1667,8 +1666,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL63
-	.4byte	0x738
-	.4byte	0x9b4
+	.4byte	0x6de
+	.4byte	0x95a
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1684,8 +1683,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL64
-	.4byte	0x738
-	.4byte	0x9cf
+	.4byte	0x6de
+	.4byte	0x975
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1701,8 +1700,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL65
-	.4byte	0x738
-	.4byte	0x9e8
+	.4byte	0x6de
+	.4byte	0x98e
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1717,8 +1716,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL66
-	.4byte	0xe8d
-	.4byte	0x9fb
+	.4byte	0xe33
+	.4byte	0x9a1
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1727,8 +1726,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL67
-	.4byte	0x738
-	.4byte	0xa14
+	.4byte	0x6de
+	.4byte	0x9ba
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1743,8 +1742,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL68
-	.4byte	0xe8d
-	.4byte	0xa27
+	.4byte	0xe33
+	.4byte	0x9cd
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1753,8 +1752,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL69
-	.4byte	0x738
-	.4byte	0xa41
+	.4byte	0x6de
+	.4byte	0x9e7
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1769,8 +1768,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL70
-	.4byte	0x738
-	.4byte	0xa59
+	.4byte	0x6de
+	.4byte	0x9ff
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1784,8 +1783,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL71
-	.4byte	0x738
-	.4byte	0xa71
+	.4byte	0x6de
+	.4byte	0xa17
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1799,8 +1798,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL72
-	.4byte	0x738
-	.4byte	0xa8a
+	.4byte	0x6de
+	.4byte	0xa30
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1815,8 +1814,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL73
-	.4byte	0x738
-	.4byte	0xaa2
+	.4byte	0x6de
+	.4byte	0xa48
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1830,8 +1829,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL74
-	.4byte	0x738
-	.4byte	0xabc
+	.4byte	0x6de
+	.4byte	0xa62
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1846,8 +1845,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL75
-	.4byte	0x738
-	.4byte	0xad5
+	.4byte	0x6de
+	.4byte	0xa7b
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1862,8 +1861,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL76
-	.4byte	0x738
-	.4byte	0xaee
+	.4byte	0x6de
+	.4byte	0xa94
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1878,8 +1877,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL77
-	.4byte	0x738
-	.4byte	0xb07
+	.4byte	0x6de
+	.4byte	0xaad
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1894,8 +1893,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL78
-	.4byte	0x738
-	.4byte	0xb20
+	.4byte	0x6de
+	.4byte	0xac6
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1910,8 +1909,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL79
-	.4byte	0x738
-	.4byte	0xb39
+	.4byte	0x6de
+	.4byte	0xadf
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1926,8 +1925,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL80
-	.4byte	0x738
-	.4byte	0xb53
+	.4byte	0x6de
+	.4byte	0xaf9
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1943,8 +1942,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL81
-	.4byte	0x738
-	.4byte	0xb6c
+	.4byte	0x6de
+	.4byte	0xb12
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1959,8 +1958,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL82
-	.4byte	0x738
-	.4byte	0xb86
+	.4byte	0x6de
+	.4byte	0xb2c
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1976,8 +1975,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL83
-	.4byte	0xe8d
-	.4byte	0xb9a
+	.4byte	0xe33
+	.4byte	0xb40
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -1987,8 +1986,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL84
-	.4byte	0x738
-	.4byte	0xbb4
+	.4byte	0x6de
+	.4byte	0xb5a
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2004,8 +2003,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL85
-	.4byte	0x738
-	.4byte	0xbce
+	.4byte	0x6de
+	.4byte	0xb74
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2021,8 +2020,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL86
-	.4byte	0x738
-	.4byte	0xbe8
+	.4byte	0x6de
+	.4byte	0xb8e
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2038,7 +2037,7 @@ _wm8904_init:
 	.byte	0
 	.byte	0x19
 	.4byte	.LVL87
-	.4byte	0x738
+	.4byte	0x6de
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2055,8 +2054,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL38
-	.4byte	0x738
-	.4byte	0xc17
+	.4byte	0x6de
+	.4byte	0xbbd
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2070,8 +2069,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL39
-	.4byte	0xe8d
-	.4byte	0xc2b
+	.4byte	0xe33
+	.4byte	0xbd1
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2081,7 +2080,7 @@ _wm8904_init:
 	.byte	0
 	.byte	0x19
 	.4byte	.LVL43
-	.4byte	0xe74
+	.4byte	0xe1a
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2091,40 +2090,40 @@ _wm8904_init:
 	.byte	0
 	.byte	0
 	.byte	0x1b
-	.4byte	0x6ed
+	.4byte	0x693
 	.4byte	.LFB2
 	.4byte	.LFE2
 	.byte	0x2
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0xd53
+	.4byte	0xcf9
 	.byte	0x1c
-	.4byte	0x70b
+	.4byte	0x6b1
 	.4byte	.LLST0
 	.byte	0x1d
-	.4byte	0x717
+	.4byte	0x6bd
 	.byte	0x1a
-	.4byte	0x6ed
+	.4byte	0x693
 	.4byte	.LBB4
 	.4byte	.LBE4
 	.byte	0x1
 	.byte	0xe0
 	.byte	0x11
-	.4byte	0xceb
+	.4byte	0xc91
 	.byte	0x1c
-	.4byte	0x70b
+	.4byte	0x6b1
 	.4byte	.LLST1
 	.byte	0x1e
 	.4byte	.LBB5
 	.4byte	.LBE5
 	.byte	0x16
-	.4byte	0x717
+	.4byte	0x6bd
 	.4byte	.LLST2
 	.byte	0x17
 	.4byte	.LVL7
-	.4byte	0xe9b
-	.4byte	0xcaa
+	.4byte	0xe41
+	.4byte	0xc50
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2139,8 +2138,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL9
-	.4byte	0xea9
-	.4byte	0xcc2
+	.4byte	0xe4f
+	.4byte	0xc68
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2154,8 +2153,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL11
-	.4byte	0xea9
-	.4byte	0xcda
+	.4byte	0xe4f
+	.4byte	0xc80
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2169,7 +2168,7 @@ _wm8904_init:
 	.byte	0
 	.byte	0x19
 	.4byte	.LVL12
-	.4byte	0xeb7
+	.4byte	0xe5d
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2180,8 +2179,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL2
-	.4byte	0xec5
-	.4byte	0xcfe
+	.4byte	0xe6b
+	.4byte	0xca4
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2190,8 +2189,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL3
-	.4byte	0xe9b
-	.4byte	0xd17
+	.4byte	0xe41
+	.4byte	0xcbd
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2206,8 +2205,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL4
-	.4byte	0xe9b
-	.4byte	0xd30
+	.4byte	0xe41
+	.4byte	0xcd6
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2222,8 +2221,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL5
-	.4byte	0xec5
-	.4byte	0xd43
+	.4byte	0xe6b
+	.4byte	0xce9
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2232,7 +2231,7 @@ _wm8904_init:
 	.byte	0
 	.byte	0x19
 	.4byte	.LVL16
-	.4byte	0xeb7
+	.4byte	0xe5d
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2241,45 +2240,45 @@ _wm8904_init:
 	.byte	0
 	.byte	0
 	.byte	0x1f
-	.4byte	0x738
+	.4byte	0x6de
 	.4byte	.LFB1
 	.4byte	.LFE1
 	.4byte	.LLST3
 	.byte	0x1
-	.4byte	0xe74
+	.4byte	0xe1a
 	.byte	0x1c
-	.4byte	0x753
+	.4byte	0x6f9
 	.4byte	.LLST4
 	.byte	0x1c
-	.4byte	0x75f
+	.4byte	0x705
 	.4byte	.LLST5
 	.byte	0x20
-	.4byte	0x76f
+	.4byte	0x715
 	.byte	0
 	.byte	0x1a
-	.4byte	0x738
+	.4byte	0x6de
 	.4byte	.LBB8
 	.4byte	.LBE8
 	.byte	0x1
 	.byte	0x9e
 	.byte	0xd
-	.4byte	0xdfe
+	.4byte	0xda4
 	.byte	0x1c
-	.4byte	0x75f
+	.4byte	0x705
 	.4byte	.LLST6
 	.byte	0x1c
-	.4byte	0x753
+	.4byte	0x6f9
 	.4byte	.LLST7
 	.byte	0x1e
 	.4byte	.LBB9
 	.4byte	.LBE9
 	.byte	0x16
-	.4byte	0x76f
+	.4byte	0x715
 	.4byte	.LLST8
 	.byte	0x17
 	.4byte	.LVL30
-	.4byte	0xeb7
-	.4byte	0xdcc
+	.4byte	0xe5d
+	.4byte	0xd72
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2288,8 +2287,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL31
-	.4byte	0xe8d
-	.4byte	0xddf
+	.4byte	0xe33
+	.4byte	0xd85
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2298,8 +2297,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL32
-	.4byte	0x6ed
-	.4byte	0xdf3
+	.4byte	0x693
+	.4byte	0xd99
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2309,13 +2308,13 @@ _wm8904_init:
 	.byte	0
 	.byte	0x21
 	.4byte	.LVL35
-	.4byte	0xed3
+	.4byte	0xe79
 	.byte	0
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL21
-	.4byte	0xec5
-	.4byte	0xe11
+	.4byte	0xe6b
+	.4byte	0xdb7
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2324,8 +2323,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL25
-	.4byte	0xe9b
-	.4byte	0xe2a
+	.4byte	0xe41
+	.4byte	0xdd0
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2340,8 +2339,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL26
-	.4byte	0xe9b
-	.4byte	0xe43
+	.4byte	0xe41
+	.4byte	0xde9
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2356,8 +2355,8 @@ _wm8904_init:
 	.byte	0
 	.byte	0x17
 	.4byte	.LVL27
-	.4byte	0xe9b
-	.4byte	0xe5e
+	.4byte	0xe41
+	.4byte	0xe04
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50
@@ -2374,7 +2373,7 @@ _wm8904_init:
 	.byte	0
 	.byte	0x19
 	.4byte	.LVL28
-	.4byte	0xe9b
+	.4byte	0xe41
 	.byte	0x18
 	.byte	0x1
 	.byte	0x50

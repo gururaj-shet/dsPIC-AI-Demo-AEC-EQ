@@ -1,4 +1,4 @@
-	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\1. Marketing\\1. Projects\\11. Audio\\JP FAE Project\\perseus_512_snapshot_20251201_ADC34_audioin\\perseus_512\\perseus_512.X\\..\\src\\curiosity\\pot.c"
+	.file "C:\\Users\\i69379\\OneDrive - Microchip Technology Inc\\Desktop\\perseus_512\\perseus_512.X\\..\\src\\curiosity\\pot.c"
 	.section	.text,code
 .Ltext0:
 	.section	.text,code
@@ -146,7 +146,7 @@ _POT_Data:
 	.file 4 "c:\\users\\i69379\\.mchp_packs\\microchip\\dspic33ak-mp_dfp\\1.3.185\\xc16\\support\\dspic33a\\h\\p33ak512mps512.h"
 	.section	.debug_info,info
 .Ldebug_info0:
-	.4byte	0x689
+	.4byte	0x62f
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
@@ -157,9 +157,8 @@ _POT_Data:
 	.asciz	"-g -O3 -ffast-math -ffp-contract=fast"
 	.byte	0xc
 	.asciz	"../src/curiosity/pot.c"
-	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\1. M"
-	.ascii	"arketing\\\\1. Projects\\\\11. Audio\\\\JP FAE Project\\\\perseus_51"
-	.asciz	"2_snapshot_20251201_ADC34_audioin\\\\perseus_512\\\\perseus_512.X"
+	.ascii	"C:\\\\Users\\\\i69379\\\\OneDrive - Microchip Technology Inc\\\\Desk"
+	.asciz	"top\\\\perseus_512\\\\perseus_512.X"
 	.4byte	.Ldebug_ranges0+0
 	.4byte	0
 	.4byte	0
@@ -189,7 +188,7 @@ _POT_Data:
 	.byte	0x3
 	.byte	0xbb
 	.byte	0x17
-	.4byte	0x234
+	.4byte	0x1da
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -199,7 +198,7 @@ _POT_Data:
 	.byte	0x3
 	.byte	0xc7
 	.byte	0x18
-	.4byte	0x256
+	.4byte	0x1fc
 	.byte	0x2
 	.byte	0x2
 	.byte	0x7
@@ -209,9 +208,9 @@ _POT_Data:
 	.byte	0x3
 	.byte	0xcd
 	.byte	0x1b
-	.4byte	0x282
+	.4byte	0x228
 	.byte	0x4
-	.4byte	0x26c
+	.4byte	0x212
 	.byte	0x2
 	.byte	0x4
 	.byte	0x7
@@ -234,13 +233,13 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19d3
 	.byte	0x10
-	.4byte	0x448
+	.4byte	0x3ee
 	.byte	0x6
 	.asciz	"CH0RDY"
 	.byte	0x4
 	.2byte	0x19d4
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -252,7 +251,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19d5
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -264,7 +263,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19d6
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -276,7 +275,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19d7
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -288,7 +287,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19d8
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -300,7 +299,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19d9
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -312,7 +311,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19da
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -324,7 +323,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19db
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -336,7 +335,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19dc
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -348,7 +347,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19dd
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -360,7 +359,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19de
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -372,7 +371,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19df
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -384,7 +383,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19e0
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -396,7 +395,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19e1
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -408,7 +407,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19e2
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -420,7 +419,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19e3
 	.byte	0xb
-	.4byte	0x224
+	.4byte	0x1ca
 	.byte	0x1
 	.byte	0x1
 	.byte	0
@@ -433,15 +432,15 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x19e6
 	.byte	0x3
-	.4byte	0x2c8
+	.4byte	0x26e
 	.byte	0x4
-	.4byte	0x448
+	.4byte	0x3ee
 	.byte	0x8
 	.asciz	"AD5STATbits"
 	.byte	0x4
 	.2byte	0x19e7
 	.byte	0x1d
-	.4byte	0x45d
+	.4byte	0x403
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
@@ -449,7 +448,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x1a1a
 	.byte	0x1a
-	.4byte	0x27d
+	.4byte	0x223
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
@@ -457,7 +456,7 @@ _POT_Data:
 	.byte	0x4
 	.2byte	0x1a54
 	.byte	0x1a
-	.4byte	0x27d
+	.4byte	0x223
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -468,11 +467,11 @@ _POT_Data:
 	.asciz	"ADC5_CHANNEL"
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2b1
+	.4byte	0x257
 	.byte	0x2
 	.byte	0x2e
 	.byte	0x6
-	.4byte	0x4ec
+	.4byte	0x492
 	.byte	0xa
 	.asciz	"ADC5_Channel0"
 	.byte	0
@@ -481,13 +480,13 @@ _POT_Data:
 	.byte	0x1
 	.byte	0
 	.byte	0xb
-	.4byte	0x4ac
+	.4byte	0x452
 	.byte	0xc
 	.asciz	"POT_Data"
 	.byte	0x1
 	.byte	0x3b
 	.byte	0x11
-	.4byte	0x245
+	.4byte	0x1eb
 	.byte	0x5
 	.byte	0x3
 	.4byte	_POT_Data
@@ -504,48 +503,48 @@ _POT_Data:
 	.byte	0x7f
 	.byte	0x7c
 	.byte	0x1
-	.4byte	0x599
+	.4byte	0x53f
 	.byte	0xe
-	.4byte	0x66b
+	.4byte	0x611
 	.4byte	.LBB8
 	.4byte	.LBE8
 	.byte	0x1
 	.byte	0x46
 	.byte	0x5
 	.byte	0xf
-	.4byte	0x5d9
+	.4byte	0x57f
 	.4byte	.LBB10
 	.4byte	.LBE10
 	.byte	0x1
 	.byte	0x47
 	.byte	0xc
-	.4byte	0x56b
+	.4byte	0x511
 	.byte	0x10
-	.4byte	0x602
+	.4byte	0x5a8
 	.4byte	.LLST0
 	.byte	0x11
 	.4byte	.LBB11
 	.4byte	.LBE11
 	.byte	0x12
-	.4byte	0x613
+	.4byte	0x5b9
 	.4byte	.LLST0
 	.byte	0
 	.byte	0
 	.byte	0x13
-	.4byte	0x624
+	.4byte	0x5ca
 	.4byte	.LBB12
 	.4byte	.LBE12
 	.byte	0x1
 	.byte	0x4a
 	.byte	0x10
 	.byte	0x10
-	.4byte	0x64b
+	.4byte	0x5f1
 	.4byte	.LLST2
 	.byte	0x11
 	.4byte	.LBB13
 	.4byte	.LBE13
 	.byte	0x12
-	.4byte	0x65b
+	.4byte	0x601
 	.4byte	.LLST2
 	.byte	0
 	.byte	0
@@ -557,7 +556,7 @@ _POT_Data:
 	.byte	0x3d
 	.byte	0xa
 	.byte	0x1
-	.4byte	0x245
+	.4byte	0x1eb
 	.4byte	.LFB15
 	.4byte	.LFE15
 	.byte	0x2
@@ -583,21 +582,21 @@ _POT_Data:
 	.2byte	0x106
 	.byte	0x13
 	.byte	0x1
-	.4byte	0x4a3
+	.4byte	0x449
 	.byte	0x3
-	.4byte	0x624
+	.4byte	0x5ca
 	.byte	0x17
 	.asciz	"channel"
 	.byte	0x2
 	.2byte	0x106
 	.byte	0x45
-	.4byte	0x4ec
+	.4byte	0x492
 	.byte	0x18
 	.asciz	"status"
 	.byte	0x2
 	.2byte	0x108
 	.byte	0x9
-	.4byte	0x4a3
+	.4byte	0x449
 	.byte	0
 	.byte	0x19
 	.asciz	"ADC5_ConversionResultGet"
@@ -605,21 +604,21 @@ _POT_Data:
 	.byte	0xec
 	.byte	0x18
 	.byte	0x1
-	.4byte	0x26c
+	.4byte	0x212
 	.byte	0x3
-	.4byte	0x66b
+	.4byte	0x611
 	.byte	0x1a
 	.asciz	"channel"
 	.byte	0x2
 	.byte	0xec
 	.byte	0x49
-	.4byte	0x4ec
+	.4byte	0x492
 	.byte	0x1b
 	.asciz	"result"
 	.byte	0x2
 	.byte	0xee
 	.byte	0xe
-	.4byte	0x26c
+	.4byte	0x212
 	.byte	0
 	.byte	0x1c
 	.asciz	"ADC5_SoftwareTriggerEnable"

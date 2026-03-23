@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Perseus_512 EQ Control GUI
+Perseus_512 EQ & AEC Control GUI
 
-Real-time 8-band graphic equalizer control for Perseus_512 firmware.
+Real-time 8-band graphic equalizer and AEC control for Perseus_512 firmware.
 Communicates via UART at 230400 baud.
 
-Protocol:
+EQ Protocol (module 'e'):
   Set band:      *eb<band><gain_hex>\n   (band=0-7, gain=signed byte -18 to +12)
   Get band:      ?eb<band>\n             (returns gain as signed byte)
   Set preset:    *ep<preset>\n           (preset=0-7)
@@ -15,6 +15,13 @@ Protocol:
   Enable:        *ee<0/1>\n              (01=enable, 00=bypass)
   Get enable:    ?ee\n
   Get levels:    ?el\n                   (returns input/output peak levels)
+
+AEC Protocol (module 'a'):
+  Enable:        *ae<0/1>\n              (01=enable, 00=disable)
+  Get enable:    ?ae\n
+  Get status:    ?as\n                   (returns enabled, ERLE, near-end)
+  Reset:         *ar\n                   (reset AEC filter)
+  Set step:      *am<mu_hex>\n           (mu=0-100, maps to 0.0-1.0)
 
 Response format: =<module><name><status><data>\n (status bit7=OK)
 
@@ -299,6 +306,81 @@ class EQSerial:
             return (data[0], data[1])
         return None
 
+    # ==================== AEC Commands ====================
+
+    def set_aec_enable(self, enable):
+        """Enable (True) or disable (False) the AEC."""
+        val = 1 if enable else 0
+        cmd = f'*ae{self._hex_byte(val)}\n'.encode()
+        resp = self._send_cmd(cmd)
+        status, _ = self._parse_response(resp)
+        return status is not None and (status & 0x80)
+
+    def get_aec_enable(self):
+        """Get AEC enable state. Returns bool or None."""
+        cmd = b'?ae\n'
+        resp = self._send_cmd(cmd)
+        status, data = self._parse_response(resp)
+        if status is not None and (status & 0x80) and len(data) >= 1:
+            return data[0] != 0
+        return None
+
+    def get_aec_status(self):
+        """Get AEC status. Returns dict with 'enabled', 'erle', 'near_end' or None."""
+        cmd = b'?as\n'
+        resp = self._send_cmd(cmd)
+        status, data = self._parse_response(resp)
+        if status is not None and (status & 0x80) and len(data) >= 3:
+            erle = self._byte_to_signed(data[1])
+            return {
+                'enabled': data[0] != 0,
+                'erle': erle,
+                'near_end': data[2] != 0
+            }
+        return None
+
+    def reset_aec(self):
+        """Reset AEC filter coefficients."""
+        cmd = b'*ar\n'
+        resp = self._send_cmd(cmd)
+        status, _ = self._parse_response(resp)
+        return status is not None and (status & 0x80)
+
+    def set_aec_step(self, mu):
+        """Set AEC step size (0.0 to 1.0)."""
+        mu_byte = int(mu * 100)
+        if mu_byte > 100:
+            mu_byte = 100
+        cmd = f'*am{self._hex_byte(mu_byte)}\n'.encode()
+        resp = self._send_cmd(cmd)
+        status, _ = self._parse_response(resp)
+        return status is not None and (status & 0x80)
+
+    # ==================== Echo Simulation Commands ====================
+
+    def set_echo_sim(self, enable, gain=0.5):
+        """Enable/disable echo simulation with gain (0.0-1.0)."""
+        enable_byte = 1 if enable else 0
+        gain_byte = int(gain * 100)
+        if gain_byte > 100:
+            gain_byte = 100
+        cmd = f'*ax{self._hex_byte(enable_byte)}{self._hex_byte(gain_byte)}\n'.encode()
+        resp = self._send_cmd(cmd)
+        status, _ = self._parse_response(resp)
+        return status is not None and (status & 0x80)
+
+    def get_echo_sim(self):
+        """Get echo simulation state. Returns dict with 'enabled', 'gain' or None."""
+        cmd = b'?ax\n'
+        resp = self._send_cmd(cmd)
+        status, data = self._parse_response(resp)
+        if status is not None and (status & 0x80) and len(data) >= 2:
+            return {
+                'enabled': data[0] != 0,
+                'gain': data[1] / 100.0
+            }
+        return None
+
 
 class LevelMeter(tk.Canvas):
     """Simple audio level meter widget."""
@@ -484,14 +566,14 @@ class EQResponsePlot(tk.Frame):
 
 
 class EQControlGUI:
-    """Main EQ Control GUI application."""
+    """Main EQ & AEC Control GUI application."""
 
     def __init__(self, root):
         self.root = root
-        self.root.title("Perseus_512 EQ Control")
+        self.root.title("Perseus_512 EQ & AEC Control")
         self.root.configure(bg='#2a2a2a')
-        self.root.geometry("800x600")
-        self.root.minsize(700, 500)
+        self.root.geometry("900x650")
+        self.root.minsize(800, 550)
 
         self.serial = EQSerial()
         self.band_sliders = []
@@ -615,10 +697,130 @@ class EQControlGUI:
         self.output_meter = LevelMeter(meter_frame, "OUT:", width=250)
         self.output_meter.pack(pady=3, padx=10, anchor='w')
 
+        # AEC Control
+        aec_frame = tk.LabelFrame(right_frame, text="AEC (Echo Cancellation)", bg='#2a2a2a', fg='white')
+        aec_frame.pack(fill=tk.X, pady=5)
+
+        aec_row1 = tk.Frame(aec_frame, bg='#2a2a2a')
+        aec_row1.pack(fill=tk.X, padx=10, pady=5)
+
+        self.aec_enable_var = tk.BooleanVar(value=True)
+        self.aec_enable_check = tk.Checkbutton(
+            aec_row1,
+            text="AEC Enabled",
+            variable=self.aec_enable_var,
+            command=self._on_aec_enable_change,
+            bg='#2a2a2a',
+            fg='white',
+            selectcolor='#1a1a1a',
+            activebackground='#2a2a2a',
+            activeforeground='white',
+            font=('Arial', 10, 'bold')
+        )
+        self.aec_enable_check.pack(side=tk.LEFT)
+
+        self.aec_reset_btn = tk.Button(aec_row1, text="Reset Filter",
+                                       command=self._on_aec_reset,
+                                       bg='#663300', fg='white')
+        self.aec_reset_btn.pack(side=tk.RIGHT, padx=5)
+
+        aec_row2 = tk.Frame(aec_frame, bg='#2a2a2a')
+        aec_row2.pack(fill=tk.X, padx=10, pady=2)
+
+        tk.Label(aec_row2, text="ERLE:", bg='#2a2a2a', fg='white',
+                font=('Arial', 9)).pack(side=tk.LEFT)
+        self.erle_label = tk.Label(aec_row2, text="-- dB", bg='#2a2a2a',
+                                  fg='#00cc00', font=('Arial', 12, 'bold'))
+        self.erle_label.pack(side=tk.LEFT, padx=10)
+
+        tk.Label(aec_row2, text="Near-End:", bg='#2a2a2a', fg='white',
+                font=('Arial', 9)).pack(side=tk.LEFT, padx=(20, 0))
+        self.nearend_label = tk.Label(aec_row2, text="--", bg='#2a2a2a',
+                                     fg='#888', font=('Arial', 10))
+        self.nearend_label.pack(side=tk.LEFT, padx=5)
+
+        aec_row3 = tk.Frame(aec_frame, bg='#2a2a2a')
+        aec_row3.pack(fill=tk.X, padx=10, pady=2)
+
+        tk.Label(aec_row3, text="Step Size:", bg='#2a2a2a', fg='white',
+                font=('Arial', 9)).pack(side=tk.LEFT)
+        self.aec_step_var = tk.IntVar(value=50)
+        self.aec_step_slider = tk.Scale(
+            aec_row3,
+            from_=1,
+            to=100,
+            orient=tk.HORIZONTAL,
+            variable=self.aec_step_var,
+            length=150,
+            bg='#3a3a3a',
+            fg='white',
+            troughcolor='#1a1a1a',
+            highlightthickness=0,
+            command=self._on_aec_step_change
+        )
+        self.aec_step_slider.pack(side=tk.LEFT, padx=5)
+
+        # Echo Simulation Controls (for testing AEC without physical mic)
+        echo_frame = tk.LabelFrame(right_frame, text="Echo Simulation (AEC Test)", bg='#2a2a2a', fg='white')
+        echo_frame.pack(fill=tk.X, pady=5)
+
+        echo_row1 = tk.Frame(echo_frame, bg='#2a2a2a')
+        echo_row1.pack(fill=tk.X, padx=10, pady=5)
+
+        self.echo_sim_var = tk.BooleanVar(value=False)
+        self.echo_sim_check = tk.Checkbutton(
+            echo_row1,
+            text="Enable Echo Simulation",
+            variable=self.echo_sim_var,
+            command=self._on_echo_sim_change,
+            bg='#2a2a2a',
+            fg='#ffcc00',
+            selectcolor='#1a1a1a',
+            activebackground='#2a2a2a',
+            activeforeground='#ffcc00',
+            font=('Arial', 10, 'bold')
+        )
+        self.echo_sim_check.pack(side=tk.LEFT)
+
+        tk.Label(echo_row1, text="(Adds delayed output to input)", bg='#2a2a2a',
+                fg='#888', font=('Arial', 8)).pack(side=tk.LEFT, padx=10)
+
+        echo_row2 = tk.Frame(echo_frame, bg='#2a2a2a')
+        echo_row2.pack(fill=tk.X, padx=10, pady=2)
+
+        tk.Label(echo_row2, text="Echo Gain:", bg='#2a2a2a', fg='white',
+                font=('Arial', 9)).pack(side=tk.LEFT)
+        self.echo_gain_var = tk.IntVar(value=50)
+        self.echo_gain_slider = tk.Scale(
+            echo_row2,
+            from_=0,
+            to=100,
+            orient=tk.HORIZONTAL,
+            variable=self.echo_gain_var,
+            length=150,
+            bg='#3a3a3a',
+            fg='white',
+            troughcolor='#1a1a1a',
+            highlightthickness=0,
+            command=self._on_echo_gain_change
+        )
+        self.echo_gain_slider.pack(side=tk.LEFT, padx=5)
+
+        self.echo_gain_label = tk.Label(echo_row2, text="50%", bg='#2a2a2a',
+                                        fg='#ffcc00', font=('Arial', 9))
+        self.echo_gain_label.pack(side=tk.LEFT, padx=5)
+
+        # Test instructions
+        test_info = tk.Label(echo_frame,
+                            text="Test: 1) Play audio via Line In  2) Enable AEC  3) Enable Echo Sim\n"
+                                 "With AEC OFF: hear echo/reverb. With AEC ON: echo cancelled, ERLE shows dB reduction",
+                            bg='#2a2a2a', fg='#888', font=('Arial', 8), justify=tk.LEFT)
+        test_info.pack(padx=10, pady=5, anchor='w')
+
         # Info label
         info_frame = tk.Frame(right_frame, bg='#2a2a2a')
         info_frame.pack(fill=tk.X)
-        tk.Label(info_frame, text="UART: 230400 baud | Bands: 32Hz - 4kHz | Gain: -18 to +12 dB",
+        tk.Label(info_frame, text="UART: 230400 baud | EQ: 32Hz-4kHz | AEC: 512 taps, 64ms",
                 bg='#2a2a2a', fg='#888', font=('Arial', 8)).pack()
 
     def _refresh_ports(self):
@@ -670,17 +872,49 @@ class EQControlGUI:
             self.poll_thread.join(timeout=1.0)
 
     def _poll_levels(self):
-        """Background thread to poll audio levels."""
+        """Background thread to poll audio levels and AEC status."""
+        poll_count = 0
         while self.polling:
+            # Poll levels every cycle
             levels = self.serial.get_levels()
             if levels:
                 self.root.after(0, lambda l=levels: self._update_meters(l))
+
+            # Poll AEC status every 5th cycle (4Hz)
+            poll_count += 1
+            if poll_count >= 5:
+                poll_count = 0
+                aec_status = self.serial.get_aec_status()
+                if aec_status:
+                    self.root.after(0, lambda s=aec_status: self._update_aec_status(s))
+
             time.sleep(0.05)  # 20Hz update rate
 
     def _update_meters(self, levels):
         """Update level meter displays."""
         self.input_meter.set_level(levels[0])
         self.output_meter.set_level(levels[1])
+
+    def _update_aec_status(self, status):
+        """Update AEC status displays."""
+        # Update ERLE display
+        erle = status['erle']
+        if erle > 15:
+            color = '#00cc00'  # Green - good
+        elif erle > 5:
+            color = '#cccc00'  # Yellow - moderate
+        else:
+            color = '#cc6600'  # Orange - low
+        self.erle_label.config(text=f"{erle:+d} dB", fg=color)
+
+        # Update near-end indicator
+        if status['near_end']:
+            self.nearend_label.config(text="SPEECH", fg='#ff6600')
+        else:
+            self.nearend_label.config(text="Silent", fg='#888')
+
+        # Update enable checkbox (without triggering callback)
+        self.aec_enable_var.set(status['enabled'])
 
     def _sync_from_device(self):
         """Read current EQ settings from device."""
@@ -719,6 +953,37 @@ class EQControlGUI:
         """Handle enable checkbox change."""
         if self.serial.connected:
             self.serial.set_enable(self.enable_var.get())
+
+    def _on_aec_enable_change(self):
+        """Handle AEC enable checkbox change."""
+        if self.serial.connected:
+            self.serial.set_aec_enable(self.aec_enable_var.get())
+
+    def _on_aec_reset(self):
+        """Handle AEC reset button click."""
+        if self.serial.connected:
+            self.serial.reset_aec()
+            self.erle_label.config(text="0 dB", fg='#888')
+
+    def _on_aec_step_change(self, value):
+        """Handle AEC step size change."""
+        if self.serial.connected:
+            mu = int(value) / 100.0
+            self.serial.set_aec_step(mu)
+
+    def _on_echo_sim_change(self):
+        """Handle echo simulation checkbox change."""
+        if self.serial.connected:
+            enabled = self.echo_sim_var.get()
+            gain = self.echo_gain_var.get() / 100.0
+            self.serial.set_echo_sim(enabled, gain)
+
+    def _on_echo_gain_change(self, value):
+        """Handle echo gain slider change."""
+        gain_pct = int(value)
+        self.echo_gain_label.config(text=f"{gain_pct}%")
+        if self.serial.connected and self.echo_sim_var.get():
+            self.serial.set_echo_sim(True, gain_pct / 100.0)
 
     def _load_preset(self, preset):
         """Load a preset from the device."""
