@@ -87,25 +87,9 @@ typedef struct {
     int   filter_order;
     int   num_channels;
 
-    /* Frame accumulators for 48kHz -> 8kHz conversion */
-    float mic_accum_48k[AEC_FRAME_SIZE_48K];
-    float ref_accum_48k[AEC_FRAME_SIZE_48K];
-    int   accum_count;
-
-    /* Output buffer for processed frames (handles frame size mismatch) */
-    float out_accum_48k[AEC_FRAME_SIZE_48K];
-    int   out_read_idx;       /* Read index into output buffer */
-    int   out_avail;          /* Samples available in output buffer */
-
-    /* 8kHz working buffers */
-    float mic_8k[AEC_FRAME_SIZE_8K];
-    float ref_8k[AEC_FRAME_SIZE_8K];
-    float out_8k[AEC_FRAME_SIZE_8K];
-
-    /* Submodule states */
+    /* Submodule states (direct 48kHz processing - no SRC buffers needed) */
     aec_nlms_state_t nlms;
     aec_vad_state_t  vad;
-    aec_src_state_t  src;
 
     /* Performance metrics */
     float erle_db;              /* Echo Return Loss Enhancement */

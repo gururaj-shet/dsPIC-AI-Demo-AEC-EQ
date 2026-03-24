@@ -1,0 +1,20 @@
+# MPLAB X Build artifacts
+perseus_512.X/build/
+perseus_512.X/dist/
+perseus_512.X/*.i
+perseus_512.X/*.s
+perseus_512.X/nbproject/private/
+
+# Temporary files
+~$*
+*.tmp
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.idea/
+*.suo
+*.user

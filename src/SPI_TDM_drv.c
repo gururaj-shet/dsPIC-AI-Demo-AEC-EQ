@@ -285,7 +285,7 @@ static float      g_aec_ref_buffer[ STAGE_1_PROC_CH * NUM_SAMPLE ];
 
 // Echo simulation for testing AEC without physical mic/speaker
 // Using 10ms delay (small buffer to save memory, but enough for testing)
-#define ECHO_SIM_DELAY_SAMPLES (1440)  // 30ms at 48kHz - audible echo delay
+#define ECHO_SIM_DELAY_SAMPLES (2880)  // 60ms at 48kHz - audible echo
 #define ECHO_SIM_BUFFER_SIZE  (ECHO_SIM_DELAY_SAMPLES + NUM_SAMPLE * STAGE_1_PROC_CH)
 static float      g_echo_sim_buffer[ECHO_SIM_BUFFER_SIZE];
 static int        g_echo_sim_write_idx = 0;
