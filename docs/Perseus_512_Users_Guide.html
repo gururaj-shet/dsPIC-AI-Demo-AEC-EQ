@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perseus_512 Audio DSP Platform - User's Guide</title>
+    <style>
+        :root {
+            --primary-color: #c8102e;
+            --secondary-color: #1a1a2e;
+            --accent-color: #4a90d9;
+            --bg-color: #0f0f1a;
+            --card-bg: #1a1a2e;
+            --text-color: #e0e0e0;
+            --text-muted: #8a8a9a;
+            --border-color: #2a2a3e;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8b0000 100%);
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .header .version {
+            margin-top: 10px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+            gap: 5px;
+        }
+
+        .nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .nav a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            color: var(--accent-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        tr:hover {
+            background: rgba(200, 16, 46, 0.1);
+        }
+
+        /* Code */
+        code, pre {
+            background: rgba(0,0,0,0.4);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .info-box.note {
+            background: rgba(74, 144, 217, 0.2);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .info-box.important {
+            background: rgba(255, 152, 0, 0.2);
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .info-box.success {
+            background: rgba(76, 175, 80, 0.2);
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            background: rgba(0,0,0,0.3);
+            border: none;
+            color: var(--text-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: rgba(200, 16, 46, 0.3);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 0 8px 8px 8px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Accordion */
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(200, 16, 46, 0.2);
+        }
+
+        .accordion-header h4 {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .accordion-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.open .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-item.open .accordion-content {
+            max-height: 2000px;
+        }
+
+        .accordion-body {
+            padding: 20px;
+        }
+
+        /* Diagram Container */
+        .diagram-container {
+            background: #0a0a15;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .diagram-container pre {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin: 0;
+            color: var(--accent-color);
+        }
+
+        /* Progress Indicator */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 2000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            width: 0;
+            transition: width 0.1s linear;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 15px rgba(200, 16, 46, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(200, 16, 46, 0.5);
+        }
+
+        /* TOC */
+        .toc {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .toc h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--accent-color);
+        }
+
+        .toc ul ul {
+            margin-left: 20px;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        /* LED Indicator */
+        .led-meter {
+            display: flex;
+            gap: 5px;
+            align-items: flex-end;
+            margin: 15px 0;
+            height: 80px;
+        }
+
+        .led-bar {
+            width: 30px;
+            border-radius: 3px;
+            transition: height 0.3s ease;
+        }
+
+        /* Quick Start Box */
+        .quick-start {
+            background: linear-gradient(135deg, rgba(200, 16, 46, 0.2), rgba(74, 144, 217, 0.2));
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .quick-start h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .quick-start ol {
+            margin-left: 25px;
+        }
+
+        .quick-start li {
+            margin: 12px 0;
+            font-size: 1.05em;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .nav a {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+
+        /* Search */
+        .search-container {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(200, 16, 46, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-container, .back-to-top, .progress-container {
+                display: none;
+            }
+
+            .section {
+                break-inside: avoid;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>Perseus_512 Audio DSP Platform</h1>
+        <div class="subtitle">dsPIC33AK512MPS512 Audio Processing Demonstration</div>
+        <div class="version">User's Guide | Version 2.1 | March 2026</div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav class="nav">
+            <a href="#introduction">Introduction</a>
+            <a href="#overview">Overview</a>
+            <a href="#hardware">Hardware</a>
+            <a href="#operating">Operating</a>
+            <a href="#controls">Controls</a>
+            <a href="#leds">LEDs</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#equalizer">Equalizer</a>
+            <a href="#aec">AEC</a>
+            <a href="#avas">AVAS</a>
+            <a href="#features">Features</a>
+            <a href="#gui">GUI</a>
+            <a href="#protocol">Protocol</a>
+            <a href="#demos">Demos</a>
+            <a href="#troubleshooting">Troubleshooting</a>
+            <a href="#specs">Specifications</a>
+        </nav>
+    </div>
+
+    <main class="container">
+        <!-- Search -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search documentation...">
+        </div>
+
+        <!-- Introduction Section -->
+        <section class="section" id="introduction">
+            <h2>1. Introduction</h2>
+
+            <h3>1.1 Purpose</h3>
+            <p>This User's Guide provides comprehensive documentation for the Perseus_512 Audio DSP Platform, a real-time audio processing demonstration built on the Microchip dsPIC33AK512MPS512 microcontroller.</p>
+
+            <h3>1.2 Key Highlights</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Real-Time Processing</h4>
+                    <p>48kHz sample rate with sub-millisecond latency using hardware FPU acceleration</p>
+                </div>
+                <div class="feature-card">
+                    <h4>8-Band Graphic EQ</h4>
+                    <p>Professional equalizer with 8 preset curves and -18 to +12 dB per-band control</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Echo Cancellation</h4>
+                    <p>512-tap NLMS adaptive filter with 64ms echo tail for hands-free applications</p>
+                </div>
+                <div class="feature-card">
+                    <h4>AVAS Engine Synth</h4>
+                    <p>V8 engine sound synthesis for electric vehicle audio alerts</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Physical Controls</h4>
+                    <p>3 buttons, 3 capacitive touch sensors, and potentiometer for hands-on control</p>
+                </div>
+                <div class="feature-card">
+                    <h4>LED Level Meter</h4>
+                    <p>8-segment logarithmic audio level display with attack/release dynamics</p>
+                </div>
+            </div>
+
+            <h3>1.3 Target Audience</h3>
+            <ul>
+                <li><strong>Applications Engineers</strong> - Evaluating dsPIC33AK audio capabilities</li>
+                <li><strong>Software Developers</strong> - Implementing audio DSP solutions</li>
+                <li><strong>Sales/FAE Teams</strong> - Demonstrating Microchip audio technology</li>
+                <li><strong>Customers</strong> - Exploring embedded audio processing options</li>
+            </ul>
+        </section>
+
+        <!-- System Overview -->
+        <section class="section" id="overview">
+            <h2>2. System Overview</h2>
+
+            <h3>2.1 Platform Description</h3>
+            <p>Perseus_512 is a comprehensive audio DSP demonstration platform that showcases the computational power and versatility of the dsPIC33AK512MPS512 microcontroller. The platform processes real-time stereo audio at 48kHz with multiple DSP algorithms running simultaneously.</p>
+
+            <h3>2.2 Key Features</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>8-Band Graphic EQ</td>
+                        <td>Professional equalizer with 8 preset curves</td>
+                    </tr>
+                    <tr>
+                        <td>Acoustic Echo Cancellation</td>
+                        <td>NLMS-based echo canceller for hands-free audio</td>
+                    </tr>
+                    <tr>
+                        <td>AVAS Engine Synthesis</td>
+                        <td>V8 engine sound for electric vehicle alerts (RPM-controlled)</td>
+                    </tr>
+                    <tr>
+                        <td>Click-Clack Synthesizer</td>
+                        <td>Turn signal indicator sounds for automotive</td>
+                    </tr>
+                    <tr>
+                        <td>Tone Controls</td>
+                        <td>Independent treble, mid, and bass adjustments</td>
+                    </tr>
+                    <tr>
+                        <td>Bass Enhancement</td>
+                        <td>Psychoacoustic bass boost for small speakers</td>
+                    </tr>
+                    <tr>
+                        <td>Stereo Widening</td>
+                        <td>Virtual surround/spatial enhancement</td>
+                    </tr>
+                    <tr>
+                        <td>Physical Controls</td>
+                        <td>3 buttons + 3 touch sensors + potentiometer</td>
+                    </tr>
+                    <tr>
+                        <td>8-Segment LED Meter</td>
+                        <td>Real-time audio level visualization</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.3 Target Applications</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Automotive Audio</h4>
+                    <p>In-vehicle entertainment, AVAS for EVs, and hands-free calling systems</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Conferencing</h4>
+                    <p>Speakerphone and video conferencing systems</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Smart Speakers</h4>
+                    <p>Audio enhancement for compact form factors</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Professional Audio</h4>
+                    <p>Studio monitoring and PA systems</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware Requirements -->
+        <section class="section" id="hardware">
+            <h2>3. Hardware Requirements</h2>
+
+            <h3>3.1 Bill of Materials</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Qty</th>
+                        <th>Component</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>dsPIC33AK512MPS512 Curiosity Nano</td>
+                        <td>Main processor evaluation board</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>WM8904 Click Board</td>
+                        <td>Audio codec with I2S interface</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>USB Micro Cable</td>
+                        <td>Programming/Debug/Power</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3.5mm Audio Cable</td>
+                        <td>Line In and Headphone Out</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Audio Source</td>
+                        <td>Smartphone, PC, or music player</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Headphones/Speaker</td>
+                        <td>Audio monitoring</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.2 Hardware Setup</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Step 1: Insert WM8904 Click Board</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Install the WM8904 Click board into <strong>MikroBUS Slot 1</strong> (critical for BCLK routing). Ensure secure connection of all pins.</p>
+                            <div class="info-box important">
+                                <strong>Important:</strong> The WM8904 MUST be in Slot 1 - the I2S clock routing depends on this specific slot.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Step 2: Connect Audio Source</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Connect your audio source (smartphone, PC) to the WM8904 <strong>LINE IN</strong> jack using a standard 3.5mm stereo cable.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Step 3: Connect Audio Output</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Connect headphones or powered speakers to the WM8904 <strong>HP OUT</strong> jack. Ensure volume is set to a moderate level initially.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Step 4: Connect USB</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p>Connect the USB micro cable to the Curiosity Nano board, then to your PC. The board will be powered via USB and enumerate as a COM port.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>3.3 Connection Diagram</h3>
+            <div class="diagram-container">
+<pre>
+                     dsPIC33AK512MPS512 Curiosity Nano
+     +================================================================+
+     |                                                                |
+     |   +------------------+     +----------+    +--------------+    |
+     |   |   MikroBUS       |     | Buttons  |    |    USB       |    |
+     |   |    Slot 1        |     | BTN1-3   |    |   Connector  |    |
+     |   |   +----------+   |     +----------+    |              |    |
+     |   |   | WM8904   |   |     | Touch    |    |  - Power     |    |
+     |   |   |  Click   |   |     | T1-T3    |    |  - Program   |    |
+     |   |   +----+-----+   |     +----------+    |  - Serial    |    |
+     |   +--------|---------+     | POT (RPM)|    +--------------+    |
+     |            |               +----------+           |            |
+     |            |               | 8x LEDs  |           |            |
+     +============|===============+----------+===========|============+
+                  |                                      |
+     +------------+------------+                         |
+     |            |            |                         v
+  LINE IN      HP OUT        I2S                   To Host PC
+     ^            |         Signals                      |
+     |            v                               +------+------+
+ +---+---+   +----+----+                     +----+----+  +-----+-----+
+ | Audio |   |  Spkr/  |                     | MPLAB X |  | Python    |
+ | Source|   |  Hdphn  |                     |   IDE   |  |   GUI     |
+ +-------+   +---------+                     +---------+  +-----------+
+</pre>
+            </div>
+        </section>
+
+        <!-- Operating the Demo -->
+        <section class="section" id="operating">
+            <h2>4. Operating the Demo</h2>
+
+            <div class="quick-start">
+                <h3>Quick Start Guide</h3>
+                <ol>
+                    <li><strong>Power On:</strong> Connect USB cable - board powers up, LED meter sweeps</li>
+                    <li><strong>Connect Audio:</strong> Audio source to LINE IN, headphones to HP OUT</li>
+                    <li><strong>Play Music:</strong> Start audio playback - hear processed audio, see level meter</li>
+                    <li><strong>Experiment:</strong> Press buttons and touch sensors to toggle effects</li>
+                    <li><strong>Advanced:</strong> Launch Python GUI for full parameter control</li>
+                </ol>
+            </div>
+
+            <h3>4.1 Power-Up Behavior</h3>
+            <table>
+                <tr><th>Condition</th><th>Behavior</th><th>Result</th></tr>
+                <tr>
+                    <td>Normal Power-Up</td>
+                    <td>USB connected, no buttons held</td>
+                    <td>Standard audio mode, all effects at defaults</td>
+                </tr>
+                <tr>
+                    <td>Engine Synth Mode</td>
+                    <td><strong>Hold BTN1 during power-up</strong></td>
+                    <td>AVAS V8 engine synthesis enabled, pot controls RPM</td>
+                </tr>
+            </table>
+
+            <h3>4.2 Basic Operation</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Audio Pass-Through</h4>
+                    <p>By default, audio flows from LINE IN through all processing stages to HP OUT. The LED meter shows the current output level.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Button Controls</h4>
+                    <p>Press BTN1 for Mute, BTN2 for Treble boost, BTN3 for Bass boost. All buttons toggle on/off.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Touch Controls</h4>
+                    <p>Touch T1 for Click-Clack, T2 for Surround/Widen, T3 for Bass Enhancer. Touch to toggle.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>RPM Control</h4>
+                    <p>When Engine Synth is enabled, the potentiometer controls engine RPM from 0 to 8190 RPM.</p>
+                </div>
+            </div>
+
+            <h3>4.3 LED Indicators</h3>
+            <p>The 8-segment LED bar shows audio output level in real-time:</p>
+            <table>
+                <tr><th>LEDs Lit</th><th>Approximate Level</th><th>Status</th></tr>
+                <tr><td>1</td><td>-40 dB</td><td>Very quiet</td></tr>
+                <tr><td>2-3</td><td>-30 to -24 dB</td><td>Quiet</td></tr>
+                <tr><td>4-5</td><td>-18 to -12 dB</td><td>Normal</td></tr>
+                <tr><td>6-7</td><td>-6 to -3 dB</td><td>Loud</td></tr>
+                <tr><td>8</td><td>-1 dB</td><td>Near clipping - reduce level</td></tr>
+            </table>
+
+            <h3>4.4 Using the Python GUI</h3>
+            <ol>
+                <li>Navigate to <code>tools/</code> directory</li>
+                <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+                <li>Launch: <code>python eq_gui.py</code></li>
+                <li>Select COM port and click Connect</li>
+                <li>Adjust EQ, AEC, and other parameters in real-time</li>
+            </ol>
+        </section>
+
+        <!-- Physical Controls -->
+        <section class="section" id="controls">
+            <h2>5. Physical Controls</h2>
+
+            <h3>5.1 Push Buttons</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Button</th>
+                        <th>Function</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>BTN1</strong></td>
+                        <td>Mute / Engine Synth Enable</td>
+                        <td>Toggle mute ON/OFF. Hold at power-up to enable Engine Synth mode.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTN2</strong></td>
+                        <td>Treble Boost</td>
+                        <td>Toggle treble enhancement (+6 dB at 8kHz)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BTN3</strong></td>
+                        <td>Bass Boost</td>
+                        <td>Toggle bass enhancement (+6 dB at 100Hz)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.2 Capacitive Touch Sensors</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sensor</th>
+                        <th>Function</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>TOUCH1</strong></td>
+                        <td>Click-Clack</td>
+                        <td>Toggle turn signal indicator sound synthesis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOUCH2</strong></td>
+                        <td>Surround/Widen</td>
+                        <td>Toggle stereo widening effect (M/S processing)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOUCH3</strong></td>
+                        <td>Bass Enhancer</td>
+                        <td>Toggle psychoacoustic bass enhancement</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="info-box note">
+                <strong>Touch Sensing:</strong> Uses Microchip QTouch library for reliable capacitive touch detection. Touch sensors require skin contact for activation.
+            </div>
+
+            <h3>5.3 Potentiometer</h3>
+            <table>
+                <tr><th>Parameter</th><th>Value</th></tr>
+                <tr><td>Function</td><td>Engine RPM Control (when Engine Synth enabled)</td></tr>
+                <tr><td>Range</td><td>0 - 8190 RPM</td></tr>
+                <tr><td>Resolution</td><td>12-bit ADC (4096 steps)</td></tr>
+                <tr><td>Response</td><td>Smoothed with low-pass filter</td></tr>
+            </table>
+            <div class="info-box important">
+                <strong>Note:</strong> The potentiometer only controls RPM when Engine Synth mode is active (BTN1 held during power-up).
+            </div>
+        </section>
+
+        <!-- LED Indicators -->
+        <section class="section" id="leds">
+            <h2>6. LED Indicators</h2>
+
+            <h3>6.1 8-Segment Audio Level Meter</h3>
+            <p>The on-board LED bar provides real-time visualization of audio output level using a logarithmic scale optimized for human perception.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>LED</th>
+                        <th>Threshold (dB)</th>
+                        <th>Linear Value</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>-40 dB</td><td>0.01</td><td>Green</td></tr>
+                    <tr><td>2</td><td>-30 dB</td><td>0.032</td><td>Green</td></tr>
+                    <tr><td>3</td><td>-24 dB</td><td>0.063</td><td>Green</td></tr>
+                    <tr><td>4</td><td>-18 dB</td><td>0.126</td><td>Green</td></tr>
+                    <tr><td>5</td><td>-12 dB</td><td>0.251</td><td>Yellow</td></tr>
+                    <tr><td>6</td><td>-6 dB</td><td>0.501</td><td>Yellow</td></tr>
+                    <tr><td>7</td><td>-3 dB</td><td>0.708</td><td>Orange</td></tr>
+                    <tr><td>8</td><td>-1 dB</td><td>0.891</td><td>Red</td></tr>
+                </tbody>
+            </table>
+
+            <h3>6.2 Dynamics</h3>
+            <table>
+                <tr><th>Parameter</th><th>Value</th><th>Description</th></tr>
+                <tr><td>Attack Coefficient</td><td>3.5</td><td>Fast response to level increases</td></tr>
+                <tr><td>Release Coefficient</td><td>0.08</td><td>Smooth decay for visual appeal</td></tr>
+                <tr><td>Update Rate</td><td>Per audio frame (32 samples)</td><td>~1500 Hz update rate</td></tr>
+            </table>
+
+            <h3>6.3 RGB Status LED</h3>
+            <p>The board includes an RGB LED for status indication, controlled via PWM.</p>
+            <table>
+                <tr><th>Color</th><th>Status</th></tr>
+                <tr><td>Green</td><td>Normal operation</td></tr>
+                <tr><td>Blue</td><td>Engine Synth mode active</td></tr>
+                <tr><td>Red</td><td>Muted / Error condition</td></tr>
+                <tr><td>Pulsing</td><td>Processing active, varies with audio level</td></tr>
+            </table>
+        </section>
+
+        <!-- Software Architecture -->
+        <section class="section" id="architecture">
+            <h2>7. Software Architecture</h2>
+
+            <h3>7.1 System Block Diagram</h3>
+            <div class="info-box note">
+                <strong>Tip:</strong> View the <a href="Perseus_512_Block_Diagram.html" style="color: var(--accent-color);">Interactive Block Diagram</a> for a detailed visual representation.
+            </div>
+
+            <h3>7.2 Audio Processing Pipeline</h3>
+            <div class="diagram-container">
+<pre>
++-----------------------------------------------------------------------------------+
+|                         AUDIO PROCESSING PIPELINE                                  |
++-----------------------------------------------------------------------------------+
+|                                                                                    |
+|  TDM      Float      Tone     8-Band    AEC      Bass     Widen    Engine   TDM   |
+|  Input -> Convert -> Ctrl  ->  EQ   -> ----  -> Enhance -> ---- -> Synth -> Out   |
+|    |        |         |        |        |         |        |        |        |    |
+|    v        v         v        v        v         v        v        v        v    |
+| 24-bit   32-bit   Treble/   Per-band   Echo    Psycho-   M/S    V8 Engine  24-bit |
+| I2S      Float    Mid/Bass   +/-18dB  Cancel   acoustic  Proc   RPM-Ctrl   I2S    |
+|                                                                                    |
+|                          +-------------+                                           |
+|                          | Click-Clack |  <- Turn signal synthesizer              |
+|                          +-------------+                                           |
+|                                 |                                                  |
+|                                 v                                                  |
+|                          +-------------+                                           |
+|                          |  Gain Ctrl  |  <- Volume/output adjustment             |
+|                          +-------------+                                           |
+|                                 |                                                  |
+|                                 v                                                  |
+|                          +-------------+                                           |
+|                          | LED Meter   |  <- 8-segment level display              |
+|                          +-------------+                                           |
+|                                                                                    |
+| Sample Rate: 48kHz         Frame Size: 32 samples            Channels: 2 (Stereo) |
+| Latency: <1ms              Processing: FPU-optimized         Bit Depth: 32-bit    |
++-----------------------------------------------------------------------------------+
+</pre>
+            </div>
+
+            <h3>7.3 File Structure</h3>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('tab-main')">Main Source</button>
+                <button class="tab-btn" onclick="showTab('tab-audio')">Audio Modules</button>
+                <button class="tab-btn" onclick="showTab('tab-tools')">Tools</button>
+            </div>
+
+            <div id="tab-main" class="tab-content active">
+                <table>
+                    <tr><th>File</th><th>Description</th></tr>
+                    <tr><td>main.c</td><td>Application entry point, button/touch handling</td></tr>
+                    <tr><td>SPI_TDM_drv.c</td><td>TDM audio interface driver, processing ISR</td></tr>
+                    <tr><td>osc_drv.c</td><td>Clock/oscillator configuration</td></tr>
+                    <tr><td>i2c.c</td><td>I2C driver for codec control</td></tr>
+                    <tr><td>wm8904.c</td><td>WM8904 codec driver</td></tr>
+                </table>
+            </div>
+
+            <div id="tab-audio" class="tab-content">
+                <table>
+                    <tr><th>File</th><th>Description</th></tr>
+                    <tr><td>gain_ctrl.c</td><td>Volume/gain control</td></tr>
+                    <tr><td>tone_ctrl.c</td><td>3-band tone control</td></tr>
+                    <tr><td>bass_enhancer.c</td><td>Psychoacoustic bass enhancement</td></tr>
+                    <tr><td>widen_ctrl.c</td><td>Stereo widening (M/S processing)</td></tr>
+                    <tr><td>aec_33ak.c</td><td>Acoustic Echo Cancellation</td></tr>
+                    <tr><td>eq_perseus_wrapper.c</td><td>8-band EQ interface</td></tr>
+                    <tr><td>engine_synth.c</td><td>AVAS V8 engine sound synthesis</td></tr>
+                    <tr><td>click_clack.c</td><td>Turn signal indicator sounds</td></tr>
+                    <tr><td>LED_level_meter.c</td><td>8-segment audio level display</td></tr>
+                </table>
+            </div>
+
+            <div id="tab-tools" class="tab-content">
+                <table>
+                    <tr><th>File</th><th>Description</th></tr>
+                    <tr><td>eq_gui.py</td><td>Python GUI application</td></tr>
+                    <tr><td>eq_test.py</td><td>Test utilities</td></tr>
+                    <tr><td>requirements.txt</td><td>Python dependencies</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Equalizer Section -->
+        <section class="section" id="equalizer">
+            <h2>8. 8-Band Graphic Equalizer</h2>
+
+            <h3>8.1 Overview</h3>
+            <p>The 8-band graphic equalizer provides independent gain control over 8 frequency bands, allowing precise tonal shaping of the audio signal. Each band is implemented using a biquad IIR filter optimized for the dsPIC33AK FPU.</p>
+
+            <h3>8.2 Frequency Bands</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Band</th>
+                        <th>Frequency</th>
+                        <th>Range</th>
+                        <th>Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>32 Hz</td><td>20-45 Hz</td><td>Sub-bass, rumble</td></tr>
+                    <tr><td>2</td><td>62 Hz</td><td>45-90 Hz</td><td>Bass fundamentals</td></tr>
+                    <tr><td>3</td><td>125 Hz</td><td>90-180 Hz</td><td>Warmth, body</td></tr>
+                    <tr><td>4</td><td>250 Hz</td><td>180-355 Hz</td><td>Low midrange</td></tr>
+                    <tr><td>5</td><td>500 Hz</td><td>355-710 Hz</td><td>Vocal fundamentals</td></tr>
+                    <tr><td>6</td><td>1 kHz</td><td>710-1.4k Hz</td><td>Presence</td></tr>
+                    <tr><td>7</td><td>2 kHz</td><td>1.4-2.8k Hz</td><td>Clarity, attack</td></tr>
+                    <tr><td>8</td><td>4 kHz</td><td>2.8-5.6k Hz</td><td>Brilliance, air</td></tr>
+                </tbody>
+            </table>
+
+            <h3>8.3 Presets</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Preset</th>
+                        <th>Band Gains (32-4kHz)</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Flat</td><td>0, 0, 0, 0, 0, 0, 0, 0</td><td>Neutral reference</td></tr>
+                    <tr><td>Bass+</td><td>+6, +5, +4, +2, 0, 0, 0, 0</td><td>Enhanced lows</td></tr>
+                    <tr><td>Treble+</td><td>0, 0, 0, 0, +2, +4, +5, +6</td><td>Bright, airy</td></tr>
+                    <tr><td>V-Shape</td><td>+5, +4, +1, -2, -2, +1, +4, +5</td><td>Modern sound</td></tr>
+                    <tr><td>Vocal</td><td>-2, 0, +3, +5, +5, +3, 0, -2</td><td>Speech clarity</td></tr>
+                    <tr><td>Rock</td><td>+4, +3, 0, -1, +2, +4, +4, +3</td><td>Energetic</td></tr>
+                    <tr><td>Jazz</td><td>+3, +2, 0, +2, +4, +3, +3, +2</td><td>Warm, natural</td></tr>
+                    <tr><td>Classical</td><td>0, 0, 0, 0, 0, -1, -2, -3</td><td>Smooth, refined</td></tr>
+                </tbody>
+            </table>
+
+            <h3>8.4 Technical Implementation</h3>
+            <div class="info-box note">
+                <strong>Filter Type:</strong> Biquad IIR (Direct Form II Transposed)<br>
+                <strong>Arithmetic:</strong> 32-bit single-precision floating point<br>
+                <strong>Optimization:</strong> FPU fused multiply-add (fmaf)
+            </div>
+        </section>
+
+        <!-- AEC Section -->
+        <section class="section" id="aec">
+            <h2>9. Acoustic Echo Cancellation (AEC)</h2>
+
+            <h3>9.1 Overview</h3>
+            <p>Acoustic Echo Cancellation removes unwanted echo in hands-free audio systems. When audio played through a speaker is picked up by a nearby microphone, the far-end listener hears their own voice delayed - this is acoustic echo.</p>
+
+            <div class="diagram-container">
+<pre>
+Without AEC:
++----------+     Speaker      +----------+
+| Far-End  | ----------------> |   Room   | <---- Near-End Talker
+|  Caller  |                   |          |
+|          | <--- Echo! ------ |   Mic    | ----> Picks up speaker
++----------+                   +----------+
+
+With AEC:
++----------+     Speaker      +----------+
+| Far-End  | -------+-------> |   Room   |
+|  Caller  |        |         |          |
+|          |        v         |   Mic    | -----+
+|          |       AEC        +----------+      |
+|          |        |                           |
+|          | <------+ (Echo Removed)            |
++----------+                                    |
+                    ^---------------------------+
+</pre>
+            </div>
+
+            <h3>9.2 NLMS Algorithm</h3>
+            <p>The AEC uses the <strong>Normalized Least Mean Squares (NLMS)</strong> adaptive filter algorithm:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Symbol</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Filter Order</td><td>N</td><td>512</td><td>Number of taps (64ms @ 8kHz)</td></tr>
+                    <tr><td>Step Size</td><td>mu</td><td>0.05</td><td>Adaptation speed</td></tr>
+                    <tr><td>Regularization</td><td>delta</td><td>1e-8</td><td>Prevents division by zero</td></tr>
+                </tbody>
+            </table>
+
+            <h3>9.3 Performance Metrics (ERLE)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ERLE Value</th>
+                        <th>Performance</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>&lt; 5 dB</td><td style="color: var(--error-color);">Poor</td><td>Echo clearly audible</td></tr>
+                    <tr><td>5-15 dB</td><td style="color: var(--warning-color);">Moderate</td><td>Echo still noticeable</td></tr>
+                    <tr><td>15-25 dB</td><td style="color: var(--success-color);">Good</td><td>Echo mostly eliminated</td></tr>
+                    <tr><td>&gt; 25 dB</td><td style="color: var(--success-color);">Excellent</td><td>Echo imperceptible</td></tr>
+                </tbody>
+            </table>
+
+            <h3>9.4 Echo Simulation Mode</h3>
+            <div class="info-box success">
+                <strong>Testing Made Easy:</strong> The firmware includes an Echo Simulation mode that digitally creates echo by adding a 60ms delayed copy of the output back to the input. This allows AEC testing with just Line In audio - no physical feedback path needed.
+            </div>
+        </section>
+
+        <!-- AVAS Engine Synthesis -->
+        <section class="section" id="avas">
+            <h2>10. AVAS Engine Sound Synthesis</h2>
+
+            <h3>10.1 Overview</h3>
+            <p>The Acoustic Vehicle Alerting System (AVAS) feature synthesizes realistic engine sounds for electric vehicles. This addresses the safety concern that quiet EVs pose to pedestrians who rely on engine noise to detect approaching vehicles.</p>
+
+            <div class="info-box important">
+                <strong>Enabling AVAS:</strong> Hold BTN1 during power-up to activate Engine Synth mode. The potentiometer then controls engine RPM.
+            </div>
+
+            <h3>10.2 Engine Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Identifier</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Inline-4</td><td>ENG_I4</td><td>4-cylinder inline engine</td></tr>
+                    <tr><td>Inline-5</td><td>ENG_I5</td><td>5-cylinder inline engine</td></tr>
+                    <tr><td>Inline-6</td><td>ENG_I6</td><td>6-cylinder inline engine</td></tr>
+                    <tr><td><strong>V8</strong></td><td>ENG_V8</td><td>V8 engine (default)</td></tr>
+                    <tr><td>V12</td><td>ENG_V12</td><td>V12 engine</td></tr>
+                </tbody>
+            </table>
+
+            <h3>10.3 RPM Control</h3>
+            <table>
+                <tr><th>Parameter</th><th>Value</th></tr>
+                <tr><td>Minimum RPM</td><td>0 (idle)</td></tr>
+                <tr><td>Maximum RPM</td><td>8190</td></tr>
+                <tr><td>Control Input</td><td>Potentiometer (12-bit ADC)</td></tr>
+                <tr><td>Response</td><td>Smoothed for realistic acceleration feel</td></tr>
+            </table>
+
+            <h3>10.4 Blip Feature</h3>
+            <p>The engine synth includes a "blip" feature that simulates throttle blips with attack/hold/decay envelope:</p>
+            <table>
+                <tr><th>Phase</th><th>Description</th></tr>
+                <tr><td>Attack</td><td>Rapid RPM rise when triggered</td></tr>
+                <tr><td>Hold</td><td>Brief plateau at peak RPM</td></tr>
+                <tr><td>Decay</td><td>Natural RPM fall-off back to current setting</td></tr>
+            </table>
+
+            <h3>10.5 Technical Details</h3>
+            <div class="info-box note">
+                <strong>Synthesis Method:</strong> Wavetable-based synthesis with harmonic content that varies with RPM<br>
+                <strong>Sample Rate:</strong> 48 kHz stereo output<br>
+                <strong>Mixing:</strong> Engine sound is mixed with LINE IN audio (or replaces it if no input)
+            </div>
+        </section>
+
+        <!-- Additional Features -->
+        <section class="section" id="features">
+            <h2>11. Additional Audio Features</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Tone Controls</h4>
+                    <p>Independent 3-band parametric equalizer with Treble (8kHz), Mid (1kHz), and Bass (100Hz) controls, each with +/-12dB range.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Bass Enhancement</h4>
+                    <p>Psychoacoustic bass boost that generates harmonics perceived as the missing fundamental - extended bass on small speakers. Toggled via TOUCH3.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Stereo Widening</h4>
+                    <p>Virtual surround using mid-side processing with frequency-dependent widening for an expanded soundstage. Toggled via TOUCH2.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Click-Clack Synthesizer</h4>
+                    <p>Turn signal indicator sound synthesis for automotive applications. Produces realistic relay-click sounds. Toggled via TOUCH1.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUI Section -->
+        <section class="section" id="gui">
+            <h2>12. GUI Application</h2>
+
+            <h3>12.1 Installation</h3>
+            <pre><code># Navigate to tools directory
+cd perseus_512/tools
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Or install manually
+pip install pyserial numpy matplotlib
+
+# Launch application
+python eq_gui.py</code></pre>
+
+            <h3>12.2 Interface Overview</h3>
+            <div class="diagram-container">
+<pre>
++-------------------------------------------------------------------------+
+| [COM Port v] [Refresh] [Connect]                    Status: Connected    |
++-------------------------------------------------------------------------+
+|                                                                          |
+|  +- Presets ----------------+  +- EQ Frequency Response --------------+  |
+|  | [Flat] [Bass+] [Treble+] |  |                                      |  |
+|  | [V-Shape] [Vocal] [Rock] |  |     ~~~frequency response curve~~~   |  |
+|  | [Jazz] [Classical]       |  |                                      |  |
+|  +--------------------------+  +--------------------------------------+  |
+|                                                                          |
+|  +- EQ Bands (Hz) ------------------------------------------------+     |
+|  |   32    62    125   250   500   1k    2k    4k                 |     |
+|  |   |     |     |     |     |     |     |     |   <- Sliders     |     |
+|  +----------------------------------------------------------------+     |
+|                                                                          |
+|  Master: [--------o--------] 0dB   [x] EQ Enabled   [Sync]              |
+|                                                                          |
+|  +- Audio Levels --------+  +- AEC (Echo Cancellation) -------------+   |
+|  | IN:  [||||||||...] -6dB|  | [x] AEC Enabled     [Reset Filter]   |   |
+|  | OUT: [||||||||||.] -3dB|  | ERLE: +18 dB       Near-End: Silent  |   |
+|  +-----------------------+  +---------------------------------------+   |
++-------------------------------------------------------------------------+
+</pre>
+            </div>
+
+            <h3>12.3 Control Reference</h3>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('gui-connection')">Connection</button>
+                <button class="tab-btn" onclick="showTab('gui-eq')">EQ Controls</button>
+                <button class="tab-btn" onclick="showTab('gui-aec')">AEC Controls</button>
+            </div>
+
+            <div id="gui-connection" class="tab-content active">
+                <table>
+                    <tr><th>Control</th><th>Function</th></tr>
+                    <tr><td>COM Port</td><td>Select serial port for device connection</td></tr>
+                    <tr><td>Refresh</td><td>Rescan available COM ports</td></tr>
+                    <tr><td>Connect/Disconnect</td><td>Toggle serial connection</td></tr>
+                    <tr><td>Status</td><td>Shows current connection state</td></tr>
+                </table>
+            </div>
+
+            <div id="gui-eq" class="tab-content">
+                <table>
+                    <tr><th>Control</th><th>Function</th></tr>
+                    <tr><td>Preset Buttons</td><td>Load predefined EQ curves</td></tr>
+                    <tr><td>Band Sliders</td><td>Adjust individual band gain (-18 to +12 dB)</td></tr>
+                    <tr><td>Master Slider</td><td>Overall output gain (0 to +12 dB)</td></tr>
+                    <tr><td>EQ Enabled</td><td>Enable/bypass equalizer</td></tr>
+                    <tr><td>Sync</td><td>Read current settings from device</td></tr>
+                </table>
+            </div>
+
+            <div id="gui-aec" class="tab-content">
+                <table>
+                    <tr><th>Control</th><th>Function</th></tr>
+                    <tr><td>AEC Enabled</td><td>Enable/disable echo cancellation</td></tr>
+                    <tr><td>Reset Filter</td><td>Clear adaptive filter coefficients</td></tr>
+                    <tr><td>ERLE Display</td><td>Shows echo reduction amount (dB)</td></tr>
+                    <tr><td>Near-End</td><td>Voice activity indicator</td></tr>
+                    <tr><td>Step Size</td><td>Adaptation speed (1-100%)</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Protocol Section -->
+        <section class="section" id="protocol">
+            <h2>13. Serial Command Protocol</h2>
+
+            <h3>13.1 Connection Settings</h3>
+            <table>
+                <tr><th>Parameter</th><th>Value</th></tr>
+                <tr><td>Baud Rate</td><td>230400</td></tr>
+                <tr><td>Data Bits</td><td>8</td></tr>
+                <tr><td>Parity</td><td>None</td></tr>
+                <tr><td>Stop Bits</td><td>1</td></tr>
+            </table>
+
+            <h3>13.2 Command Format</h3>
+            <pre><code>Command:  &lt;kind&gt;&lt;module&gt;&lt;name&gt;&lt;hex_data&gt;\n
+Response: =&lt;module&gt;&lt;name&gt;&lt;status&gt;&lt;hex_data&gt;\n
+
+kind:   '*' = set command, '?' = query command
+module: 'e' = EQ, 'a' = AEC
+status: 0x80 = OK, 0x00 = Error</code></pre>
+
+            <h3>13.3 EQ Commands</h3>
+            <table>
+                <tr><th>Command</th><th>Format</th><th>Example</th></tr>
+                <tr><td>Set Band</td><td><code>*eb&lt;band&gt;&lt;gain&gt;</code></td><td><code>*eb0306</code> = Band 3 to +6dB</td></tr>
+                <tr><td>Get Band</td><td><code>?eb&lt;band&gt;</code></td><td><code>?eb03</code></td></tr>
+                <tr><td>Load Preset</td><td><code>*ep&lt;preset&gt;</code></td><td><code>*ep03</code> = V-Shape</td></tr>
+                <tr><td>Get All</td><td><code>?ea</code></td><td>Returns 10 bytes</td></tr>
+                <tr><td>Set Master</td><td><code>*em&lt;gain&gt;</code></td><td><code>*em06</code> = +6dB</td></tr>
+                <tr><td>Enable</td><td><code>*ee&lt;0/1&gt;</code></td><td><code>*ee01</code> = enable</td></tr>
+            </table>
+
+            <h3>13.4 AEC Commands</h3>
+            <table>
+                <tr><th>Command</th><th>Format</th><th>Description</th></tr>
+                <tr><td>Enable</td><td><code>*ae&lt;0/1&gt;</code></td><td>Enable/disable AEC</td></tr>
+                <tr><td>Get Status</td><td><code>?as</code></td><td>Get enabled, ERLE, near-end</td></tr>
+                <tr><td>Reset</td><td><code>*ar</code></td><td>Reset filter coefficients</td></tr>
+                <tr><td>Set Step</td><td><code>*am&lt;mu&gt;</code></td><td>Set step size (0-100)</td></tr>
+                <tr><td>Echo Sim</td><td><code>*ax&lt;en&gt;&lt;gain&gt;</code></td><td>Echo simulation control</td></tr>
+            </table>
+        </section>
+
+        <!-- Demo Section -->
+        <section class="section" id="demos">
+            <h2>14. Demonstration Procedures</h2>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Demo 1: Graphic Equalizer</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Objective:</strong> Demonstrate real-time frequency response shaping</p>
+                            <table>
+                                <tr><th>Step</th><th>Action</th><th>Result</th></tr>
+                                <tr><td>1</td><td>Play music with varied content</td><td>Baseline audio</td></tr>
+                                <tr><td>2</td><td>Click <strong>Bass+</strong> preset</td><td>Enhanced low frequencies</td></tr>
+                                <tr><td>3</td><td>Click <strong>Treble+</strong> preset</td><td>Brighter sound</td></tr>
+                                <tr><td>4</td><td>Click <strong>V-Shape</strong> preset</td><td>Exciting, modern sound</td></tr>
+                                <tr><td>5</td><td>Toggle <strong>EQ Enabled</strong></td><td>Compare processed vs bypass</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Demo 2: Echo Cancellation</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Objective:</strong> Demonstrate echo detection and cancellation</p>
+                            <table>
+                                <tr><th>Step</th><th>Action</th><th>Result</th></tr>
+                                <tr><td>1</td><td>Play audio through system</td><td>Clean playback</td></tr>
+                                <tr><td>2</td><td>Enable <strong>Echo Simulation</strong> at 50%</td><td>Hear 60ms echo</td></tr>
+                                <tr><td>3</td><td>Enable <strong>AEC</strong></td><td>Echo cancelled</td></tr>
+                                <tr><td>4</td><td>Observe <strong>ERLE</strong> display</td><td>10-25 dB reduction</td></tr>
+                                <tr><td>5</td><td>Disable <strong>AEC</strong></td><td>Echo returns</td></tr>
+                                <tr><td>6</td><td>Click <strong>Reset Filter</strong></td><td>ERLE drops, then recovers</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Demo 3: AVAS Engine Sound</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Objective:</strong> Demonstrate V8 engine sound synthesis for EVs</p>
+                            <table>
+                                <tr><th>Step</th><th>Action</th><th>Result</th></tr>
+                                <tr><td>1</td><td>Power off board</td><td>Board off</td></tr>
+                                <tr><td>2</td><td><strong>Hold BTN1</strong> while powering on</td><td>Engine Synth mode enabled</td></tr>
+                                <tr><td>3</td><td>Turn potentiometer slowly</td><td>V8 engine RPM increases</td></tr>
+                                <tr><td>4</td><td>Rotate pot full range</td><td>Hear 0-8190 RPM range</td></tr>
+                                <tr><td>5</td><td>Observe LED meter</td><td>Shows engine audio level</td></tr>
+                            </table>
+                            <div class="info-box success">
+                                <strong>Key Point:</strong> This demonstrates AVAS compliance for electric vehicles - required in many jurisdictions to warn pedestrians.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Demo 4: Physical Controls</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Objective:</strong> Show hands-on control without PC</p>
+                            <table>
+                                <tr><th>Step</th><th>Action</th><th>Result</th></tr>
+                                <tr><td>1</td><td>Play music through system</td><td>Baseline audio</td></tr>
+                                <tr><td>2</td><td>Press <strong>BTN1</strong></td><td>Audio mutes</td></tr>
+                                <tr><td>3</td><td>Press <strong>BTN1</strong> again</td><td>Audio unmutes</td></tr>
+                                <tr><td>4</td><td>Press <strong>BTN2</strong></td><td>Treble boost engaged</td></tr>
+                                <tr><td>5</td><td>Press <strong>BTN3</strong></td><td>Bass boost engaged</td></tr>
+                                <tr><td>6</td><td>Touch <strong>TOUCH2</strong></td><td>Stereo widening on</td></tr>
+                                <tr><td>7</td><td>Touch <strong>TOUCH3</strong></td><td>Bass enhancer on</td></tr>
+                                <tr><td>8</td><td>Touch <strong>TOUCH1</strong></td><td>Click-clack sound plays</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h4>Demo 5: Combined Features</h4>
+                        <span class="accordion-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <p><strong>Objective:</strong> Show multiple features working together</p>
+                            <ol>
+                                <li>Enable Echo Simulation - hear echo</li>
+                                <li>Enable AEC - echo cancelled</li>
+                                <li>Apply various EQ presets</li>
+                                <li>Observe ERLE remains stable while EQ changes</li>
+                                <li>Enable Bass Enhancement (TOUCH3)</li>
+                                <li>Enable Stereo Widening (TOUCH2)</li>
+                                <li>Watch LED meter respond to all processing</li>
+                            </ol>
+                            <div class="info-box success">
+                                <strong>Key Point:</strong> All features process in cascade without interfering with each other. The LED meter shows the combined output level in real-time.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="section" id="troubleshooting">
+            <h2>15. Troubleshooting</h2>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('ts-hardware')">Hardware</button>
+                <button class="tab-btn" onclick="showTab('ts-gui')">GUI</button>
+                <button class="tab-btn" onclick="showTab('ts-controls')">Controls</button>
+                <button class="tab-btn" onclick="showTab('ts-aec')">AEC</button>
+            </div>
+
+            <div id="ts-hardware" class="tab-content active">
+                <table>
+                    <tr><th>Symptom</th><th>Cause</th><th>Solution</th></tr>
+                    <tr><td>No audio output</td><td>WM8904 in wrong slot</td><td>Move to MikroBUS Slot 1</td></tr>
+                    <tr><td>No audio output</td><td>PLL not locked</td><td>Check codec initialization</td></tr>
+                    <tr><td>Intermittent audio</td><td>Loose connections</td><td>Secure all cables</td></tr>
+                    <tr><td>Distorted audio</td><td>Gain too high</td><td>Reduce input/output levels</td></tr>
+                    <tr><td>LED meter not working</td><td>Audio path issue</td><td>Check signal chain</td></tr>
+                </table>
+            </div>
+
+            <div id="ts-gui" class="tab-content">
+                <table>
+                    <tr><th>Symptom</th><th>Cause</th><th>Solution</th></tr>
+                    <tr><td>Port not listed</td><td>Driver missing</td><td>Install USB CDC driver</td></tr>
+                    <tr><td>Connection timeout</td><td>Wrong baud rate</td><td>Verify 230400 baud</td></tr>
+                    <tr><td>Commands fail</td><td>Firmware issue</td><td>Re-program device</td></tr>
+                    <tr><td>matplotlib error</td><td>Missing package</td><td><code>pip install matplotlib</code></td></tr>
+                </table>
+            </div>
+
+            <div id="ts-controls" class="tab-content">
+                <table>
+                    <tr><th>Symptom</th><th>Cause</th><th>Solution</th></tr>
+                    <tr><td>Buttons not responding</td><td>Button bounce</td><td>Press firmly, wait for debounce</td></tr>
+                    <tr><td>Touch not working</td><td>No skin contact</td><td>Use fingertip directly on sensor</td></tr>
+                    <tr><td>Engine synth won't start</td><td>BTN1 not held</td><td>Hold BTN1 BEFORE power-up</td></tr>
+                    <tr><td>Pot has no effect</td><td>Not in engine mode</td><td>Enable engine synth first</td></tr>
+                </table>
+            </div>
+
+            <div id="ts-aec" class="tab-content">
+                <table>
+                    <tr><th>Symptom</th><th>Cause</th><th>Solution</th></tr>
+                    <tr><td>No echo reduction</td><td>AEC disabled</td><td>Enable AEC checkbox</td></tr>
+                    <tr><td>ERLE stays 0</td><td>No echo present</td><td>Enable Echo Simulation</td></tr>
+                    <tr><td>ERLE negative</td><td>Filter diverging</td><td>Reset, reduce step size</td></tr>
+                    <tr><td>Noise when enabled</td><td>Step size too high</td><td>Reduce to 5%</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Specifications -->
+        <section class="section" id="specs">
+            <h2>16. Technical Specifications</h2>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('spec-processor')">Processor</button>
+                <button class="tab-btn" onclick="showTab('spec-audio')">Audio</button>
+                <button class="tab-btn" onclick="showTab('spec-io')">I/O</button>
+                <button class="tab-btn" onclick="showTab('spec-aec')">AEC</button>
+            </div>
+
+            <div id="spec-processor" class="tab-content active">
+                <table>
+                    <tr><th>Parameter</th><th>Value</th></tr>
+                    <tr><td>Device</td><td>dsPIC33AK512MPS512</td></tr>
+                    <tr><td>Core</td><td>dsPIC33A (16-bit)</td></tr>
+                    <tr><td>Flash Memory</td><td>512 KB</td></tr>
+                    <tr><td>RAM</td><td>96 KB</td></tr>
+                    <tr><td>FPU</td><td>Single-precision hardware</td></tr>
+                    <tr><td>Speed</td><td>200 MIPS (100 MHz core)</td></tr>
+                </table>
+            </div>
+
+            <div id="spec-audio" class="tab-content">
+                <table>
+                    <tr><th>Parameter</th><th>Value</th></tr>
+                    <tr><td>Sample Rate</td><td>48 kHz</td></tr>
+                    <tr><td>Bit Depth</td><td>24-bit ADC/DAC, 32-bit internal</td></tr>
+                    <tr><td>Channels</td><td>2 (Stereo)</td></tr>
+                    <tr><td>Latency</td><td>&lt; 1 ms</td></tr>
+                    <tr><td>Frame Size</td><td>32 samples</td></tr>
+                    <tr><td>Audio Codec</td><td>WM8904</td></tr>
+                    <tr><td>EQ Bands</td><td>8 (32Hz - 4kHz)</td></tr>
+                    <tr><td>EQ Gain Range</td><td>-18 to +12 dB</td></tr>
+                </table>
+            </div>
+
+            <div id="spec-io" class="tab-content">
+                <table>
+                    <tr><th>Parameter</th><th>Value</th></tr>
+                    <tr><td>Push Buttons</td><td>3 (BTN1, BTN2, BTN3)</td></tr>
+                    <tr><td>Touch Sensors</td><td>3 (QTouch capacitive)</td></tr>
+                    <tr><td>Potentiometer</td><td>1 (12-bit ADC)</td></tr>
+                    <tr><td>LED Level Meter</td><td>8 segments (logarithmic)</td></tr>
+                    <tr><td>RGB Status LED</td><td>1 (PWM controlled)</td></tr>
+                    <tr><td>Serial</td><td>UART 230400 baud via USB CDC</td></tr>
+                </table>
+            </div>
+
+            <div id="spec-aec" class="tab-content">
+                <table>
+                    <tr><th>Parameter</th><th>Value</th></tr>
+                    <tr><td>Algorithm</td><td>NLMS (Normalized LMS)</td></tr>
+                    <tr><td>Filter Taps</td><td>512</td></tr>
+                    <tr><td>Echo Tail</td><td>64 ms (at 8kHz internal)</td></tr>
+                    <tr><td>Step Size</td><td>0.01 - 1.0 (default 0.05)</td></tr>
+                    <tr><td>Processing</td><td>32-bit float</td></tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Copyright 2026 Microchip Technology Inc. All rights reserved.</p>
+        <p style="margin-top: 10px;">MPLAB, dsPIC, and Microchip are registered trademarks of Microchip Technology Inc.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">&#8593;</button>
+
+    <script>
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active from all tab buttons in the same container
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                const container = targetTab.parentElement;
+                container.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show the selected tab
+                targetTab.classList.add('active');
+
+                // Find and activate the correct button
+                const tabs = container.querySelector('.tabs');
+                if (tabs) {
+                    tabs.querySelectorAll('.tab-btn').forEach(btn => {
+                        if (btn.getAttribute('onclick').includes(tabId)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                }
+            }
+
+            // Fallback: activate by event target
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('open');
+            });
+        });
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (winScroll > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 60; // Account for sticky nav
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

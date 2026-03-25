@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perseus_512 - Interactive Block Diagram</title>
+    <style>
+        :root {
+            --primary: #c8102e;
+            --secondary: #1a1a2e;
+            --accent: #4a90d9;
+            --bg: #0a0a15;
+            --card-bg: #1a1a2e;
+            --text: #e0e0e0;
+            --muted: #8a8a9a;
+            --border: #2a2a3e;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --purple: #9966ff;
+            --cyan: #00bcd4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), #8b0000);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .control-btn {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-line {
+            width: 30px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .legend-line.audio { background: var(--success); }
+        .legend-line.control { background: var(--warning); }
+        .legend-line.data { background: var(--accent); }
+        .legend-line.synth { background: var(--purple); }
+        .legend-line.input { background: var(--cyan); }
+
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 0.9em;
+        }
+
+        .diagram-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+
+        .diagram-svg {
+            width: 100%;
+            min-width: 1400px;
+            height: auto;
+        }
+
+        .block {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .block:hover {
+            filter: brightness(1.2);
+        }
+
+        .block.highlighted {
+            filter: brightness(1.3);
+        }
+
+        .block-rect {
+            fill: var(--secondary);
+            stroke: var(--accent);
+            stroke-width: 2;
+            rx: 8;
+        }
+
+        .block-label {
+            fill: var(--text);
+            text-anchor: middle;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .block-sublabel {
+            fill: var(--muted);
+            text-anchor: middle;
+            font-size: 10px;
+        }
+
+        .signal-path {
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        .signal-path.audio {
+            stroke: var(--success);
+        }
+
+        .signal-path.control {
+            stroke: var(--warning);
+        }
+
+        .signal-path.data {
+            stroke: var(--accent);
+        }
+
+        .signal-path.synth {
+            stroke: var(--purple);
+        }
+
+        .signal-path.input {
+            stroke: var(--cyan);
+        }
+
+        .section-box {
+            fill: rgba(255,255,255,0.03);
+            stroke: var(--border);
+            stroke-width: 1;
+            stroke-dasharray: 5,5;
+            rx: 10;
+        }
+
+        .section-label {
+            fill: var(--muted);
+            font-size: 11px;
+            text-anchor: middle;
+        }
+
+        .info-panel {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .info-panel h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-panel h4 {
+            color: var(--accent);
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .info-panel p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .info-panel ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .info-panel li {
+            margin: 5px 0;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .spec-table th, .spec-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-table th {
+            background: rgba(200, 16, 46, 0.2);
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .processing .block-rect {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes flowRight {
+            0% { stroke-dashoffset: 20; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .signal-path.animated {
+            stroke-dasharray: 10, 5;
+            animation: flowRight 0.5s linear infinite;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            max-width: 250px;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .diagram-container {
+                padding: 15px;
+            }
+
+            .controls {
+                gap: 5px;
+            }
+
+            .control-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Perseus_512 Audio DSP Platform</h1>
+        <p>Interactive System Block Diagram</p>
+    </header>
+
+    <div class="container">
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-value">48</div>
+                <div class="stat-label">kHz Sample Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">&lt;1</div>
+                <div class="stat-label">ms Latency</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">32</div>
+                <div class="stat-label">bit Float Processing</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">EQ Bands</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">512</div>
+                <div class="stat-label">AEC Filter Taps</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">V8</div>
+                <div class="stat-label">Engine Synth</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="control-btn active" onclick="showAll()">Show All</button>
+            <button class="control-btn" onclick="highlightPath('audio')">Audio Path</button>
+            <button class="control-btn" onclick="highlightPath('eq')">Equalizer</button>
+            <button class="control-btn" onclick="highlightPath('aec')">AEC</button>
+            <button class="control-btn" onclick="highlightPath('avas')">AVAS/Engine</button>
+            <button class="control-btn" onclick="highlightPath('controls')">Physical Controls</button>
+            <button class="control-btn" onclick="highlightPath('control')">Host Control</button>
+            <button class="control-btn" onclick="toggleAnimation()">Toggle Animation</button>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-line audio"></div>
+                <span>Audio Signal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-line control"></div>
+                <span>Control Signal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-line data"></div>
+                <span>Data/I2C</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-line synth"></div>
+                <span>Synth Signal</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-line input"></div>
+                <span>User Input</span>
+            </div>
+        </div>
+
+        <!-- Main Diagram -->
+        <div class="diagram-container">
+            <svg class="diagram-svg" viewBox="0 0 1500 850" xmlns="http://www.w3.org/2000/svg">
+                <!-- Definitions -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)" />
+                    </marker>
+                    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="var(--success)" />
+                    </marker>
+                    <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="var(--warning)" />
+                    </marker>
+                    <marker id="arrowhead-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="var(--purple)" />
+                    </marker>
+                    <marker id="arrowhead-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="var(--cyan)" />
+                    </marker>
+                </defs>
+
+                <!-- Section Boxes -->
+                <rect class="section-box" x="30" y="150" width="200" height="200" />
+                <text class="section-label" x="130" y="170">Audio Input</text>
+
+                <rect class="section-box" x="280" y="100" width="900" height="400" />
+                <text class="section-label" x="730" y="120">dsPIC33AK512MPS512 Processing</text>
+
+                <rect class="section-box" x="1230" y="150" width="200" height="250" />
+                <text class="section-label" x="1330" y="170">Audio Output</text>
+
+                <rect class="section-box" x="30" y="550" width="250" height="200" />
+                <text class="section-label" x="155" y="570">Physical Controls</text>
+
+                <rect class="section-box" x="320" y="550" width="350" height="200" />
+                <text class="section-label" x="495" y="570">Synthesis</text>
+
+                <rect class="section-box" x="710" y="550" width="400" height="200" />
+                <text class="section-label" x="910" y="570">Host Control</text>
+
+                <rect class="section-box" x="1150" y="550" width="280" height="200" />
+                <text class="section-label" x="1290" y="570">Indicators</text>
+
+                <!-- Audio Input Section -->
+                <g class="block" id="block-source" onclick="showInfo('source')">
+                    <rect class="block-rect" x="50" y="200" width="140" height="60" />
+                    <text class="block-label" x="120" y="225">Audio Source</text>
+                    <text class="block-sublabel" x="120" y="245">Line In / 3.5mm</text>
+                </g>
+
+                <g class="block" id="block-codec-in" onclick="showInfo('codec')">
+                    <rect class="block-rect" x="50" y="280" width="140" height="60" />
+                    <text class="block-label" x="120" y="305">WM8904</text>
+                    <text class="block-sublabel" x="120" y="325">ADC / I2S TX</text>
+                </g>
+
+                <!-- dsPIC Processing Chain - Row 1 -->
+                <g class="block audio-path" id="block-tdm-in" onclick="showInfo('tdm-in')">
+                    <rect class="block-rect" x="300" y="200" width="90" height="70" />
+                    <text class="block-label" x="345" y="225">TDM</text>
+                    <text class="block-label" x="345" y="240">Input</text>
+                    <text class="block-sublabel" x="345" y="260">24-bit DMA</text>
+                </g>
+
+                <g class="block audio-path" id="block-convert" onclick="showInfo('convert')">
+                    <rect class="block-rect" x="400" y="200" width="90" height="70" />
+                    <text class="block-label" x="445" y="225">Float</text>
+                    <text class="block-label" x="445" y="240">Convert</text>
+                    <text class="block-sublabel" x="445" y="260">32-bit FPU</text>
+                </g>
+
+                <g class="block audio-path" id="block-tone" onclick="showInfo('tone')">
+                    <rect class="block-rect" x="500" y="200" width="90" height="70" />
+                    <text class="block-label" x="545" y="225">Tone</text>
+                    <text class="block-label" x="545" y="240">Control</text>
+                    <text class="block-sublabel" x="545" y="260">Tre/Mid/Bass</text>
+                </g>
+
+                <g class="block audio-path eq-path" id="block-eq" onclick="showInfo('eq')">
+                    <rect class="block-rect" x="600" y="200" width="100" height="70" style="stroke: var(--primary);" />
+                    <text class="block-label" x="650" y="225">8-Band</text>
+                    <text class="block-label" x="650" y="240">Graphic EQ</text>
+                    <text class="block-sublabel" x="650" y="260">Biquad IIR</text>
+                </g>
+
+                <g class="block audio-path aec-path" id="block-aec" onclick="showInfo('aec')">
+                    <rect class="block-rect" x="710" y="200" width="90" height="70" style="stroke: var(--primary);" />
+                    <text class="block-label" x="755" y="225">AEC</text>
+                    <text class="block-label" x="755" y="240">NLMS</text>
+                    <text class="block-sublabel" x="755" y="260">512 Taps</text>
+                </g>
+
+                <g class="block audio-path" id="block-bass" onclick="showInfo('bass')">
+                    <rect class="block-rect" x="810" y="200" width="90" height="70" />
+                    <text class="block-label" x="855" y="225">Bass</text>
+                    <text class="block-label" x="855" y="240">Enhance</text>
+                    <text class="block-sublabel" x="855" y="260">Psychoacoustic</text>
+                </g>
+
+                <g class="block audio-path" id="block-widen" onclick="showInfo('widen')">
+                    <rect class="block-rect" x="910" y="200" width="90" height="70" />
+                    <text class="block-label" x="955" y="225">Stereo</text>
+                    <text class="block-label" x="955" y="240">Widen</text>
+                    <text class="block-sublabel" x="955" y="260">M/S Process</text>
+                </g>
+
+                <!-- Row 2 - Engine Synth and Click-Clack -->
+                <g class="block audio-path avas-path" id="block-engine" onclick="showInfo('engine')">
+                    <rect class="block-rect" x="1010" y="200" width="90" height="70" style="stroke: var(--purple);" />
+                    <text class="block-label" x="1055" y="225">Engine</text>
+                    <text class="block-label" x="1055" y="240">Synth</text>
+                    <text class="block-sublabel" x="1055" y="260">V8 AVAS</text>
+                </g>
+
+                <g class="block audio-path avas-path" id="block-clickclack" onclick="showInfo('clickclack')">
+                    <rect class="block-rect" x="1010" y="290" width="90" height="60" style="stroke: var(--purple);" />
+                    <text class="block-label" x="1055" y="315">Click-Clack</text>
+                    <text class="block-sublabel" x="1055" y="335">Turn Signal</text>
+                </g>
+
+                <g class="block audio-path" id="block-gain" onclick="showInfo('gain')">
+                    <rect class="block-rect" x="1110" y="200" width="90" height="70" />
+                    <text class="block-label" x="1155" y="225">Gain</text>
+                    <text class="block-label" x="1155" y="240">Control</text>
+                    <text class="block-sublabel" x="1155" y="260">Volume</text>
+                </g>
+
+                <!-- dsPIC CPU Block -->
+                <g class="block" id="block-cpu" onclick="showInfo('cpu')">
+                    <rect class="block-rect" x="500" y="370" width="220" height="100" style="stroke: var(--primary); stroke-width: 3;" />
+                    <text class="block-label" x="610" y="400">dsPIC33AK512MPS512</text>
+                    <text class="block-sublabel" x="610" y="420">200 MIPS | FPU | 512KB Flash</text>
+                    <text class="block-sublabel" x="610" y="440">96KB RAM | I2C | SPI | TDM</text>
+                </g>
+
+                <!-- AEC Reference Path -->
+                <g class="block aec-path" id="block-ref" onclick="showInfo('aec-ref')">
+                    <rect class="block-rect" x="755" y="290" width="90" height="50" />
+                    <text class="block-label" x="800" y="312">Reference</text>
+                    <text class="block-sublabel" x="800" y="328">Speaker Sig</text>
+                </g>
+
+                <!-- Audio Output Section -->
+                <g class="block" id="block-codec-out" onclick="showInfo('codec')">
+                    <rect class="block-rect" x="1250" y="200" width="140" height="60" />
+                    <text class="block-label" x="1320" y="225">WM8904</text>
+                    <text class="block-sublabel" x="1320" y="245">I2S RX / DAC</text>
+                </g>
+
+                <g class="block" id="block-output" onclick="showInfo('output')">
+                    <rect class="block-rect" x="1250" y="280" width="140" height="60" />
+                    <text class="block-label" x="1320" y="305">HP Output</text>
+                    <text class="block-sublabel" x="1320" y="325">3.5mm / Speaker</text>
+                </g>
+
+                <!-- Physical Controls Section -->
+                <g class="block controls-path" id="block-buttons" onclick="showInfo('buttons')">
+                    <rect class="block-rect" x="50" y="600" width="100" height="60" style="stroke: var(--cyan);" />
+                    <text class="block-label" x="100" y="625">Buttons</text>
+                    <text class="block-sublabel" x="100" y="645">BTN1-3</text>
+                </g>
+
+                <g class="block controls-path" id="block-touch" onclick="showInfo('touch')">
+                    <rect class="block-rect" x="160" y="600" width="100" height="60" style="stroke: var(--cyan);" />
+                    <text class="block-label" x="210" y="625">Touch</text>
+                    <text class="block-sublabel" x="210" y="645">T1-T3 QTouch</text>
+                </g>
+
+                <g class="block controls-path avas-path" id="block-pot" onclick="showInfo('pot')">
+                    <rect class="block-rect" x="50" y="680" width="100" height="60" style="stroke: var(--cyan);" />
+                    <text class="block-label" x="100" y="705">Potentiometer</text>
+                    <text class="block-sublabel" x="100" y="725">RPM Control</text>
+                </g>
+
+                <!-- Synthesis Section -->
+                <g class="block avas-path" id="block-engine-gen" onclick="showInfo('engine-gen')">
+                    <rect class="block-rect" x="340" y="600" width="120" height="70" style="stroke: var(--purple);" />
+                    <text class="block-label" x="400" y="625">V8 Engine</text>
+                    <text class="block-label" x="400" y="640">Generator</text>
+                    <text class="block-sublabel" x="400" y="660">0-8190 RPM</text>
+                </g>
+
+                <g class="block avas-path" id="block-click-gen" onclick="showInfo('click-gen')">
+                    <rect class="block-rect" x="480" y="600" width="120" height="70" style="stroke: var(--purple);" />
+                    <text class="block-label" x="540" y="625">Click-Clack</text>
+                    <text class="block-label" x="540" y="640">Generator</text>
+                    <text class="block-sublabel" x="540" y="660">Turn Signal</text>
+                </g>
+
+                <!-- Control Section -->
+                <g class="block control-path" id="block-uart" onclick="showInfo('uart')">
+                    <rect class="block-rect" x="730" y="600" width="110" height="60" />
+                    <text class="block-label" x="785" y="625">UART</text>
+                    <text class="block-sublabel" x="785" y="645">230400 baud</text>
+                </g>
+
+                <g class="block control-path" id="block-usb" onclick="showInfo('usb')">
+                    <rect class="block-rect" x="860" y="600" width="110" height="60" />
+                    <text class="block-label" x="915" y="625">USB CDC</text>
+                    <text class="block-sublabel" x="915" y="645">Virtual COM</text>
+                </g>
+
+                <g class="block control-path" id="block-gui" onclick="showInfo('gui')">
+                    <rect class="block-rect" x="990" y="600" width="110" height="60" />
+                    <text class="block-label" x="1045" y="625">Python GUI</text>
+                    <text class="block-sublabel" x="1045" y="645">eq_gui.py</text>
+                </g>
+
+                <!-- Indicators Section -->
+                <g class="block indicators-path" id="block-ledmeter" onclick="showInfo('ledmeter')">
+                    <rect class="block-rect" x="1170" y="600" width="120" height="70" style="stroke: var(--success);" />
+                    <text class="block-label" x="1230" y="625">LED Meter</text>
+                    <text class="block-label" x="1230" y="640">8-Segment</text>
+                    <text class="block-sublabel" x="1230" y="660">Logarithmic</text>
+                </g>
+
+                <g class="block indicators-path" id="block-rgb" onclick="showInfo('rgb')">
+                    <rect class="block-rect" x="1310" y="600" width="100" height="70" style="stroke: var(--success);" />
+                    <text class="block-label" x="1360" y="625">RGB LED</text>
+                    <text class="block-label" x="1360" y="640">Status</text>
+                    <text class="block-sublabel" x="1360" y="660">PWM</text>
+                </g>
+
+                <!-- Signal Paths - Audio Main -->
+                <path class="signal-path audio" d="M 120 260 L 120 280" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio" d="M 190 310 L 300 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 390 235 L 400 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 490 235 L 500 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 590 235 L 600 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 700 235 L 710 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 800 235 L 810 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 900 235 L 910 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 1000 235 L 1010 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio audio-main" d="M 1100 235 L 1110 235" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio" d="M 1200 235 L 1250 230" marker-end="url(#arrowhead-green)" />
+                <path class="signal-path audio" d="M 1320 260 L 1320 280" marker-end="url(#arrowhead-green)" />
+
+                <!-- Click-Clack to main path -->
+                <path class="signal-path synth" d="M 1055 290 L 1055 270" marker-end="url(#arrowhead-purple)" />
+
+                <!-- Signal Paths - Control -->
+                <path class="signal-path control" d="M 610 470 L 610 550 L 785 550 L 785 600" marker-end="url(#arrowhead-orange)" />
+                <path class="signal-path control" d="M 915 600 L 915 550 L 630 550 L 630 470" marker-end="url(#arrowhead-orange)" />
+                <path class="signal-path control" d="M 970 630 L 990 630" marker-end="url(#arrowhead-orange)" />
+
+                <!-- Signal Paths - I2C to Codec -->
+                <path class="signal-path" d="M 500 420 L 120 420 L 120 340" marker-end="url(#arrowhead)" />
+
+                <!-- AEC Reference Path -->
+                <path class="signal-path aec-path" d="M 800 270 L 800 290" marker-end="url(#arrowhead)" style="stroke: #9966ff;" />
+                <path class="signal-path aec-path" d="M 1155 270 L 1000 350 L 800 350 L 800 340" style="stroke: #9966ff; stroke-dasharray: 5,3;" />
+
+                <!-- Physical Controls to CPU -->
+                <path class="signal-path input" d="M 100 600 L 100 500 L 500 500 L 500 470" marker-end="url(#arrowhead-cyan)" />
+                <path class="signal-path input" d="M 210 600 L 210 520 L 520 520 L 520 470" marker-end="url(#arrowhead-cyan)" />
+
+                <!-- Potentiometer to Engine Generator -->
+                <path class="signal-path input" d="M 150 710 L 340 635" marker-end="url(#arrowhead-cyan)" />
+
+                <!-- Engine Generator to Engine Synth block -->
+                <path class="signal-path synth" d="M 400 600 L 400 500 L 1055 500 L 1055 270" marker-end="url(#arrowhead-purple)" />
+
+                <!-- Click Generator to Click-Clack block -->
+                <path class="signal-path synth" d="M 540 600 L 540 510 L 1000 510 L 1000 320 L 1010 320" marker-end="url(#arrowhead-purple)" />
+
+                <!-- Gain to LED Meter -->
+                <path class="signal-path audio" d="M 1155 270 L 1155 550 L 1230 600" marker-end="url(#arrowhead-green)" />
+
+                <!-- CPU to RGB -->
+                <path class="signal-path control" d="M 720 420 L 1360 420 L 1360 600" marker-end="url(#arrowhead-orange)" />
+
+                <!-- Labels for signal flow -->
+                <text x="250" y="250" fill="var(--success)" font-size="10">I2S/TDM</text>
+                <text x="1200" y="220" fill="var(--success)" font-size="10">I2S/TDM</text>
+                <text x="200" y="440" fill="var(--muted)" font-size="10">I2C Control</text>
+                <text x="650" y="545" fill="var(--muted)" font-size="10">Serial Commands</text>
+                <text x="200" y="490" fill="var(--cyan)" font-size="10">User Input</text>
+                <text x="420" y="490" fill="var(--purple)" font-size="10">Synth Audio</text>
+            </svg>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="info-panel" id="infoPanel">
+            <h3>System Overview</h3>
+            <p>Click on any block in the diagram above to see detailed information about that component.</p>
+
+            <h4>Audio Signal Flow</h4>
+            <p>Audio enters through the WM8904 codec (LINE IN), is processed by the dsPIC33AK512MPS512 through multiple DSP stages including EQ, AEC, bass enhancement, stereo widening, and optional engine synthesis, then outputs back through the WM8904 to headphones/speakers.</p>
+
+            <h4>Key Processing Stages</h4>
+            <ul>
+                <li><strong>TDM Input:</strong> 24-bit audio received via DMA</li>
+                <li><strong>Float Conversion:</strong> Converted to 32-bit float for FPU processing</li>
+                <li><strong>Tone Control:</strong> 3-band parametric EQ</li>
+                <li><strong>8-Band EQ:</strong> Graphic equalizer with biquad filters</li>
+                <li><strong>AEC:</strong> Acoustic echo cancellation (512 taps)</li>
+                <li><strong>Bass/Widen:</strong> Enhancement effects</li>
+                <li><strong>Engine Synth:</strong> V8 AVAS sound generation</li>
+                <li><strong>Click-Clack:</strong> Turn signal synthesis</li>
+                <li><strong>TDM Output:</strong> Back to 24-bit for DAC</li>
+            </ul>
+
+            <h4>Physical Controls</h4>
+            <ul>
+                <li><strong>BTN1:</strong> Mute (hold at startup for Engine mode)</li>
+                <li><strong>BTN2:</strong> Treble boost</li>
+                <li><strong>BTN3:</strong> Bass boost</li>
+                <li><strong>TOUCH1:</strong> Click-Clack toggle</li>
+                <li><strong>TOUCH2:</strong> Stereo widen toggle</li>
+                <li><strong>TOUCH3:</strong> Bass enhancer toggle</li>
+                <li><strong>POT:</strong> Engine RPM (0-8190)</li>
+            </ul>
+
+            <h4>Control Interface</h4>
+            <p>Parameters are controlled via UART (230400 baud) using the Python GUI application or direct serial commands.</p>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        const blockInfo = {
+            'source': {
+                title: 'Audio Source',
+                content: `
+                    <p>External audio input connected via 3.5mm LINE IN jack on the WM8904 Click board.</p>
+                    <h4>Supported Sources</h4>
+                    <ul>
+                        <li>Smartphone headphone output</li>
+                        <li>PC/laptop audio output</li>
+                        <li>MP3 player</li>
+                        <li>Any line-level source</li>
+                    </ul>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Input Type</td><td>Line Level</td></tr>
+                        <tr><td>Connector</td><td>3.5mm TRS</td></tr>
+                        <tr><td>Channels</td><td>2 (Stereo)</td></tr>
+                    </table>
+                `
+            },
+            'codec': {
+                title: 'WM8904 Audio Codec',
+                content: `
+                    <p>High-quality audio codec providing ADC/DAC conversion and I2S interface to the dsPIC.</p>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>24-bit ADC/DAC</li>
+                        <li>I2S/TDM interface</li>
+                        <li>Programmable PGA</li>
+                        <li>Headphone amplifier</li>
+                    </ul>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Sample Rate</td><td>48 kHz</td></tr>
+                        <tr><td>Bit Depth</td><td>24-bit</td></tr>
+                        <tr><td>SNR</td><td>>90 dB</td></tr>
+                        <tr><td>THD+N</td><td><0.01%</td></tr>
+                    </table>
+                    <h4>Configuration</h4>
+                    <p>Controlled via I2C from the dsPIC. Must be in <strong>MikroBUS Slot 1</strong> for proper BCLK routing.</p>
+                `
+            },
+            'tdm-in': {
+                title: 'TDM Input',
+                content: `
+                    <p>Time Division Multiplexed audio input using SPI peripheral configured in TDM slave mode.</p>
+                    <h4>Operation</h4>
+                    <ul>
+                        <li>Receives 24-bit audio samples via DMA</li>
+                        <li>8-slot TDM frame (256fs BCLK)</li>
+                        <li>Double-buffered for continuous processing</li>
+                        <li>Zero-copy transfer to processing buffer</li>
+                    </ul>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Frame Size</td><td>32 samples</td></tr>
+                        <tr><td>BCLK</td><td>12.288 MHz (256fs)</td></tr>
+                        <tr><td>Slots</td><td>8</td></tr>
+                        <tr><td>Bit Depth</td><td>24-bit</td></tr>
+                    </table>
+                `
+            },
+            'convert': {
+                title: 'Float Conversion',
+                content: `
+                    <p>Converts fixed-point audio samples to 32-bit floating point for efficient FPU processing.</p>
+                    <h4>Benefits</h4>
+                    <ul>
+                        <li>High dynamic range (>140 dB)</li>
+                        <li>No overflow/underflow concerns</li>
+                        <li>Direct FPU instruction use</li>
+                        <li>Simplified algorithm implementation</li>
+                    </ul>
+                    <h4>Process</h4>
+                    <table class="spec-table">
+                        <tr><th>Stage</th><th>Format</th></tr>
+                        <tr><td>Input</td><td>24-bit signed integer</td></tr>
+                        <tr><td>Output</td><td>32-bit IEEE 754 float</td></tr>
+                        <tr><td>Normalization</td><td>-1.0 to +1.0</td></tr>
+                    </table>
+                `
+            },
+            'tone': {
+                title: 'Tone Control',
+                content: `
+                    <p>3-band parametric equalizer providing basic tonal adjustment.</p>
+                    <h4>Bands</h4>
+                    <table class="spec-table">
+                        <tr><th>Control</th><th>Frequency</th><th>Range</th></tr>
+                        <tr><td>Treble</td><td>8 kHz</td><td>+/-12 dB</td></tr>
+                        <tr><td>Mid</td><td>1 kHz</td><td>+/-12 dB</td></tr>
+                        <tr><td>Bass</td><td>100 Hz</td><td>+/-12 dB</td></tr>
+                    </table>
+                    <h4>Physical Control</h4>
+                    <ul>
+                        <li>BTN2: Toggle Treble boost (+6 dB)</li>
+                        <li>BTN3: Toggle Bass boost (+6 dB)</li>
+                    </ul>
+                `
+            },
+            'eq': {
+                title: '8-Band Graphic Equalizer',
+                content: `
+                    <p>Professional 8-band graphic equalizer with FPU-optimized biquad filters.</p>
+                    <h4>Frequency Bands</h4>
+                    <table class="spec-table">
+                        <tr><th>Band</th><th>Frequency</th><th>Application</th></tr>
+                        <tr><td>1</td><td>32 Hz</td><td>Sub-bass</td></tr>
+                        <tr><td>2</td><td>62 Hz</td><td>Bass</td></tr>
+                        <tr><td>3</td><td>125 Hz</td><td>Low-mid</td></tr>
+                        <tr><td>4</td><td>250 Hz</td><td>Fullness</td></tr>
+                        <tr><td>5</td><td>500 Hz</td><td>Midrange</td></tr>
+                        <tr><td>6</td><td>1 kHz</td><td>Presence</td></tr>
+                        <tr><td>7</td><td>2 kHz</td><td>Clarity</td></tr>
+                        <tr><td>8</td><td>4 kHz</td><td>Brilliance</td></tr>
+                    </table>
+                    <h4>Specifications</h4>
+                    <ul>
+                        <li>Gain Range: -18 to +12 dB per band</li>
+                        <li>Master Gain: 0 to +12 dB</li>
+                        <li>8 Presets: Flat, Bass+, Treble+, V-Shape, Vocal, Rock, Jazz, Classical</li>
+                        <li>Filter Type: Direct Form II Transposed biquad</li>
+                    </ul>
+                `
+            },
+            'aec': {
+                title: 'Acoustic Echo Cancellation',
+                content: `
+                    <p>NLMS adaptive filter for removing acoustic echo in hands-free applications.</p>
+                    <h4>Algorithm: NLMS</h4>
+                    <p>Normalized Least Mean Squares with automatic step size normalization for stable convergence.</p>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Filter Taps</td><td>512</td></tr>
+                        <tr><td>Echo Tail</td><td>64 ms @ 8kHz</td></tr>
+                        <tr><td>Step Size (mu)</td><td>0.01 - 1.0</td></tr>
+                        <tr><td>ERLE Target</td><td>>15 dB</td></tr>
+                    </table>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Voice Activity Detection (VAD)</li>
+                        <li>Double-talk detection</li>
+                        <li>Echo simulation mode for testing</li>
+                        <li>Real-time ERLE monitoring</li>
+                    </ul>
+                `
+            },
+            'aec-ref': {
+                title: 'AEC Reference Signal',
+                content: `
+                    <p>The speaker output signal used as the reference for echo estimation.</p>
+                    <h4>Purpose</h4>
+                    <p>The AEC algorithm needs to know what audio is being played through the speaker to estimate and cancel the acoustic echo picked up by the microphone.</p>
+                    <h4>Signal Flow</h4>
+                    <ul>
+                        <li>Tapped from TDM output path</li>
+                        <li>Fed into NLMS adaptive filter</li>
+                        <li>Used to generate echo estimate</li>
+                        <li>Estimate subtracted from mic input</li>
+                    </ul>
+                `
+            },
+            'bass': {
+                title: 'Bass Enhancement',
+                content: `
+                    <p>Psychoacoustic bass boost for systems with limited low-frequency response.</p>
+                    <h4>Technique</h4>
+                    <p>Generates harmonics of bass frequencies that the brain interprets as the missing fundamental.</p>
+                    <h4>Control</h4>
+                    <p><strong>TOUCH3:</strong> Toggle bass enhancer on/off</p>
+                    <h4>Benefits</h4>
+                    <ul>
+                        <li>Extended perceived bass on small speakers</li>
+                        <li>No additional low-frequency power required</li>
+                        <li>Works within speaker's safe operating range</li>
+                    </ul>
+                `
+            },
+            'widen': {
+                title: 'Stereo Widening',
+                content: `
+                    <p>Virtual surround/spatial enhancement using mid-side processing.</p>
+                    <h4>Technique</h4>
+                    <ul>
+                        <li>Convert L/R to Mid/Side</li>
+                        <li>Apply frequency-dependent Side boost</li>
+                        <li>Convert back to L/R</li>
+                    </ul>
+                    <h4>Control</h4>
+                    <p><strong>TOUCH2:</strong> Toggle stereo widening on/off</p>
+                    <h4>Benefits</h4>
+                    <ul>
+                        <li>Expanded soundstage</li>
+                        <li>Maintains mono compatibility</li>
+                        <li>No additional speakers required</li>
+                    </ul>
+                `
+            },
+            'engine': {
+                title: 'Engine Synth (AVAS)',
+                content: `
+                    <p>V8 engine sound synthesis for electric vehicle Acoustic Vehicle Alerting System (AVAS).</p>
+                    <h4>Activation</h4>
+                    <p><strong>Hold BTN1 during power-up</strong> to enable Engine Synth mode.</p>
+                    <h4>Engine Types</h4>
+                    <table class="spec-table">
+                        <tr><th>Type</th><th>Description</th></tr>
+                        <tr><td>ENG_I4</td><td>Inline 4-cylinder</td></tr>
+                        <tr><td>ENG_I5</td><td>Inline 5-cylinder</td></tr>
+                        <tr><td>ENG_I6</td><td>Inline 6-cylinder</td></tr>
+                        <tr><td>ENG_V8</td><td>V8 (default)</td></tr>
+                        <tr><td>ENG_V12</td><td>V12</td></tr>
+                    </table>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>RPM: 0 - 8190 (pot controlled)</li>
+                        <li>Blip feature with attack/hold/decay</li>
+                        <li>Mixed with or replaces LINE IN audio</li>
+                    </ul>
+                `
+            },
+            'clickclack': {
+                title: 'Click-Clack Synthesizer',
+                content: `
+                    <p>Turn signal indicator sound synthesis for automotive applications.</p>
+                    <h4>Control</h4>
+                    <p><strong>TOUCH1:</strong> Toggle click-clack sound on/off</p>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Realistic relay click sound</li>
+                        <li>Configurable timing</li>
+                        <li>Mixed into audio output</li>
+                    </ul>
+                    <h4>Application</h4>
+                    <p>Provides audible feedback for turn signals in electric vehicles where traditional relay click is not present.</p>
+                `
+            },
+            'gain': {
+                title: 'Gain Control',
+                content: `
+                    <p>Final output volume control before DAC conversion.</p>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Smooth gain transitions</li>
+                        <li>Mute function (BTN1)</li>
+                        <li>Level monitoring for LED meter</li>
+                    </ul>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Range</td><td>0 to +12 dB</td></tr>
+                        <tr><td>Mute</td><td>-infinity dB</td></tr>
+                        <tr><td>Control</td><td>BTN1 toggle</td></tr>
+                    </table>
+                `
+            },
+            'buttons': {
+                title: 'Push Buttons',
+                content: `
+                    <p>Three physical push buttons for hands-on control.</p>
+                    <h4>Button Functions</h4>
+                    <table class="spec-table">
+                        <tr><th>Button</th><th>Function</th></tr>
+                        <tr><td>BTN1</td><td>Mute (hold at power-up: Engine mode)</td></tr>
+                        <tr><td>BTN2</td><td>Treble boost toggle</td></tr>
+                        <tr><td>BTN3</td><td>Bass boost toggle</td></tr>
+                    </table>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Hardware debouncing</li>
+                        <li>Press-to-toggle behavior</li>
+                        <li>LED feedback (when applicable)</li>
+                    </ul>
+                `
+            },
+            'touch': {
+                title: 'Capacitive Touch Sensors',
+                content: `
+                    <p>Three QTouch capacitive touch sensors for effect control.</p>
+                    <h4>Touch Functions</h4>
+                    <table class="spec-table">
+                        <tr><th>Sensor</th><th>Function</th></tr>
+                        <tr><td>TOUCH1</td><td>Click-Clack toggle</td></tr>
+                        <tr><td>TOUCH2</td><td>Stereo Widen toggle</td></tr>
+                        <tr><td>TOUCH3</td><td>Bass Enhancer toggle</td></tr>
+                    </table>
+                    <h4>Technology</h4>
+                    <ul>
+                        <li>Microchip QTouch library</li>
+                        <li>Self-capacitance sensing</li>
+                        <li>Automatic calibration</li>
+                        <li>Noise immunity</li>
+                    </ul>
+                `
+            },
+            'pot': {
+                title: 'Potentiometer',
+                content: `
+                    <p>Analog potentiometer for Engine RPM control.</p>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>ADC Resolution</td><td>12-bit</td></tr>
+                        <tr><td>RPM Range</td><td>0 - 8190</td></tr>
+                        <tr><td>Smoothing</td><td>Low-pass filtered</td></tr>
+                    </table>
+                    <h4>Usage</h4>
+                    <p>Only active when Engine Synth mode is enabled (BTN1 held at power-up). Rotation controls simulated engine RPM.</p>
+                `
+            },
+            'engine-gen': {
+                title: 'V8 Engine Generator',
+                content: `
+                    <p>Wavetable-based V8 engine sound synthesis module.</p>
+                    <h4>Synthesis Method</h4>
+                    <ul>
+                        <li>Wavetable lookup with interpolation</li>
+                        <li>Harmonic content varies with RPM</li>
+                        <li>Firing order simulation</li>
+                        <li>Exhaust resonance modeling</li>
+                    </ul>
+                    <h4>RPM Response</h4>
+                    <table class="spec-table">
+                        <tr><th>RPM Range</th><th>Character</th></tr>
+                        <tr><td>0-1000</td><td>Idle rumble</td></tr>
+                        <tr><td>1000-4000</td><td>Low-mid power band</td></tr>
+                        <tr><td>4000-6000</td><td>Mid-high power band</td></tr>
+                        <tr><td>6000-8190</td><td>High RPM scream</td></tr>
+                    </table>
+                `
+            },
+            'click-gen': {
+                title: 'Click-Clack Generator',
+                content: `
+                    <p>Turn signal indicator sound synthesizer.</p>
+                    <h4>Sound Characteristics</h4>
+                    <ul>
+                        <li>Sharp attack transient</li>
+                        <li>Resonant body</li>
+                        <li>Quick decay</li>
+                    </ul>
+                    <h4>Timing</h4>
+                    <p>Standard automotive turn signal cadence (~60-80 BPM).</p>
+                    <h4>Application</h4>
+                    <p>Provides familiar auditory feedback in EVs that lack mechanical relay sounds.</p>
+                `
+            },
+            'cpu': {
+                title: 'dsPIC33AK512MPS512',
+                content: `
+                    <p>High-performance 16-bit digital signal controller with hardware floating-point unit.</p>
+                    <h4>Core Features</h4>
+                    <table class="spec-table">
+                        <tr><th>Feature</th><th>Value</th></tr>
+                        <tr><td>Architecture</td><td>dsPIC33A (16-bit)</td></tr>
+                        <tr><td>Speed</td><td>200 MIPS</td></tr>
+                        <tr><td>Flash</td><td>512 KB</td></tr>
+                        <tr><td>RAM</td><td>96 KB</td></tr>
+                        <tr><td>FPU</td><td>Single-precision hardware</td></tr>
+                    </table>
+                    <h4>Peripherals Used</h4>
+                    <ul>
+                        <li>SPI (TDM mode) - Audio I/O</li>
+                        <li>I2C - Codec control</li>
+                        <li>UART - Host communication</li>
+                        <li>DMA - Zero-copy transfers</li>
+                        <li>PWM - LED/RGB control</li>
+                        <li>ADC - Potentiometer input</li>
+                        <li>GPIO - Buttons, Touch</li>
+                    </ul>
+                `
+            },
+            'output': {
+                title: 'Audio Output',
+                content: `
+                    <p>Headphone/speaker output via 3.5mm jack on WM8904 Click board.</p>
+                    <h4>Supported Outputs</h4>
+                    <ul>
+                        <li>Headphones (any impedance)</li>
+                        <li>Powered speakers</li>
+                        <li>Line input to amplifier</li>
+                    </ul>
+                    <h4>Specifications</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Output Type</td><td>Headphone amplifier</td></tr>
+                        <tr><td>Connector</td><td>3.5mm TRS</td></tr>
+                        <tr><td>Drive Capability</td><td>16-600 ohm</td></tr>
+                    </table>
+                `
+            },
+            'uart': {
+                title: 'UART Communication',
+                content: `
+                    <p>Serial interface for host control and parameter adjustment.</p>
+                    <h4>Settings</h4>
+                    <table class="spec-table">
+                        <tr><th>Parameter</th><th>Value</th></tr>
+                        <tr><td>Baud Rate</td><td>230400</td></tr>
+                        <tr><td>Data Bits</td><td>8</td></tr>
+                        <tr><td>Parity</td><td>None</td></tr>
+                        <tr><td>Stop Bits</td><td>1</td></tr>
+                    </table>
+                    <h4>Protocol</h4>
+                    <p>ASCII-based command protocol:</p>
+                    <code>*eb0306</code> - Set EQ band 3 to +6dB<br>
+                    <code>?ea</code> - Query all EQ settings
+                `
+            },
+            'usb': {
+                title: 'USB CDC',
+                content: `
+                    <p>Virtual COM port via USB for host PC connection.</p>
+                    <h4>Functions</h4>
+                    <ul>
+                        <li>Programming/Debug (MPLAB X)</li>
+                        <li>Power supply (5V USB)</li>
+                        <li>Serial communication</li>
+                    </ul>
+                    <h4>Driver</h4>
+                    <p>Uses standard CDC class - no special driver required on modern OS.</p>
+                `
+            },
+            'gui': {
+                title: 'Python GUI Application',
+                content: `
+                    <p>Desktop application for real-time control of audio parameters.</p>
+                    <h4>Features</h4>
+                    <ul>
+                        <li>8-band EQ with visual sliders</li>
+                        <li>Frequency response visualization</li>
+                        <li>Preset management</li>
+                        <li>AEC control and ERLE monitoring</li>
+                        <li>Audio level meters</li>
+                        <li>Echo simulation control</li>
+                    </ul>
+                    <h4>Requirements</h4>
+                    <code>pip install pyserial numpy matplotlib</code>
+                    <h4>Launch</h4>
+                    <code>python eq_gui.py</code>
+                `
+            },
+            'ledmeter': {
+                title: '8-Segment LED Level Meter',
+                content: `
+                    <p>Real-time audio level visualization using 8 LEDs.</p>
+                    <h4>Thresholds (dB)</h4>
+                    <table class="spec-table">
+                        <tr><th>LED</th><th>Threshold</th><th>Color</th></tr>
+                        <tr><td>1</td><td>-40 dB</td><td>Green</td></tr>
+                        <tr><td>2</td><td>-30 dB</td><td>Green</td></tr>
+                        <tr><td>3</td><td>-24 dB</td><td>Green</td></tr>
+                        <tr><td>4</td><td>-18 dB</td><td>Green</td></tr>
+                        <tr><td>5</td><td>-12 dB</td><td>Yellow</td></tr>
+                        <tr><td>6</td><td>-6 dB</td><td>Yellow</td></tr>
+                        <tr><td>7</td><td>-3 dB</td><td>Orange</td></tr>
+                        <tr><td>8</td><td>-1 dB</td><td>Red</td></tr>
+                    </table>
+                    <h4>Dynamics</h4>
+                    <ul>
+                        <li>Attack: 3.5 (fast rise)</li>
+                        <li>Release: 0.08 (slow decay)</li>
+                        <li>Logarithmic scale for human perception</li>
+                    </ul>
+                `
+            },
+            'rgb': {
+                title: 'RGB Status LED',
+                content: `
+                    <p>Multi-color status indicator controlled via PWM.</p>
+                    <h4>Status Colors</h4>
+                    <table class="spec-table">
+                        <tr><th>Color</th><th>Status</th></tr>
+                        <tr><td>Green</td><td>Normal operation</td></tr>
+                        <tr><td>Blue</td><td>Engine Synth mode active</td></tr>
+                        <tr><td>Red</td><td>Muted / Error</td></tr>
+                        <tr><td>Pulsing</td><td>Processing active</td></tr>
+                    </table>
+                    <h4>Control</h4>
+                    <p>PWM-based intensity control for smooth color transitions and pulsing effects.</p>
+                `
+            }
+        };
+
+        function showInfo(blockId) {
+            const info = blockInfo[blockId];
+            if (!info) return;
+
+            const panel = document.getElementById('infoPanel');
+            panel.innerHTML = `<h3>${info.title}</h3>${info.content}`;
+
+            // Highlight the clicked block
+            document.querySelectorAll('.block').forEach(b => b.classList.remove('highlighted'));
+            const block = document.getElementById('block-' + blockId);
+            if (block) block.classList.add('highlighted');
+        }
+
+        function showAll() {
+            document.querySelectorAll('.block').forEach(b => {
+                b.classList.remove('highlighted');
+                b.style.opacity = '1';
+            });
+            document.querySelectorAll('.signal-path').forEach(p => {
+                p.classList.remove('highlighted');
+                p.style.opacity = '1';
+            });
+
+            // Reset buttons
+            document.querySelectorAll('.control-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Reset info panel
+            document.getElementById('infoPanel').innerHTML = `
+                <h3>System Overview</h3>
+                <p>Click on any block in the diagram above to see detailed information about that component.</p>
+                <h4>Audio Signal Flow</h4>
+                <p>Audio enters through the WM8904 codec (LINE IN), is processed by the dsPIC33AK512MPS512 through multiple DSP stages including EQ, AEC, bass enhancement, stereo widening, and optional engine synthesis, then outputs back through the WM8904 to headphones/speakers.</p>
+                <h4>Key Processing Stages</h4>
+                <ul>
+                    <li><strong>TDM Input:</strong> 24-bit audio received via DMA</li>
+                    <li><strong>Float Conversion:</strong> Converted to 32-bit float for FPU processing</li>
+                    <li><strong>Tone Control:</strong> 3-band parametric EQ</li>
+                    <li><strong>8-Band EQ:</strong> Graphic equalizer with biquad filters</li>
+                    <li><strong>AEC:</strong> Acoustic echo cancellation (512 taps)</li>
+                    <li><strong>Bass/Widen:</strong> Enhancement effects</li>
+                    <li><strong>Engine Synth:</strong> V8 AVAS sound generation</li>
+                    <li><strong>Click-Clack:</strong> Turn signal synthesis</li>
+                    <li><strong>TDM Output:</strong> Back to 24-bit for DAC</li>
+                </ul>
+                <h4>Physical Controls</h4>
+                <ul>
+                    <li><strong>BTN1:</strong> Mute (hold at startup for Engine mode)</li>
+                    <li><strong>BTN2:</strong> Treble boost</li>
+                    <li><strong>BTN3:</strong> Bass boost</li>
+                    <li><strong>TOUCH1:</strong> Click-Clack toggle</li>
+                    <li><strong>TOUCH2:</strong> Stereo widen toggle</li>
+                    <li><strong>TOUCH3:</strong> Bass enhancer toggle</li>
+                    <li><strong>POT:</strong> Engine RPM (0-8190)</li>
+                </ul>
+            `;
+        }
+
+        function highlightPath(path) {
+            // Reset all
+            document.querySelectorAll('.block').forEach(b => {
+                b.style.opacity = '0.3';
+                b.classList.remove('highlighted');
+            });
+            document.querySelectorAll('.signal-path').forEach(p => {
+                p.style.opacity = '0.2';
+                p.classList.remove('highlighted');
+            });
+
+            // Reset buttons
+            document.querySelectorAll('.control-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (path === 'audio') {
+                document.querySelectorAll('.audio-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.querySelectorAll('.signal-path.audio').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                ['block-source', 'block-codec-in', 'block-codec-out', 'block-output'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.opacity = '1';
+                });
+            } else if (path === 'eq') {
+                document.querySelectorAll('.eq-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                showInfo('eq');
+            } else if (path === 'aec') {
+                document.querySelectorAll('.aec-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                showInfo('aec');
+            } else if (path === 'avas') {
+                document.querySelectorAll('.avas-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.querySelectorAll('.signal-path.synth').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                showInfo('engine');
+            } else if (path === 'controls') {
+                document.querySelectorAll('.controls-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.querySelectorAll('.indicators-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.querySelectorAll('.signal-path.input').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.getElementById('block-cpu').style.opacity = '1';
+            } else if (path === 'control') {
+                document.querySelectorAll('.control-path').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.querySelectorAll('.signal-path.control').forEach(el => {
+                    el.style.opacity = '1';
+                    el.classList.add('highlighted');
+                });
+                document.getElementById('block-cpu').style.opacity = '1';
+            }
+        }
+
+        let animationEnabled = false;
+        function toggleAnimation() {
+            animationEnabled = !animationEnabled;
+            document.querySelectorAll('.signal-path.audio-main').forEach(p => {
+                if (animationEnabled) {
+                    p.classList.add('animated');
+                } else {
+                    p.classList.remove('animated');
+                }
+            });
+
+            // Update button state
+            document.querySelectorAll('.control-btn').forEach(b => b.classList.remove('active'));
+            if (animationEnabled) {
+                event.target.classList.add('active');
+            }
+        }
+
+        // Tooltip functionality
+        const tooltip = document.getElementById('tooltip');
+
+        document.querySelectorAll('.block').forEach(block => {
+            block.addEventListener('mouseenter', (e) => {
+                const id = block.id.replace('block-', '');
+                const info = blockInfo[id];
+                if (info) {
+                    tooltip.textContent = info.title;
+                    tooltip.classList.add('visible');
+                }
+            });
+
+            block.addEventListener('mousemove', (e) => {
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+            });
+
+            block.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+            });
+        });
+    </script>
+</body>
+</html>
